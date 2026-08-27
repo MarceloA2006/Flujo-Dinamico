@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block title %}Historial Beacon{% endblock %}
+{% block page_title %}Historial de Eventos Beacon{% endblock %}
+{% block page_subtitle %}Detecciones BLE del beacon — fuente: MongoDB{% endblock %}
+
+{% block content %}
+<div style="margin-bottom:16px;">
+  <a href="{{ url_for('graficas_dispositivos') }}" style="font-size:13px;color:var(--navy);text-decoration:none;">← Volver a reportes</a>
+</div>
+
+<div style="background:white;border-radius:12px;padding:20px;box-shadow:var(--shadow-xs);">
+  {% if eventos %}
+  <p style="font-size:12px;color:var(--muted);margin-bottom:16px;">{{ eventos|length }} eventos registrados</p>
+  <table style="width:100%;border-collapse:collapse;font-size:13px;">
+    <thead>
+      <tr style="border-bottom:2px solid var(--border);">
+        <th style="text-align:left;padding:10px;color:var(--muted);font-weight:600;">Beacon</th>
+        <th style="text-align:left;padding:10px;color:var(--muted);font-weight:600;">Estado</th>
+        <th style="text-align:left;padding:10px;color:var(--muted);font-weight:600;">RSSI</th>
+        <th style="text-align:left;padding:10px;color:var(--muted);font-weight:600;">Fecha</th>
+        <th style="text-align:left;padding:10px;color:var(--muted);font-weight:600;">Hora</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for ev in eventos %}
+      {% set color = '#22c55e' if ev.detectado else '#d1d5db' %}
+      <tr style="border-bottom:1px solid var(--border);">
+        <td style="padding:10px;"><code style="font-size:11px;background:var(--bg);padding:2px 6px;border-radius:4px;">{{ ev.id_beacon }}</code></td>
+        <td style="padding:10px;">
+          <span style="font-size:11px;font-weight:700;color:{{ color }};background:{{ color }}20;padding:3px 10px;border-radius:4px;">
+            {{ 'DETECTADO' if ev.detectado else 'SIN SEÑAL' }}
+          </span>
+        </td>
+        <td style="padding:10px;color:var(--ink2);font-weight:500;">
+          {% if ev.rssi %}{{ ev.rssi }} dBm{% else %}—{% endif %}
+        </td>
+        <td style="padding:10px;color:var(--muted);font-size:12px;">{{ ev.fecha_local }}</td>
+        <td style="padding:10px;color:var(--muted);font-size:12px;">{{ ev.hora_local }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <div style="text-align:center;padding:48px;color:var(--muted);">
+    <p style="font-size:14px;font-weight:500;">Sin eventos de beacon registrados</p>
+    <p style="font-size:12px;margin-top:8px;">Los eventos aparecerán aquí cuando el ESP32 detecte el beacon</p>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

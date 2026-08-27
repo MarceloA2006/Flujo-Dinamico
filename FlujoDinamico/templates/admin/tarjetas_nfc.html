@@ -1,0 +1,237 @@
+{% extends 'base.html' %}
+{% block title %}Tarjetas NFC{% endblock %}
+{% block page_title %}Tarjetas NFC{% endblock %}
+{% block page_subtitle %}Gestión de tarjetas vinculadas a pacientes{% endblock %}
+
+{% block topbar_actions %}
+  {% if session.rol == 'ADMIN' %}
+  <button onclick="abrirModal()" class="btn btn-primary">➕ Registrar tarjeta</button>
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+
+<!-- ── Stats ─────────────────────────────────────── -->
+<div class="stats-grid" style="grid-template-columns:repeat(3,1fr);margin-bottom:24px;">
+  <div class="stat-card">
+    <div class="stat-icon">💳</div>
+    <div class="stat-info"><p>{{ tarjetas|length }}</p><span>Tarjetas registradas</span></div>
+  </div>
+  <div class="stat-card verde">
+    <div class="stat-icon verde">👤</div>
+    <div class="stat-info"><p>{{ pacientes|length }}</p><span>Pacientes disponibles</span></div>
+  </div>
+  <div class="stat-card azul">
+    <div class="stat-icon azul">📡</div>
+    <div class="stat-info"><p>{{ tarjetas|length }}</p><span>Lecturas habilitadas</span></div>
+  </div>
+</div>
+
+<!-- ── Panel instrucciones ESP32 ─────────────────── -->
+<div class="iot-panel" style="margin-bottom:22px;">
+  <div style="display:flex;align-items:flex-start;gap:20px;flex-wrap:wrap;">
+    <div style="flex:1;min-width:250px;">
+      <p style="font-size:9px;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:2px;margin-bottom:6px;">Cómo obtener el UID de una tarjeta</p>
+      <p style="font-size:14px;font-weight:600;color:white;margin-bottom:8px;">Sube <code style="background:rgba(255,255,255,.1);padding:1px 7px;border-radius:4px;font-size:13px;">leer_uid_nfc.ino</code> al ESP32</p>
+      <p style="font-size:12px;color:rgba(255,255,255,.45);line-height:1.8;">
+        1. Abre el Monitor Serie a <strong style="color:rgba(255,255,255,.7);">115200 baud</strong><br>
+        2. Acerca la tarjeta NFC al lector<br>
+        3. Copia el UID que aparece (ej: <code style="background:rgba(255,255,255,.1);padding:1px 5px;border-radius:3px;">A3F2019B</code>)<br>
+        4. Regístrala aquí con el paciente correspondiente
+      </p>
+    </div>
+    <div style="background:rgba(0,0,0,.3);border-radius:10px;padding:14px 18px;font-family:'JetBrains Mono',monospace;font-size:11px;color:#90e0ef;min-width:280px;">
+      <p style="color:rgba(255,255,255,.3);margin-bottom:6px;"># Monitor Serie output:</p>
+      <p>┌─────────────────────────────┐</p>
+      <p>│  UID HEX  :  <span style="color:#caf0f8;font-weight:700;">A3F2019B</span>        │</p>
+      <p>│  Longitud :  4 bytes        │</p>
+      <p>└─────────────────────────────┘</p>
+    </div>
+  </div>
+</div>
+
+<!-- ── Flash messages ────────────────────────────── -->
+{% with msgs = get_flashed_messages(with_categories=true) %}
+  {% for cat, msg in msgs %}
+  <div style="padding:12px 18px;border-radius:8px;margin-bottom:16px;font-size:13px;font-weight:500;
+    background:{{ 'var(--grn-bg)' if cat=='success' else 'var(--red-bg)' }};
+    color:{{ 'var(--green)' if cat=='success' else 'var(--red)' }};
+    border:1px solid {{ 'var(--grn-bd)' if cat=='success' else 'var(--red-bd)' }};">
+    {{ msg }}
+  </div>
+  {% endfor %}
+{% endwith %}
+
+<!-- ── Tabla tarjetas ─────────────────────────────── -->
+<div class="card">
+  <div class="card-header">
+    <h3>Tarjetas registradas</h3>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <input type="text" placeholder="Buscar..." oninput="filtrar(this.value)"
+             style="padding:6px 12px;border:1px solid var(--border);border-radius:6px;font-size:13px;outline:none;width:180px;">
+      <span class="badge badge-iot">{{ tarjetas|length }} tarjetas</span>
+    </div>
+  </div>
+  <div class="table-container">
+    <table id="tabla-tarjetas">
+      <thead>
+        <tr>
+          <th>UID HEX</th>
+          <th>Paciente</th>
+          <th>Expediente</th>
+          <th>Descripción</th>
+          <th>Registrada</th>
+          {% if session.rol == 'ADMIN' %}<th>Acciones</th>{% endif %}
+        </tr>
+      </thead>
+      <tbody>
+        {% for t in tarjetas %}
+        <tr data-q="{{ (t.uid_hex + ' ' + t.nombre_completo + ' ' + (t.num_expediente or '') + ' ' + (t.descripcion or ''))|lower }}">
+          <td>
+            <code style="font-size:12px;background:var(--ice);color:var(--navy);padding:3px 9px;border-radius:5px;font-weight:700;letter-spacing:1px;">
+              {{ t.uid_hex }}
+            </code>
+          </td>
+          <td>
+            <div style="display:flex;align-items:center;gap:9px;">
+              <img src="{{ t.foto }}" style="width:32px;height:32px;border-radius:50%;object-fit:cover;border:1.5px solid var(--border);flex-shrink:0;"
+                   onerror="this.src='https://ui-avatars.com/api/?name=P&background=6366f1&color=fff&size=64'">
+              <span style="font-size:13px;font-weight:500;color:var(--ink2);">{{ t.nombre_completo }}</span>
+            </div>
+          </td>
+          <td><code style="font-size:11px;">{{ t.num_expediente or '—' }}</code></td>
+          <td style="font-size:12px;color:var(--muted);">{{ t.descripcion or '—' }}</td>
+          <td style="font-size:12px;color:var(--muted);">{{ t.fecha_registro or '—' }}</td>
+          {% if session.rol == 'ADMIN' %}
+          <td>
+            <a href="{{ url_for('tarjeta_eliminar', uid=t.uid_hex) }}"
+               class="btn btn-danger btn-sm"
+               onclick="return confirm('¿Eliminar tarjeta {{ t.uid_hex }}?')">🗑️ Eliminar</a>
+          </td>
+          {% endif %}
+        </tr>
+        {% else %}
+        <tr>
+          <td colspan="6" style="text-align:center;padding:40px;color:var(--muted);">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" style="margin:0 auto 10px;display:block;opacity:.25;">
+              <rect x="2" y="5" width="20" height="14" rx="2" stroke="currentColor" stroke-width="2"/>
+              <path d="M2 10h20" stroke="currentColor" stroke-width="2"/>
+            </svg>
+            <p style="font-size:13px;font-weight:500;">No hay tarjetas registradas</p>
+            <p style="font-size:12px;margin-top:4px;">Obtén el UID con el sketch del ESP32 y regístrala aquí</p>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ══ MODAL — Registrar tarjeta ══════════════════════════════ -->
+{% if session.rol == 'ADMIN' %}
+<div id="modal-overlay" onclick="cerrarModal()" style="
+  display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);
+  z-index:1000;align-items:center;justify-content:center;">
+</div>
+
+<div id="modal" style="
+  display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);
+  background:var(--white);border-radius:14px;box-shadow:var(--shadow-lg);
+  width:100%;max-width:480px;z-index:1001;overflow:hidden;">
+
+  <!-- Header -->
+  <div style="background:var(--navy);padding:18px 24px;display:flex;align-items:center;justify-content:space-between;">
+    <div>
+      <p style="font-size:15px;font-weight:700;color:white;">Registrar tarjeta NFC</p>
+      <p style="font-size:11px;color:rgba(255,255,255,.45);margin-top:2px;">Vincula un UID a un paciente</p>
+    </div>
+    <button onclick="cerrarModal()" style="background:rgba(255,255,255,.1);border:none;color:white;width:30px;height:30px;border-radius:6px;cursor:pointer;font-size:16px;">✕</button>
+  </div>
+
+  <!-- Form -->
+  <form method="POST" action="{{ url_for('tarjeta_nueva') }}" style="padding:24px;">
+
+    <!-- UID -->
+    <div style="margin-bottom:18px;">
+      <label style="font-size:12px;font-weight:600;color:var(--ink3);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:6px;">
+        UID HEX <span style="color:var(--red);">*</span>
+      </label>
+      <input type="text" name="uid_hex" required
+             placeholder="Ej: A3F2019B"
+             maxlength="20"
+             oninput="this.value=this.value.toUpperCase().replace(/[^0-9A-F]/g,'')"
+             style="width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;letter-spacing:2px;outline:none;box-sizing:border-box;transition:border .15s;"
+             onfocus="this.style.borderColor='var(--blue)'"
+             onblur="this.style.borderColor='var(--border)'">
+      <p style="font-size:11px;color:var(--muted);margin-top:5px;">📋 Cópialo del Monitor Serie del Arduino IDE</p>
+    </div>
+
+    <!-- Paciente -->
+    <div style="margin-bottom:18px;">
+      <label style="font-size:12px;font-weight:600;color:var(--ink3);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:6px;">
+        Paciente <span style="color:var(--red);">*</span>
+      </label>
+      <select name="id_paciente" required
+              style="width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:13px;outline:none;background:var(--white);box-sizing:border-box;transition:border .15s;"
+              onfocus="this.style.borderColor='var(--blue)'"
+              onblur="this.style.borderColor='var(--border)'">
+        <option value="">— Selecciona un paciente —</option>
+        {% for p in pacientes %}
+        <option value="{{ p.id_paciente }}">
+          {{ p.nombre_completo }} — {{ p.num_expediente or 'Sin exp.' }}
+        </option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <!-- Descripción -->
+    <div style="margin-bottom:24px;">
+      <label style="font-size:12px;font-weight:600;color:var(--ink3);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:6px;">
+        Descripción <span style="color:var(--muted);font-weight:400;">(opcional)</span>
+      </label>
+      <input type="text" name="descripcion"
+             placeholder="Ej: Tarjeta principal de María González"
+             maxlength="100"
+             style="width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:13px;outline:none;box-sizing:border-box;transition:border .15s;"
+             onfocus="this.style.borderColor='var(--blue)'"
+             onblur="this.style.borderColor='var(--border)'">
+    </div>
+
+    <!-- Botones -->
+    <div style="display:flex;gap:10px;">
+      <button type="button" onclick="cerrarModal()"
+              style="flex:1;padding:11px;border:1.5px solid var(--border);border-radius:8px;background:var(--white);font-size:13px;font-weight:600;cursor:pointer;color:var(--ink3);">
+        Cancelar
+      </button>
+      <button type="submit"
+              style="flex:2;padding:11px;border:none;border-radius:8px;background:var(--navy);color:white;font-size:13px;font-weight:600;cursor:pointer;">
+        💳 Registrar tarjeta
+      </button>
+    </div>
+  </form>
+</div>
+{% endif %}
+
+<script>
+function abrirModal() {
+  document.getElementById('modal-overlay').style.display = 'block';
+  document.getElementById('modal').style.display = 'block';
+  document.querySelector('[name="uid_hex"]').focus();
+}
+function cerrarModal() {
+  document.getElementById('modal-overlay').style.display = 'none';
+  document.getElementById('modal').style.display = 'none';
+}
+function filtrar(q) {
+  q = q.toLowerCase();
+  let v = 0;
+  document.querySelectorAll('#tabla-tarjetas tbody tr[data-q]').forEach(r => {
+    const m = r.dataset.q.includes(q);
+    r.style.display = m ? '' : 'none';
+    if (m) v++;
+  });
+}
+// Cerrar con Escape
+document.addEventListener('keydown', e => { if (e.key === 'Escape') cerrarModal(); });
+</script>
+{% endblock %}

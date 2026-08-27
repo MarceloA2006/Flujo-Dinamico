@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% block title %}{{ accion }} Ingreso{% endblock %}
+{% block page_title %}{{ accion }} Ingreso{% endblock %}
+{% block page_subtitle %}Formulario de ingreso hospitalario{% endblock %}
+{% block topbar_actions %}
+  <a href="{{ url_for('ingresos') }}" class="btn btn-outline">← Volver</a>
+{% endblock %}
+
+{% block content %}
+<div class="card" style="max-width:700px;">
+  <div class="card-header">
+    <h3>{{ '✏️ Editar' if accion == 'Editar' else '➕  Nuevo' }} Ingreso</h3>
+  </div>
+  <div class="card-body">
+    <form method="POST">
+
+      <!-- Expediente -->
+      <div class="form-group">
+        <label class="form-label">Expediente *</label>
+        <select name="id_expediente" class="form-control" required>
+          <option value="">— Seleccionar expediente —</option>
+          {% for e in expedientes %}
+          <option value="{{ e.id_expediente }}"
+            {% if ingreso and ingreso.id_expediente == e.id_expediente %}selected{% endif %}>
+            {{ e.num_expediente }} — {{ e.paciente }}
+          </option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <!-- Médico tratante -->
+      <div class="form-group">
+        <label class="form-label">Médico tratante *</label>
+        <select name="cedula_medico" class="form-control" required>
+          <option value="">— Seleccionar médico —</option>
+          {% for m in medicos %}
+          <option value="{{ m.cedula_medico }}"
+            {% if ingreso and ingreso.cedula_medico == m.cedula_medico %}selected{% endif %}>
+            {{ m.nombre_completo }}
+          </option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <!-- Tipo de ingreso y Área inicial (esta última solo para NUEVO) -->
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Tipo de ingreso *</label>
+          <select name="tipo_ingreso" class="form-control" required>
+            <option value="">— Seleccionar —</option>
+            {% for tipo in ['URGENCIA','PROGRAMADO','TRASLADO','REINGRESO'] %}
+            <option value="{{ tipo }}"
+              {% if ingreso and ingreso.tipo_ingreso == tipo %}selected{% endif %}>
+              {{ tipo }}
+            </option>
+            {% endfor %}
+          </select>
+        </div>
+
+        {% if accion != 'Editar' %}
+        <div class="form-group">
+          <label class="form-label">Área inicial *</label>
+          <select name="id_area_inicial" class="form-control">
+            <option value="">— Seleccionar área —</option>
+            {% for a in areas %}
+            <option value="{{ a.id_area }}">{{ a.nombre_area }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        {% endif %}
+      </div>
+
+      <!-- Motivo de ingreso -->
+      <div class="form-group">
+        <label class="form-label">Motivo de ingreso *</label>
+        <textarea name="motivo_ingreso" class="form-control" rows="3" required>{{ ingreso.motivo_ingreso if ingreso else '' }}</textarea>
+      </div>
+
+      <!-- Estado (solo en edición) -->
+      {% if accion == 'Editar' %}
+      <div class="form-group">
+        <label class="form-label">Estado del ingreso</label>
+        <select name="estado" class="form-control">
+          {% for estado in ['EN_ESPERA','EN_ATENCION','COMPLETADO','ALTA','TRASLADADO'] %}
+          <option value="{{ estado }}"
+            {% if ingreso and ingreso.estado == estado %}selected{% endif %}>
+            {{ estado.replace('_',' ').capitalize() }}
+          </option>
+          {% endfor %}
+        </select>
+      </div>
+      {% endif %}
+
+      <div style="display:flex;gap:12px;margin-top:20px;">
+        <button type="submit" class="btn btn-primary">
+          💾  {{ 'Actualizar' if accion == 'Editar' else 'Registrar' }} Ingreso
+        </button>
+        <a href="{{ url_for('ingresos') }}" class="btn btn-outline">Cancelar</a>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

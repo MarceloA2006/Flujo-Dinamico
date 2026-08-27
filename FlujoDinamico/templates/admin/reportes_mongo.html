@@ -1,0 +1,232 @@
+{% extends 'base.html' %}
+{% block title %}Reportes MongoDB{% endblock %}
+{% block page_title %}Analítica en Tiempo Real{% endblock %}
+{% block page_subtitle %}Datos desde MongoDB — eventos IoT del sistema BeaconFlow{% endblock %}
+
+{% block content %}
+
+<!-- ── Navegación ── -->
+<div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:24px;">
+  <a href="{{ url_for('graficas_nfc') }}"
+     style="padding:8px 16px;border-radius:8px;background:var(--navy);color:white;text-decoration:none;font-size:13px;font-weight:600;">
+    📋 Historial NFC
+  </a>
+  <a href="{{ url_for('graficas_beacon') }}"
+     style="padding:8px 16px;border-radius:8px;background:var(--navy);color:white;text-decoration:none;font-size:13px;font-weight:600;">
+    📡 Historial Beacon
+  </a>
+</div>
+
+<!-- ── KPI Cards ── -->
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px;margin-bottom:28px;">
+  {% set kpis = [
+    ('Eventos NFC',        resumen.get('total_eventos_nfc',0),    '#6366f1'),
+    ('Entradas',           resumen.get('total_entradas',0),       '#22c55e'),
+    ('Salidas',            resumen.get('total_salidas',0),        '#f59e0b'),
+    ('Detecciones beacon', resumen.get('total_detecciones',0),    '#0ea5e9'),
+    ('Logs totales',       resumen.get('total_logs',0),           '#64748b'),
+    ('Errores sistema',    resumen.get('total_errores',0),        '#ef4444'),
+  ] %}
+  {% for nombre, valor, color in kpis %}
+  <div style="background:white;border-radius:12px;padding:18px;box-shadow:var(--shadow-xs);border-top:3px solid {{ color }};">
+    <p style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;">{{ nombre }}</p>
+    <p style="font-size:28px;font-weight:700;color:{{ color }};">{{ valor }}</p>
+  </div>
+  {% endfor %}
+</div>
+
+<!-- GRÁFICA 1 — Línea de series: Actividad IoT por día -->
+<div style="background:white;border-radius:12px;padding:24px;box-shadow:var(--shadow-xs);margin-bottom:20px;">
+  <h3 style="font-size:15px;font-weight:700;color:var(--navy);margin-bottom:4px;">Actividad IoT del Sistema</h3>
+  <p style="font-size:12px;color:var(--muted);margin-bottom:20px;">
+    Registros NFC de pacientes y detecciones del beacon por día — últimos 7 días.
+    Fuente: colecciones <code>eventos_nfc</code> y <code>eventos_beacon</code> (MongoDB)
+  </p>
+  <div id="chart-linea" style="height:320px;"></div>
+</div>
+
+<!-- GRÁFICAS 2 y 3 -->
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px;">
+
+  <!-- GRÁFICA 2 — Pie: Distribución de acciones NFC -->
+  <div style="background:white;border-radius:12px;padding:24px;box-shadow:var(--shadow-xs);">
+    <h3 style="font-size:15px;font-weight:700;color:var(--navy);margin-bottom:4px;">Distribución de Eventos NFC</h3>
+    <p style="font-size:12px;color:var(--muted);margin-bottom:20px;">
+      Proporción de entradas vs salidas registradas.
+      Fuente: colección <code>eventos_nfc</code> (MongoDB)
+    </p>
+    <div id="chart-pie" style="height:300px;"></div>
+  </div>
+
+  <!-- GRÁFICA 3 — Barras: RSSI beacon por hora -->
+  <div style="background:white;border-radius:12px;padding:24px;box-shadow:var(--shadow-xs);">
+    <h3 style="font-size:15px;font-weight:700;color:var(--navy);margin-bottom:4px;">Calidad de Señal BLE por Hora</h3>
+    <p style="font-size:12px;color:var(--muted);margin-bottom:20px;">
+      RSSI promedio del beacon agrupado por hora del día.
+      Fuente: colección <code>eventos_beacon</code> (MongoDB)
+    </p>
+    <div id="chart-barras" style="height:300px;"></div>
+  </div>
+</div>
+
+<!-- Logs recientes -->
+<div style="background:white;border-radius:12px;padding:20px;box-shadow:var(--shadow-xs);">
+  <h3 style="font-size:14px;font-weight:600;color:var(--navy);margin-bottom:16px;">Logs recientes del sistema</h3>
+  {% if logs %}
+  <table style="width:100%;border-collapse:collapse;font-size:13px;">
+    <thead>
+      <tr style="border-bottom:2px solid var(--border);">
+        <th style="text-align:left;padding:8px;color:var(--muted);font-weight:600;">Nivel</th>
+        <th style="text-align:left;padding:8px;color:var(--muted);font-weight:600;">Módulo</th>
+        <th style="text-align:left;padding:8px;color:var(--muted);font-weight:600;">Mensaje</th>
+        <th style="text-align:left;padding:8px;color:var(--muted);font-weight:600;">Fecha</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for log in logs %}
+      {% set color = '#ef4444' if log.nivel=='ERROR' else ('#f59e0b' if log.nivel=='WARNING' else '#22c55e') %}
+      <tr style="border-bottom:1px solid var(--border);">
+        <td style="padding:8px;"><span style="font-size:11px;font-weight:700;color:{{ color }};background:{{ color }}15;padding:2px 8px;border-radius:4px;">{{ log.nivel }}</span></td>
+        <td style="padding:8px;color:var(--ink2);">{{ log.modulo }}</td>
+        <td style="padding:8px;color:var(--sub);">{{ log.mensaje }}</td>
+        <td style="padding:8px;color:var(--muted);font-size:12px;">{{ log.fecha_local }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p style="color:var(--muted);text-align:center;padding:32px;">Sin logs registrados aún</p>
+  {% endif %}
+</div>
+
+<!-- Highcharts -->
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  fetch('/admin/graficas/datos')
+    .then(r => r.json())
+    .then(data => {
+      const entradasDia   = data.entradas_por_dia || [];
+      const beaconDia     = data.beacon_por_dia   || [];
+      const rssiHora      = data.rssi_por_hora    || [];
+      const totalEntradas = {{ resumen.get('total_entradas', 0) }};
+      const totalSalidas  = {{ resumen.get('total_salidas',  0) }};
+      const totalErrores  = {{ resumen.get('total_errores',  0) }};
+
+      // Unir y ordenar fechas para gráfica de línea
+      const todasFechas = [...new Set([
+        ...entradasDia.map(d => d.fecha),
+        ...beaconDia.map(d => d.fecha)
+      ])].sort();
+      const mapNFC    = Object.fromEntries(entradasDia.map(d => [d.fecha, d.total]));
+      const mapBeacon = Object.fromEntries(beaconDia.map(d => [d.fecha, d.total]));
+
+      // ── GRÁFICA 1: Línea de series (estructura de tu profesor) ──
+      Highcharts.chart('chart-linea', {
+        title:    { text: 'Actividad IoT — NFC y Beacon por Día', align: 'left' },
+        subtitle: { text: 'Fuente: eventos_nfc y eventos_beacon — MongoDB hospital_beaconflow', align: 'left' },
+        yAxis:    { title: { text: 'Cantidad de eventos' }, allowDecimals: false },
+        xAxis: {
+          categories: todasFechas.length ? todasFechas : ['Sin datos'],
+          accessibility: { rangeDescription: 'Últimos 7 días de actividad' }
+        },
+        legend: { layout: 'vertical', align: 'right', verticalAlign: 'middle' },
+        plotOptions: {
+          series: { label: { connectorAllowed: false }, marker: { enabled: true, radius: 4 } }
+        },
+        series: [
+          { name: 'Registros NFC (pacientes)', data: todasFechas.map(f => mapNFC[f]    || 0), color: '#6366f1' },
+          { name: 'Detecciones Beacon BLE',    data: todasFechas.map(f => mapBeacon[f] || 0), color: '#0ea5e9' }
+        ],
+        responsive: {
+          rules: [{ condition: { maxWidth: 500 }, chartOptions: {
+            legend: { layout: 'horizontal', align: 'center', verticalAlign: 'bottom' }
+          }}]
+        },
+        credits: { enabled: false }
+      });
+
+      // ── GRÁFICA 2: Pie (estructura de tu profesor) ──
+      Highcharts.chart('chart-pie', {
+        chart: {
+          type: 'pie',
+          zooming: { type: 'xy' },
+          panning: { enabled: true, type: 'xy' },
+          panKey: 'shift'
+        },
+        title:    { text: 'Distribución de Eventos NFC' },
+        subtitle: { text: 'Fuente: eventos_nfc — MongoDB hospital_beaconflow' },
+        tooltip:  { valueSuffix: ' eventos' },
+        plotOptions: {
+          pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: [
+              { enabled: true, distance: 20 },
+              {
+                enabled: true, distance: -40,
+                format: '{point.percentage:.1f}%',
+                style: { fontSize: '1.2em', textOutline: 'none', opacity: 0.7 },
+                filter: { operator: '>', property: 'percentage', value: 10 }
+              }
+            ]
+          }
+        },
+        series: [{
+          name: 'Eventos',
+          colorByPoint: true,
+          data: [
+            { name: 'Entradas de pacientes', y: totalEntradas || 0, color: '#22c55e' },
+            { name: 'Salidas de pacientes',  y: totalSalidas  || 0, color: '#6366f1', sliced: true, selected: true },
+            { name: 'Errores del sistema',   y: totalErrores  || 0, color: '#ef4444' }
+          ]
+        }],
+        credits: { enabled: false }
+      });
+
+      // ── GRÁFICA 3: Barras horizontales (estructura de tu profesor) ──
+      const horas    = rssiHora.map(d => d.hora + ':00 h');
+      const rssiVals = rssiHora.map(d => Math.abs(d.rssi_prom));
+      const detVals  = rssiHora.map(d => d.detecciones);
+
+      Highcharts.chart('chart-barras', {
+        chart: { type: 'bar' },
+        title:    { text: 'Señal BLE del Beacon por Hora del Día' },
+        subtitle: { text: 'Fuente: eventos_beacon — MongoDB hospital_beaconflow' },
+        xAxis: {
+          categories: horas.length ? horas : ['Sin datos'],
+          title: { text: null },
+          gridLineWidth: 1,
+          lineWidth: 0
+        },
+        yAxis: {
+          min: 0,
+          title: { text: 'Valor absoluto RSSI (dBm)', align: 'high' },
+          labels: { overflow: 'justify' },
+          gridLineWidth: 0
+        },
+        tooltip: { valueSuffix: ' unidades' },
+        plotOptions: {
+          bar: {
+            borderRadius: '50%',
+            dataLabels: { enabled: true },
+            groupPadding: 0.1
+          }
+        },
+        legend: {
+          layout: 'vertical', align: 'right', verticalAlign: 'top',
+          x: -40, y: 80, floating: true, borderWidth: 1,
+          backgroundColor: '#ffffff', shadow: true
+        },
+        credits: { enabled: false },
+        series: [
+          { name: '|RSSI| promedio (dBm)', data: rssiVals.length ? rssiVals : [0], color: '#0ea5e9' },
+          { name: 'Detecciones',           data: detVals.length  ? detVals  : [0], color: '#22c55e' }
+        ]
+      });
+    })
+    .catch(err => console.warn('[Highcharts] Error:', err));
+});
+</script>
+{% endblock %}

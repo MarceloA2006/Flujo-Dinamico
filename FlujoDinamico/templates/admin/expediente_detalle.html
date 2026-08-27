@@ -1,0 +1,209 @@
+{% extends 'base.html' %}
+{% block title %}Expediente {{ exp.num_expediente }}{% endblock %}
+{% block page_title %}Expediente {{ exp.num_expediente }}{% endblock %}
+{% block page_subtitle %}Historial clínico completo{% endblock %}
+
+{% block topbar_actions %}
+  <a href="{{ url_for('expedientes') }}" class="btn btn-outline">← Volver</a>
+{% endblock %}
+
+{% block content %}
+<div class="grid-2 mb-6">
+
+  <!-- Datos del paciente desde BD -->
+  <div class="card">
+    <div class="card-header">
+      <h3>🧑‍⚕️ Datos del Paciente</h3>
+      <span class="badge {% if exp.activo %}badge-activo{% else %}badge-inactivo{% endif %}">
+        {{ 'ACTIVO' if exp.activo else 'CERRADO' }}
+      </span>
+    </div>
+    <div class="card-body">
+      <div style="display:flex;flex-direction:column;gap:12px;">
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <div>
+            <p style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--text-secondary);margin-bottom:3px;">Nombre completo</p>
+            <p style="font-weight:700;font-size:16px;">{{ exp.paciente_nombre }}</p>
+          </div>
+          <div>
+            <p style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--text-secondary);margin-bottom:3px;">No. Expediente</p>
+            <code style="font-size:13px;background:var(--slate-100);padding:3px 8px;border-radius:6px;">{{ exp.num_expediente }}</code>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;padding-top:10px;border-top:1px solid var(--border);">
+          <div style="background:var(--slate-100);border-radius:8px;padding:12px;text-align:center;">
+            <p style="font-size:11px;color:var(--text-secondary);">CURP</p>
+            <p style="font-size:10px;font-weight:600;word-break:break-all;">{{ exp.curp }}</p>
+          </div>
+          <div style="background:var(--slate-100);border-radius:8px;padding:12px;text-align:center;">
+            <p style="font-size:11px;color:var(--text-secondary);">Tipo Sangre</p>
+            <p style="font-size:18px;font-weight:700;color:var(--alerta-rojo);">{{ exp.tipo_sangre or '?' }}</p>
+          </div>
+          <div style="background:var(--slate-100);border-radius:8px;padding:12px;text-align:center;">
+            <p style="font-size:11px;color:var(--text-secondary);">Sexo</p>
+            <p style="font-size:14px;font-weight:600;">{{ '♀ Femenino' if exp.sexo == 'F' else '♂ Masculino' }}</p>
+          </div>
+        </div>
+
+        {% if exp.telefono or exp.email %}
+        <div>
+          <p style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--text-secondary);margin-bottom:3px;">Contacto</p>
+          <p style="font-size:13px;">
+            {% if exp.telefono %}📞 {{ exp.telefono }}{% endif %}
+            {% if exp.telefono and exp.email %} &nbsp;|&nbsp; {% endif %}
+            {% if exp.email %}✉️ {{ exp.email }}{% endif %}
+          </p>
+        </div>
+        {% endif %}
+
+        <!-- Alergias críticas destacadas -->
+        {% if alergias %}
+        <div style="padding:12px;background:#fff5f5;border:1px solid #ffcccc;border-radius:8px;">
+          <p style="font-size:11px;font-weight:700;color:var(--alerta-rojo);margin-bottom:8px;">
+            ALERGIAS REGISTRADAS
+          </p>
+          {% for al in alergias %}
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+            <span class="badge" style="
+              background:{% if al.severidad == 'ANAFILACTICA' %}#c0392b{% elif al.severidad == 'SEVERA' %}#e74c3c{% elif al.severidad == 'MODERADA' %}#e67e22{% else %}#f1c40f{% endif %};
+              color:white;font-size:10px;">
+              {{ al.severidad }}
+            </span>
+            <span style="font-size:13px;font-weight:600;">{{ al.alergia }}</span>
+            <span style="font-size:11px;color:var(--text-secondary);">({{ al.tipo }})</span>
+          </div>
+          {% if al.observaciones %}
+          <p style="font-size:11px;color:var(--text-secondary);margin-left:60px;margin-bottom:4px;">{{ al.observaciones }}</p>
+          {% endif %}
+          {% endfor %}
+        </div>
+        {% endif %}
+
+        <div style="padding-top:10px;border-top:1px solid var(--border);">
+          <p style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--text-secondary);margin-bottom:3px;">Médico Titular</p>
+          <p style="font-weight:600;">{{ exp.medico_nombre }}</p>
+        </div>
+
+        {% if exp.notas_iniciales %}
+        <div>
+          <p style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--text-secondary);margin-bottom:3px;">Notas Iniciales</p>
+          <p style="font-size:13px;color:var(--text-secondary);font-style:italic;">{{ exp.notas_iniciales }}</p>
+        </div>
+        {% endif %}
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Triajes con variables de BD real -->
+  <div class="card">
+    <div class="card-header">
+      <h3>Triajes del Expediente</h3>
+      <span class="badge badge-activo">{{ triajes|length }} registros</span>
+    </div>
+    <div class="card-body">
+      {% if triajes %}
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        {% for t in triajes %}
+        <div style="border:1px solid var(--border);border-left:4px solid {{ t.color_hex }};border-radius:8px;padding:12px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <span style="font-weight:700;color:{{ t.color_hex }};">
+              ● {{ t.nivel }} &nbsp;
+              <span style="font-weight:400;font-size:12px;color:var(--text-secondary);">{{ t.enfermero }}</span>
+            </span>
+            <span style="font-size:11px;color:var(--text-secondary);">{{ t.timestamp_triaje }}</span>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;font-size:12px;">
+            <div>
+              <span style="color:var(--text-secondary);">FC:</span>
+              <strong style="{% if t.frecuencia_cardiaca and (t.frecuencia_cardiaca > 100 or t.frecuencia_cardiaca < 60) %}color:var(--alerta-rojo);{% endif %}">
+                {{ t.frecuencia_cardiaca or '—' }} bpm
+              </strong>
+            </div>
+            <div>
+              <span style="color:var(--text-secondary);">PA:</span>
+              <strong style="{% if t.presion_sistolica and t.presion_sistolica > 140 %}color:var(--alerta-rojo);{% endif %}">
+                {{ t.presion_sistolica or '—' }}/{{ t.presion_diastolica or '—' }}
+              </strong>
+            </div>
+            <div>
+              <span style="color:var(--text-secondary);">Temp:</span>
+              <strong style="{% if t.temperatura and t.temperatura > 38.0 %}color:var(--alerta-amarillo);{% endif %}">
+                {{ t.temperatura or '—' }} °C
+              </strong>
+            </div>
+            <div>
+              <span style="color:var(--text-secondary);">SpO₂:</span>
+              <strong style="{% if t.saturacion_o2 and t.saturacion_o2 < 95 %}color:var(--alerta-rojo);{% endif %}">
+                {{ t.saturacion_o2 or '—' }}%
+              </strong>
+            </div>
+            <div>
+              <span style="color:var(--text-secondary);">Glasgow:</span>
+              <strong style="{% if t.glasgow and t.glasgow < 14 %}color:var(--alerta-amarillo);{% endif %}">
+                {{ t.glasgow or '—' }}/15
+              </strong>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      {% else %}
+      <p style="color:var(--text-secondary);text-align:center;padding:20px;">Sin triajes registrados</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<!-- Ingresos del expediente -->
+<div class="card">
+  <div class="card-header">
+    <h3>Ingresos del Expediente</h3>
+    <span class="badge badge-activo">{{ ingresos|length }} ingresos</span>
+  </div>
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Fecha</th>
+          <th>Tipo</th>
+          <th>Motivo</th>
+          <th>Médico</th>
+          <th>Estado</th>
+          <th>Espera (min)</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for i in ingresos %}
+        <tr>
+          <td>{{ i.id_ingreso }}</td>
+          <td style="font-size:12px;">{{ i.fecha_ingreso }}</td>
+          <td>
+            <span class="badge {% if i.tipo_ingreso == 'URGENCIA' %}badge-mantenimiento{% else %}badge-medico{% endif %}">
+              {{ i.tipo_ingreso }}
+            </span>
+          </td>
+          <td style="color:var(--text-secondary);max-width:200px;white-space:normal;">{{ i.motivo_ingreso }}</td>
+          <td>{{ i.medico }}</td>
+          <td>
+            <span class="badge {% if i.estado == 'COMPLETADO' or i.estado == 'ALTA' %}badge-activo{% elif i.estado == 'EN_ESPERA' %}badge-mantenimiento{% else %}badge-medico{% endif %}">
+              {{ i.estado }}
+            </span>
+          </td>
+          <td style="font-weight:600;{% if i.tiempo_espera_min and i.tiempo_espera_min > 30 %}color:var(--alerta-rojo);{% endif %}">
+            {{ i.tiempo_espera_min or '—' }}
+          </td>
+        </tr>
+        {% else %}
+        <tr>
+          <td colspan="7" style="text-align:center;color:var(--text-secondary);padding:24px;">Sin ingresos registrados</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

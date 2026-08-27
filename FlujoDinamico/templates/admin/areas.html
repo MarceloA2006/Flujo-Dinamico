@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block title %}Áreas{% endblock %}
+{% block page_title %}Gestión de Áreas{% endblock %}
+{% block page_subtitle %}Catálogo de áreas hospitalarias con ocupación en tiempo real{% endblock %}
+
+{% block topbar_actions %}
+  {% if session.rol == 'ADMIN' %}
+  <a href="{{ url_for('area_nueva') }}" class="btn btn-primary">➕ Nueva Área</a>
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="card">
+  <div class="card-header">
+    <h3>Áreas Hospitalarias</h3>
+    <span class="badge badge-activo">{{ areas|length }} áreas</span>
+  </div>
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th><th>Nombre</th><th>Tipo</th><th>Piso</th>
+          <th>Ocupación</th><th>Capacidad</th><th>Estado</th>
+          {% if session.rol == 'ADMIN' %}<th>Acciones</th>{% endif %}
+        </tr>
+      </thead>
+      <tbody>
+        {% for a in areas %}
+        {% set pct = ((a.ocupacion_actual / a.capacidad * 100)|int) if a.capacidad > 0 else 0 %}
+        <tr>
+          <td><code style="font-size:12px;background:var(--slate-100);padding:2px 7px;border-radius:5px;">{{ a.id_area }}</code></td>
+          <td><strong>{{ a.nombre_area }}</strong></td>
+          <td><span class="badge badge-enfermero">{{ a.tipo }}</span></td>
+          <td style="color:var(--text-secondary);">{{ a.nombre_piso }}</td>
+          <td>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <div style="flex:1;background:var(--border);border-radius:10px;height:6px;min-width:60px;">
+                <div style="width:{{ pct }}%;height:6px;border-radius:10px;background:{% if pct>80 %}#e11d48{% elif pct>50 %}#d97706{% else %}#059669{% endif %};"></div>
+              </div>
+              <span style="font-size:12px;font-weight:600;">{{ a.ocupacion_actual }}/{{ a.capacidad }} ({{ pct }}%)</span>
+            </div>
+          </td>
+          <td>{{ a.capacidad }} pac.</td>
+          <td>
+            <span class="badge {% if a.activo %}badge-activo{% else %}badge-inactivo{% endif %}">
+              {{ 'ACTIVA' if a.activo else 'INACTIVA' }}
+            </span>
+          </td>
+          {% if session.rol == 'ADMIN' %}
+          <td>
+            <div class="flex gap-2">
+              <a href="{{ url_for('area_editar', id_area=a.id_area) }}" class="btn btn-outline btn-sm">✏️ Editar</a>
+              <a href="{{ url_for('area_eliminar', id_area=a.id_area) }}" class="btn btn-danger btn-sm"
+                 onclick="return confirm('¿Eliminar el área {{ a.nombre_area }}?')">🗑️</a>
+            </div>
+          </td>
+          {% endif %}
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

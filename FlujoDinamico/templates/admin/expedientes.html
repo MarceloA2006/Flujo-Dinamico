@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}Expedientes{% endblock %}
+{% block page_title %}Expedientes clínicos{% endblock %}
+{% block page_subtitle %}Historial médico de pacientes registrados{% endblock %}
+{% block content %}
+<div class="search-bar"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" style="color:var(--muted);flex-shrink:0;"><circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><input type="text" placeholder="Buscar por paciente, expediente o médico..." oninput="filtrar(this.value)"><span style="font-size:12px;color:var(--muted);" id="ct">{{ expedientes|length }}</span></div>
+<div class="card">
+  <div class="table-container">
+    <table>
+      <thead><tr><th>Paciente</th><th>Núm. expediente</th><th>Médico titular</th><th>Apertura</th><th>Estado</th><th>Acciones</th></tr></thead>
+      <tbody id="tbody">
+      {% for e in expedientes %}
+      {% set foto_url = e.get('foto', 'https://ui-avatars.com/api/?name='+e.paciente+'&background=e0f4ff&color=03045e&size=80') %}
+      <tr data-q="{{ (e.paciente+' '+e.num_expediente+' '+e.medico)|lower }}">
+        <td><div style="display:flex;align-items:center;gap:9px;"><img src="{{ foto_url }}" alt="{{ e.paciente }}" style="width:32px;height:32px;border-radius:50%;object-fit:cover;border:1.5px solid var(--border);flex-shrink:0;" onerror="this.src='https://ui-avatars.com/api/?name={{ e.paciente }}&background=e0f4ff&color=03045e&size=48'"><span style="font-weight:600;font-size:13px;">{{ e.paciente }}</span></div></td>
+        <td><code>{{ e.num_expediente }}</code></td>
+        <td style="font-size:12.5px;color:var(--ink3);">{{ e.medico }}</td>
+        <td style="font-size:12px;color:var(--muted);">{{ e.fecha_apertura }}</td>
+        <td><span class="badge {{ 'badge-activo' if e.activo else 'badge-inactivo' }}">{{ 'Activo' if e.activo else 'Cerrado' }}</span></td>
+        <td><div style="display:flex;gap:5px;"><a href="{{ url_for('expediente_detalle', id=e.id_expediente) }}" style="padding:5px 10px;border-radius:5px;font-size:11.5px;font-weight:600;text-decoration:none;background:var(--ice);color:var(--navy);border:1px solid var(--light);transition:all .12s;" onmouseover="this.style.background='var(--blue)';this.style.color='white'" onmouseout="this.style.background='var(--ice)';this.style.color='var(--navy)'">Ver detalle</a>{% if session.rol in ['MEDICO','ENFERMERO','RECEPCION'] %}<a href="#" style="padding:5px 10px;border-radius:5px;font-size:11.5px;font-weight:600;text-decoration:none;background:var(--bg);color:var(--sub);border:1px solid var(--border);transition:all .12s;" onmouseover="this.style.background='var(--ink2)';this.style.color='white'" onmouseout="this.style.background='var(--bg)';this.style.color='var(--sub)'">Editar</a>{% endif %}</div></td>
+        <td><div style="display:flex;gap:5px;"><a href="{{ url_for('expediente_nuevo') }}" class="btn btn-primary">+ Nuevo Expediente</a></div></td>
+      </tr>
+      {% else %}<tr><td colspan="6" style="text-align:center;color:var(--muted);padding:40px;">Sin expedientes</td></tr>{% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+<script>function filtrar(q){q=q.toLowerCase();let v=0;document.querySelectorAll('#tbody tr[data-q]').forEach(r=>{const m=r.dataset.q.includes(q);r.style.display=m?'':'none';if(m)v++;});document.getElementById('ct').textContent=v;}</script>
+{% endblock %}

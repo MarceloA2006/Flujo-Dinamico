@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% block title %}{{ accion }} Triaje{% endblock %}
+{% block page_title %}{{ accion }} Triaje{% endblock %}
+{% block page_subtitle %}Registro de signos vitales y clasificación{% endblock %}
+{% block topbar_actions %}
+  <a href="{{ url_for('triajes') }}" class="btn btn-outline">← Volver</a>
+{% endblock %}
+
+{% block content %}
+<div class="card" style="max-width:700px;">
+  <div class="card-header">
+    <h3>{{ '✏️ Editar' if accion == 'Editar' else '➕ Nuevo' }} Triaje</h3>
+  </div>
+  <div class="card-body">
+    <form method="POST">
+
+      {% if accion != 'Editar' %}
+      <div class="form-group">
+        <label class="form-label">Ingreso (paciente) *</label>
+        <select name="id_ingreso" class="form-control" required>
+          <option value="">— Seleccionar ingreso activo —</option>
+          {% for i in ingresos %}
+          <option value="{{ i.id_ingreso }}">{{ i.num_expediente or i.expediente }} — {{ i.paciente }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      {% else %}
+      <div class="form-group">
+        <label class="form-label">Paciente</label>
+        <input type="text" class="form-control" value="{{ triaje.paciente }} ({{ triaje.num_expediente }})" readonly disabled>
+      </div>
+      {% endif %}
+
+      <!-- Nivel de triaje -->
+      <div class="form-group">
+        <label class="form-label">Nivel de triaje *</label>
+        <select name="nivel_triaje" class="form-control" required>
+          <option value="">— Seleccionar nivel —</option>
+          {% for nivel in ['ROJO','NARANJA','AMARILLO','VERDE','AZUL'] %}
+          <option value="{{ nivel }}"
+            {% if triaje and triaje.nivel_triaje == nivel %}selected
+            {% elif triaje and triaje.get('nivel') == nivel %}selected{% endif %}>
+            {{ nivel }}
+          </option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <!-- Signos vitales -->
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Frec. Cardíaca (lpm) *</label>
+          <input type="number" name="frecuencia_cardiaca" class="form-control" min="0" max="300"
+                 value="{{ triaje.frecuencia_cardiaca if triaje else '' }}" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Presión Sistólica (mmHg) *</label>
+          <input type="number" name="presion_sistolica" class="form-control" min="0" max="300"
+                 value="{{ triaje.presion_sistolica if triaje else '' }}" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Presión Diastólica (mmHg) *</label>
+          <input type="number" name="presion_diastolica" class="form-control" min="0" max="200"
+                 value="{{ triaje.presion_diastolica if triaje else '' }}" required>
+        </div>
+      </div>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Temperatura (°C) *</label>
+          <input type="number" step="0.1" name="temperatura" class="form-control" min="30" max="45"
+                 value="{{ triaje.temperatura if triaje else '' }}" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Saturación O₂ (%) *</label>
+          <input type="number" name="saturacion_o2" class="form-control" min="0" max="100"
+                 value="{{ triaje.saturacion_o2 if triaje else '' }}" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Glasgow (3-15) *</label>
+          <input type="number" name="glasgow" class="form-control" min="3" max="15"
+                 value="{{ triaje.glasgow if triaje else '15' }}" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Enfermero responsable</label>
+        <select name="id_enfermero" class="form-control">
+          <option value="">— Sin asignar —</option>
+          {% for e in enfermeros %}
+          <option value="{{ e.id_enfermero }}"
+            {% if triaje and triaje.get('id_enfermero') == e.id_enfermero %}selected{% endif %}>
+            {{ e.nombre_completo or e.nombre }}
+          </option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div style="display:flex;gap:12px;margin-top:20px;">
+        <button type="submit" class="btn btn-primary">
+          {{ 'Actualizar' if accion == 'Editar' else 'Registrar' }} Triaje
+        </button>
+        <a href="{{ url_for('triajes') }}" class="btn btn-outline">Cancelar</a>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

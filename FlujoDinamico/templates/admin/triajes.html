@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block title %}Triajes{% endblock %}
+{% block page_title %}Triajes{% endblock %}
+{% block page_subtitle %}Signos vitales y clasificación por nivel de urgencia{% endblock %}
+{% block topbar_actions %}
+  {% if session.rol in ['ADMIN','ENFERMERO'] %}
+  <a href="{{ url_for('triaje_nuevo') }}" class="btn btn-primary">Nuevo triaje</a>
+  {% endif %}
+{% endblock %}
+{% block content %}
+<!-- Resumen niveles -->
+<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:18px;">
+  {% for nivel,col,bg in [('ROJO','#b91c1c','#fef2f2'),('NARANJA','#c2410c','#fff7ed'),('AMARILLO','#a16207','#fefce8'),('VERDE','#065f46','#ecfdf5'),('AZUL','#1d4ed8','#eff6ff')] %}
+  <div style="background:white;border-radius:8px;padding:12px 14px;text-align:center;border:1px solid var(--border);border-top:3px solid {{ col }};box-shadow:var(--shadow-xs);">
+    <p style="font-size:22px;font-weight:700;color:{{ col }};letter-spacing:-1px;">{{ triajes|selectattr('nivel','eq',nivel)|list|length }}</p>
+    <p style="font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.5px;">{{ nivel }}</p>
+  </div>
+  {% endfor %}
+</div>
+<div class="search-bar"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" style="color:var(--muted);flex-shrink:0;"><circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><input type="text" placeholder="Buscar paciente o expediente..." oninput="filtrar(this.value)"><span style="font-size:12px;color:var(--muted);" id="ct">{{ triajes|length }}</span></div>
+<div class="card">
+  <div class="table-container">
+    <table>
+      <thead><tr><th>Paciente</th><th>Nivel</th><th>FC</th><th>PA</th><th>Temp</th><th>SpO₂</th><th>Glasgow</th><th>Enfermero</th><th>Hora</th><th></th></tr></thead>
+      <tbody id="tbody">
+      {% for t in triajes %}
+      <tr data-q="{{ (t.paciente+' '+t.expediente)|lower }}">
+        <td><div style="display:flex;align-items:center;gap:9px;"><img src="{{ t.foto }}" style="width:32px;height:32px;border-radius:50%;object-fit:cover;border:2px solid {{ t.color_hex }}33;flex-shrink:0;" onerror="this.src='https://ui-avatars.com/api/?name={{ t.paciente }}&background=e0f4ff&color=03045e&size=48'"><div><p style="font-weight:600;font-size:13px;">{{ t.paciente }}</p><code style="font-size:10px;">{{ t.expediente }}</code></div></div></td>
+        <td><span style="display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:4px;font-size:11px;font-weight:700;background:{{ t.color_hex }}18;color:{{ t.color_hex }};border:1px solid {{ t.color_hex }}44;"><span style="width:5px;height:5px;border-radius:50%;background:{{ t.color_hex }};flex-shrink:0;"></span>{{ t.nivel }}</span></td>
+        <td style="font-weight:{{ '700' if t.frecuencia_cardiaca and (t.frecuencia_cardiaca>100 or t.frecuencia_cardiaca<60) else '400' }};color:{{ 'var(--red)' if t.frecuencia_cardiaca and (t.frecuencia_cardiaca>100 or t.frecuencia_cardiaca<60) else 'inherit' }};">{{ t.frecuencia_cardiaca or '—' }}</td>
+        <td style="font-weight:{{ '700' if t.presion_sistolica and t.presion_sistolica>140 else '400' }};color:{{ 'var(--red)' if t.presion_sistolica and t.presion_sistolica>140 else 'inherit' }};">{{ t.presion_sistolica or '—' }}/{{ t.presion_diastolica or '—' }}</td>
+        <td style="color:{{ 'var(--amber)' if t.temperatura and t.temperatura>38 else 'inherit' }};font-weight:{{ '600' if t.temperatura and t.temperatura>38 else '400' }};">{{ t.temperatura or '—' }}</td>
+        <td style="color:{{ 'var(--red)' if t.saturacion_o2 and t.saturacion_o2<95 else 'inherit' }};font-weight:{{ '700' if t.saturacion_o2 and t.saturacion_o2<95 else '400' }};">{{ t.saturacion_o2 or '—' }}</td>
+        <td>{{ t.glasgow or '—' }}/15</td>
+        <td style="font-size:12px;color:var(--sub);">{{ t.enfermero }}</td>
+        <td style="font-size:11.5px;color:var(--muted);">{{ t.timestamp_triaje }}</td>
+	<td><div style="display:flex;gap:5px;"><a href="{{ url_for('clinico_detalle', id_ingreso=t.id_ingreso) }}" style="padding:5px 10px;border-radius:5px;font-size:11.5px;font-weight:600;text-decoration:none;background:var(--ice);color:var(--navy);border:1px solid var(--light);transition:all .12s;" onmouseover="this.style.background='var(--blue)';this.style.color='white'" onmouseout="this.style.background='var(--ice)';this.style.color='var(--navy)'">Ver</a>{% if session.rol in ['ADMIN','ENFERMERO'] %}<a href="{{ url_for('triaje_editar', id=t.id_triaje) }}" style="padding:5px 10px;border-radius:5px;font-size:11.5px;font-weight:600;text-decoration:none;background:var(--bg);color:var(--sub);border:1px solid var(--border);transition:all .12s;" onmouseover="this.style.background='var(--ink2)';this.style.color='white'" onmouseout="this.style.background='var(--bg)';this.style.color='var(--sub)'">Editar</a>{% endif %}</div></td>
+      </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+<script>function filtrar(q){q=q.toLowerCase();let v=0;document.querySelectorAll('#tbody tr').forEach(r=>{const m=r.dataset.q&&r.dataset.q.includes(q);r.style.display=m?'':'none';if(m)v++;});document.getElementById('ct').textContent=v;}</script>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}Alertas{% endblock %}
+{% block page_title %}Alertas{% endblock %}
+{% block page_subtitle %}Alertas activas del sistema de monitoreo{% endblock %}
+{% block content %}
+<div class="stats-grid" style="grid-template-columns:repeat(3,1fr);margin-bottom:18px;">
+  <div class="stat-card rojo"><div class="stat-icon rojo"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0zM12 9v4M12 17h.01" stroke="#b91c1c" stroke-width="2" stroke-linecap="round"/></svg></div><div class="stat-info"><p>{{ alertas|selectattr('estado','eq','ACTIVA')|list|length }}</p><span>Alertas activas</span></div></div>
+  <div class="stat-card"><div class="stat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M22 11.08V12a10 10 0 11-5.93-9.14" stroke="#0077b6" stroke-width="2"/><polyline points="22 4 12 14.01 9 11.01" stroke="#0077b6" stroke-width="2" stroke-linecap="round"/></svg></div><div class="stat-info"><p>{{ alertas|selectattr('estado','eq','RESUELTA')|list|length }}</p><span>Resueltas</span></div></div>
+  <div class="stat-card amber"><div class="stat-icon amarillo"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#b45309" stroke-width="2"/><path d="M12 6v6l4 2" stroke="#b45309" stroke-width="2" stroke-linecap="round"/></svg></div><div class="stat-info"><p>{{ alertas|length }}</p><span>Total</span></div></div>
+</div>
+<div class="card">
+  <div class="card-header"><h3>Registro de alertas</h3><span class="badge badge-iot">Beacon BLE</span></div>
+  <div class="table-container">
+    <table>
+      <thead><tr><th>Tipo</th><th>Descripción</th><th>Área</th><th>Paciente</th><th>Tiempo</th><th>Estado</th><th></th></tr></thead>
+      <tbody>
+      {% for a in alertas %}
+      <tr>
+        <td><span class="badge {{ 'badge-mantenimiento' if a.tipo=='PERMANENCIA' else 'badge-recepcion' }}">{{ a.tipo }}</span></td>
+        <td style="font-size:12.5px;color:var(--ink3);">{{ a.descripcion }}</td>
+        <td style="font-size:12.5px;">{{ a.area }}</td>
+        <td style="font-size:12.5px;">{{ a.paciente or '—' }}</td>
+        <td style="font-size:12px;color:var(--muted);">{{ a.timestamp }}</td>
+        <td><span class="badge {{ 'badge-mantenimiento' if a.estado=='ACTIVA' else 'badge-activo' }}">{{ a.estado }}</span></td>
+        <td>{% if a.estado=='ACTIVA' and session.rol in ['ADMIN','ENFERMERO'] %}<a href="{{ url_for('alertas_resolver', id=a.id_alerta) }}" class="btn btn-sm btn-success">Resolver</a>{% endif %}</td>
+      </tr>
+      {% else %}<tr><td colspan="7" style="text-align:center;color:var(--muted);padding:40px;">Sin alertas</td></tr>{% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

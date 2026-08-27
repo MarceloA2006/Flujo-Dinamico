@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Bitácora{% endblock %}
+{% block page_title %}Bitácora de accesos{% endblock %}
+{% block page_subtitle %}Registro de operaciones críticas del sistema{% endblock %}
+{% block content %}
+<div class="card">
+  <div class="card-header"><h3>Registro de operaciones</h3><span class="badge badge-admin">{{ logs|length }} registros</span></div>
+  <div class="table-container">
+    <table>
+      <thead><tr><th>Timestamp</th><th>Usuario</th><th>Acción</th><th>Entidad</th><th>IP</th><th>Resultado</th></tr></thead>
+      <tbody>
+      {% for l in logs %}
+      <tr>
+        <td style="font-size:11.5px;color:var(--muted);font-family:'JetBrains Mono',monospace;">{{ l.timestamp }}</td>
+        <td style="font-weight:600;font-size:13px;">{{ l.usuario }}</td>
+        <td><span class="badge {{ 'badge-mantenimiento' if l.accion in ['DELETE','ELIMINAR'] else 'badge-medico' if l.accion in ['CREATE','CREAR'] else 'badge-recepcion' if l.accion in ['UPDATE','EDITAR'] else 'badge-inactivo' }}">{{ l.accion }}</span></td>
+        <td style="font-size:12.5px;color:var(--ink3);">{{ l.entidad }}</td>
+        <td style="font-size:11.5px;color:var(--muted);font-family:'JetBrains Mono',monospace;">{{ l.ip or '—' }}</td>
+        <td><span class="badge {{ 'badge-activo' if l.resultado=='OK' else 'badge-mantenimiento' }}">{{ l.resultado }}</span></td>
+      </tr>
+      {% else %}<tr><td colspan="6" style="text-align:center;color:var(--muted);padding:40px;">Sin registros en bitácora</td></tr>{% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

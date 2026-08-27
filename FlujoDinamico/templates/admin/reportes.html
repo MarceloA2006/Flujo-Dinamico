@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block title %}Reportes{% endblock %}
+{% block page_title %}Reportes{% endblock %}
+{% block page_subtitle %}Métricas operativas del sistema hospitalario IoT{% endblock %}
+{% block topbar_actions %}
+  <a href="{{ url_for('exportar_csv', tipo='ingresos') }}" class="btn btn-outline">Exportar ingresos</a>
+  <a href="{{ url_for('exportar_csv', tipo='espera') }}" class="btn btn-outline">Exportar espera</a>
+{% endblock %}
+{% block content %}
+<div class="stats-grid" style="grid-template-columns:repeat(4,1fr);margin-bottom:20px;">
+  <div class="stat-card"><div class="stat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke="#0077b6" stroke-width="2"/><circle cx="9" cy="7" r="4" stroke="#0077b6" stroke-width="2"/></svg></div><div class="stat-info"><p>{{ kpi_espera|sum(attribute='total_ingresos') }}</p><span>Total ingresos</span></div></div>
+  <div class="stat-card amber"><div class="stat-icon amarillo"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#b45309" stroke-width="2"/><path d="M12 6v6l4 2" stroke="#b45309" stroke-width="2" stroke-linecap="round"/></svg></div><div class="stat-info"><p>{{ ((kpi_espera|sum(attribute='tiempo_espera_prom'))/kpi_espera|length)|round(1) if kpi_espera else '—' }}</p><span>Espera prom. (min)</span></div></div>
+  <div class="stat-card"><div class="stat-icon azul"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="2" fill="#1d4ed8"/><path d="M16.24 7.76a6 6 0 010 8.49M7.76 16.24a6 6 0 010-8.49" stroke="#1d4ed8" stroke-width="2" stroke-linecap="round"/></svg></div><div class="stat-info"><p>7</p><span>Beacons BLE</span></div></div>
+  <div class="stat-card verde"><div class="stat-icon verde"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="#065f46" stroke-width="2"/><path d="M12 14c-4.42 0-8 1.79-8 4v2h16v-2c0-2.21-3.58-4-8-4z" stroke="#065f46" stroke-width="2"/></svg></div><div class="stat-info"><p>{{ kpi_medicos|length }}</p><span>Médicos activos</span></div></div>
+</div>
+<div class="grid-2">
+  <div class="card">
+    <div class="card-header"><h3>Tiempo de espera por área</h3><a href="{{ url_for('exportar_csv', tipo='espera') }}" class="btn btn-sm btn-outline">Exportar</a></div>
+    <div class="table-container">
+      <table><thead><tr><th>Área</th><th>Ingresos</th><th>Espera prom.</th><th>Estado</th></tr></thead>
+      <tbody>{% for k in kpi_espera %}<tr><td style="font-weight:600;">{{ k.nombre_area }}</td><td style="font-weight:700;">{{ k.total_ingresos }}</td><td style="font-weight:700;color:{{ 'var(--red)' if k.tiempo_espera_prom>30 else 'var(--amber)' if k.tiempo_espera_prom>15 else 'var(--green)' }};">{{ k.tiempo_espera_prom }} min</td><td><span class="badge {{ 'badge-mantenimiento' if k.tiempo_espera_prom>30 else 'badge-recepcion' if k.tiempo_espera_prom>15 else 'badge-activo' }}">{{ 'Alto' if k.tiempo_espera_prom>30 else 'Medio' if k.tiempo_espera_prom>15 else 'OK' }}</span></td></tr>{% endfor %}</tbody>
+      </table>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header"><h3>Productividad por médico</h3></div>
+    <div class="table-container">
+      <table><thead><tr><th>Médico</th><th>Especialidad</th><th>Pacientes</th><th>Espera prom.</th></tr></thead>
+      <tbody>{% for k in kpi_medicos %}<tr><td style="font-weight:600;font-size:12.5px;">{{ k.medico }}</td><td><span class="badge badge-medico" style="font-size:10px;">{{ k.especialidad }}</span></td><td style="font-weight:700;">{{ k.total_ingresos }}</td><td style="font-weight:600;color:{{ 'var(--red)' if k.espera_prom>20 else 'var(--green)' }};">{{ k.espera_prom }} min</td></tr>{% endfor %}</tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header"><h3>Visualización — Espera por área</h3><span class="badge badge-iot">Beacon BLE · Tiempo real</span></div>
+  <div class="card-body">
+    <div class="barra-container">
+      {% for k in kpi_espera %}
+      {% set pct = [((k.tiempo_espera_prom/40*100)|int), 100]|min %}
+      <div>
+        <div class="barra-label"><span style="font-weight:500;color:var(--ink3);">{{ k.nombre_area }}</span><span style="font-weight:600;color:{{ 'var(--red)' if k.tiempo_espera_prom>30 else 'var(--amber)' if k.tiempo_espera_prom>15 else 'var(--cyan)' }};">{{ k.tiempo_espera_prom }} min</span></div>
+        <div class="barra-track" style="height:8px;"><div class="barra-fill {% if k.tiempo_espera_prom>30 %}alta{% elif k.tiempo_espera_prom>15 %}media{% endif %}" style="width:{{ pct }}%;height:8px;"></div></div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+<div class="iot-panel">
+  <div style="display:flex;align-items:center;gap:14px;">
+    <div style="width:44px;height:44px;border-radius:10px;background:rgba(0,180,216,.15);border:1px solid rgba(0,180,216,.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="2" fill="#90e0ef"/><path d="M16.24 7.76a6 6 0 010 8.49M7.76 16.24a6 6 0 010-8.49M19.07 4.93a10 10 0 010 14.14M4.93 19.07a10 10 0 010-14.14" stroke="#90e0ef" stroke-width="2" stroke-linecap="round"/></svg></div>
+    <div><p style="font-size:13.5px;font-weight:600;color:white;margin-bottom:3px;">Sistema IoT — ESP32 + PN532 NFC · Beacons BLE/UWB</p><p style="font-size:12px;color:rgba(255,255,255,.35);line-height:1.7;">Datos en tiempo real desde beacons · Identificación NFC de pacientes · PostgreSQL 3FN</p></div>
+    <div style="display:flex;gap:8px;flex-shrink:0;margin-left:auto;"><span class="badge badge-iot">BLE</span><span class="badge badge-iot">NFC</span><span class="badge badge-iot">3FN</span></div>
+  </div>
+</div>
+{% endblock %}

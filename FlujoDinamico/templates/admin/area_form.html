@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block title %}{{ accion }} Área{% endblock %}
+{% block page_title %}{{ accion }} Área{% endblock %}
+{% block page_subtitle %}Formulario de registro de área hospitalaria{% endblock %}
+{% block topbar_actions %}<a href="{{ url_for('areas') }}" class="btn btn-outline">← Volver</a>{% endblock %}
+
+{% block content %}
+<div class="card" style="max-width:600px;">
+  <div class="card-header"><h3>{{ '✏️ Editar' if accion == 'Editar' else '➕ Nueva' }} Área</h3></div>
+  <div class="card-body">
+    <form method="POST">
+      {% if accion != 'Editar' %}
+      <div class="form-group">
+        <label class="form-label">ID del Área * <small>(ej: A-009)</small></label>
+        <input type="text" name="id_area" class="form-control" placeholder="A-009"
+               value="{{ area.id_area if area else '' }}" required>
+      </div>
+      {% endif %}
+      <div class="form-group">
+        <label class="form-label">Nombre del Área *</label>
+        <input type="text" name="nombre_area" class="form-control"
+               value="{{ area.nombre_area if area else '' }}" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Piso / Ubicación</label>
+        <input type="text" name="nombre_piso" class="form-control"
+               placeholder="Planta Baja — Urgencias"
+               value="{{ area.nombre_piso if area else '' }}">
+      </div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Tipo *</label>
+          <select name="tipo" class="form-control" required>
+            {% for t in tipos %}
+            <option value="{{ t }}" {{ 'selected' if area and area.tipo == t }}>{{ t }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Capacidad (pacientes) *</label>
+          <input type="number" name="capacidad" class="form-control" min="1"
+                 value="{{ area.capacidad if area else 10 }}" required>
+        </div>
+      </div>
+      {% if accion == 'Editar' %}
+      <div class="form-group">
+        <label style="display:flex;align-items:center;gap:8px;cursor:pointer;">
+          <input type="checkbox" name="activo" {{ 'checked' if area and area.activo }}>
+          <span class="form-label" style="margin:0;">Área activa</span>
+        </label>
+      </div>
+      {% endif %}
+      <div style="display:flex;gap:12px;margin-top:20px;">
+        <button type="submit" class="btn btn-primary">💾 {{ 'Actualizar' if accion == 'Editar' else 'Registrar' }} Área</button>
+        <a href="{{ url_for('areas') }}" class="btn btn-outline">Cancelar</a>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

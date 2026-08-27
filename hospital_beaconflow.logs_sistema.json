@@ -1,0 +1,462 @@
+[{
+  "_id": {
+    "$oid": "69ff568ad7b82ed0539afafb"
+  },
+  "nivel": "INFO",
+  "modulo": "auth",
+  "mensaje": "Login exitoso: admin — rol ADMIN",
+  "id_usuario": null,
+  "detalle": null,
+  "timestamp": {
+    "$date": "2026-05-09T15:45:14.289Z"
+  },
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "69ff56e7d7b82ed0539afb11"
+  },
+  "nivel": "INFO",
+  "modulo": "auth",
+  "mensaje": "Logout: admin",
+  "id_usuario": null,
+  "detalle": null,
+  "timestamp": {
+    "$date": "2026-05-09T15:46:47.393Z"
+  },
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "69ff56f0d7b82ed0539afb14"
+  },
+  "nivel": "INFO",
+  "modulo": "auth",
+  "mensaje": "Login exitoso: dr_ramirez — rol MEDICO",
+  "id_usuario": null,
+  "detalle": null,
+  "timestamp": {
+    "$date": "2026-05-09T15:46:56.471Z"
+  },
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "69ff5709d7b82ed0539afb1a"
+  },
+  "nivel": "INFO",
+  "modulo": "ingresos",
+  "mensaje": "Paciente admitido en ingreso 193 por dr_ramirez",
+  "id_usuario": null,
+  "detalle": null,
+  "timestamp": {
+    "$date": "2026-05-09T15:47:21.316Z"
+  },
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "69ff5769d7b82ed0539afb2e"
+  },
+  "nivel": "INFO",
+  "modulo": "ingresos",
+  "mensaje": "Paciente admitido en ingreso 194 por dr_ramirez",
+  "id_usuario": null,
+  "detalle": null,
+  "timestamp": {
+    "$date": "2026-05-09T15:48:57.641Z"
+  },
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "6a020fc13ff0f25e6414ed2e"
+  },
+  "nivel": "INFO",
+  "modulo": "auth",
+  "mensaje": "Login exitoso: dr_ramirez — rol MEDICO",
+  "id_usuario": null,
+  "detalle": null,
+  "timestamp": {
+    "$date": "2026-05-11T17:20:01.017Z"
+  },
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a020ffe3ff0f25e6414ed3f"
+  },
+  "nivel": "INFO",
+  "modulo": "ingresos",
+  "mensaje": "Paciente admitido en ingreso 198 por dr_ramirez",
+  "id_usuario": null,
+  "detalle": null,
+  "timestamp": {
+    "$date": "2026-05-11T17:21:02.659Z"
+  },
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a0210043ff0f25e6414ed41"
+  },
+  "nivel": "INFO",
+  "modulo": "auth",
+  "mensaje": "Logout: dr_ramirez",
+  "id_usuario": null,
+  "detalle": null,
+  "timestamp": {
+    "$date": "2026-05-11T17:21:08.847Z"
+  },
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a0210093ff0f25e6414ed43"
+  },
+  "nivel": "INFO",
+  "modulo": "auth",
+  "mensaje": "Login exitoso: admin — rol ADMIN",
+  "id_usuario": null,
+  "detalle": null,
+  "timestamp": {
+    "$date": "2026-05-11T17:21:13.277Z"
+  },
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a0210193ff0f25e6414ed47"
+  },
+  "nivel": "INFO",
+  "modulo": "auth",
+  "mensaje": "Logout: admin",
+  "id_usuario": null,
+  "detalle": null,
+  "timestamp": {
+    "$date": "2026-05-11T17:21:29.353Z"
+  },
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a02101c3ff0f25e6414ed49"
+  },
+  "nivel": "INFO",
+  "modulo": "auth",
+  "mensaje": "Login exitoso: dr_ramirez — rol MEDICO",
+  "id_usuario": null,
+  "detalle": null,
+  "timestamp": {
+    "$date": "2026-05-11T17:21:32.279Z"
+  },
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025aacd4d5e8b454d789be"
+  },
+  "nivel": "INFO",
+  "modulo": "auth",
+  "mensaje": "Login exitoso: dr_ramirez — rol MEDICO",
+  "id_usuario": null,
+  "detalle": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:39:40.295Z"
+  },
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025ae1d4d5e8b454d789cb"
+  },
+  "nivel": "INFO",
+  "modulo": "ingresos",
+  "mensaje": "Paciente admitido en ingreso 199 por dr_ramirez",
+  "id_usuario": null,
+  "detalle": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:40:33.303Z"
+  },
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025b8fd4d5e8b454d789f0"
+  },
+  "nivel": "INFO",
+  "modulo": "auth",
+  "mensaje": "Logout: dr_ramirez",
+  "id_usuario": null,
+  "detalle": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:43:27.700Z"
+  },
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025b95d4d5e8b454d789f2"
+  },
+  "nivel": "INFO",
+  "modulo": "auth",
+  "mensaje": "Login exitoso: admin — rol ADMIN",
+  "id_usuario": null,
+  "detalle": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:43:33.433Z"
+  },
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025ba3d4d5e8b454d789f6"
+  },
+  "nivel": "INFO",
+  "modulo": "auth",
+  "mensaje": "Logout: admin",
+  "id_usuario": null,
+  "detalle": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:43:47.287Z"
+  },
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025ba5d4d5e8b454d789f7"
+  },
+  "nivel": "INFO",
+  "modulo": "auth",
+  "mensaje": "Login exitoso: enf_salinas — rol ENFERMERO",
+  "id_usuario": null,
+  "detalle": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:43:49.402Z"
+  },
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025bcbd4d5e8b454d78a02"
+  },
+  "nivel": "INFO",
+  "modulo": "auth",
+  "mensaje": "Logout: enf_salinas",
+  "id_usuario": null,
+  "detalle": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:44:27.886Z"
+  },
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025cb1d4d5e8b454d78a30"
+  },
+  "nivel": "INFO",
+  "modulo": "auth",
+  "mensaje": "Login exitoso: admin — rol ADMIN",
+  "id_usuario": null,
+  "detalle": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:48:17.832Z"
+  },
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025d6bd4d5e8b454d78a56"
+  },
+  "nivel": "INFO",
+  "modulo": "auth",
+  "mensaje": "Logout: admin",
+  "id_usuario": null,
+  "detalle": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:51:23.618Z"
+  },
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025d71d4d5e8b454d78a58"
+  },
+  "nivel": "INFO",
+  "modulo": "auth",
+  "mensaje": "Login exitoso: dr_ramirez — rol MEDICO",
+  "id_usuario": null,
+  "detalle": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:51:29.433Z"
+  },
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025d8fd4d5e8b454d78a5f"
+  },
+  "nivel": "INFO",
+  "modulo": "auth",
+  "mensaje": "Logout: dr_ramirez",
+  "id_usuario": null,
+  "detalle": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:51:59.517Z"
+  },
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025d92d4d5e8b454d78a61"
+  },
+  "nivel": "INFO",
+  "modulo": "auth",
+  "mensaje": "Login exitoso: enf_salinas — rol ENFERMERO",
+  "id_usuario": null,
+  "detalle": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:52:02.013Z"
+  },
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025dacd4d5e8b454d78a67"
+  },
+  "nivel": "INFO",
+  "modulo": "auth",
+  "mensaje": "Logout: enf_salinas",
+  "id_usuario": null,
+  "detalle": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:52:28.925Z"
+  },
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025dafd4d5e8b454d78a69"
+  },
+  "nivel": "INFO",
+  "modulo": "auth",
+  "mensaje": "Login exitoso: enf_salinas — rol ENFERMERO",
+  "id_usuario": null,
+  "detalle": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:52:31.882Z"
+  },
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025db3d4d5e8b454d78a6a"
+  },
+  "nivel": "INFO",
+  "modulo": "auth",
+  "mensaje": "Logout: enf_salinas",
+  "id_usuario": null,
+  "detalle": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:52:35.412Z"
+  },
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025dced4d5e8b454d78a71"
+  },
+  "nivel": "INFO",
+  "modulo": "auth",
+  "mensaje": "Login exitoso: admin — rol ADMIN",
+  "id_usuario": null,
+  "detalle": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:53:02.995Z"
+  },
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025e17d4d5e8b454d78a83"
+  },
+  "nivel": "INFO",
+  "modulo": "auth",
+  "mensaje": "Logout: admin",
+  "id_usuario": null,
+  "detalle": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:54:15.463Z"
+  },
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025e19d4d5e8b454d78a84"
+  },
+  "nivel": "INFO",
+  "modulo": "auth",
+  "mensaje": "Login exitoso: dr_ramirez — rol MEDICO",
+  "id_usuario": null,
+  "detalle": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:54:17.855Z"
+  },
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025e33d4d5e8b454d78a8a"
+  },
+  "nivel": "INFO",
+  "modulo": "ingresos",
+  "mensaje": "Paciente admitido en ingreso 203 por dr_ramirez",
+  "id_usuario": null,
+  "detalle": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:54:43.396Z"
+  },
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025e54d4d5e8b454d78a93"
+  },
+  "nivel": "INFO",
+  "modulo": "auth",
+  "mensaje": "Logout: dr_ramirez",
+  "id_usuario": null,
+  "detalle": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:55:16.724Z"
+  },
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025e56d4d5e8b454d78a94"
+  },
+  "nivel": "INFO",
+  "modulo": "auth",
+  "mensaje": "Login exitoso: enf_salinas — rol ENFERMERO",
+  "id_usuario": null,
+  "detalle": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:55:18.402Z"
+  },
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025e60d4d5e8b454d78a97"
+  },
+  "nivel": "INFO",
+  "modulo": "auth",
+  "mensaje": "Logout: enf_salinas",
+  "id_usuario": null,
+  "detalle": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:55:28.008Z"
+  },
+  "fecha_local": "2026-05-11"
+}]

@@ -1,0 +1,357 @@
+[{
+  "_id": {
+    "$oid": "69fe40784e097ff80350f09e"
+  },
+  "uid_hex": "AB251607",
+  "id_paciente": 8,
+  "nombre_paciente": "Valentina Juárez Pacheco",
+  "num_expediente": "EXP-008",
+  "id_expediente": 8,
+  "id_ingreso": 192,
+  "accion": "ENTRADA",
+  "timestamp": {
+    "$date": "2026-05-08T19:58:48.541Z"
+  },
+  "hora_local": "13:58:48",
+  "fecha_local": "2026-05-08"
+},
+{
+  "_id": {
+    "$oid": "69ff567cd7b82ed0539afaf7"
+  },
+  "uid_hex": "AB251607",
+  "id_paciente": 8,
+  "nombre_paciente": "Valentina Juárez Pacheco",
+  "num_expediente": "EXP-008",
+  "id_expediente": 8,
+  "id_ingreso": 192,
+  "accion": "SALIDA",
+  "timestamp": {
+    "$date": "2026-05-09T15:45:00.125Z"
+  },
+  "hora_local": "09:45:00",
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "69ff568dd7b82ed0539afafd"
+  },
+  "uid_hex": "AB251607",
+  "id_paciente": 8,
+  "nombre_paciente": "Valentina Juárez Pacheco",
+  "num_expediente": "EXP-008",
+  "id_expediente": 8,
+  "id_ingreso": 193,
+  "accion": "ENTRADA",
+  "timestamp": {
+    "$date": "2026-05-09T15:45:17.066Z"
+  },
+  "hora_local": "09:45:17",
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "69ff56bad7b82ed0539afb07"
+  },
+  "uid_hex": "31B91507",
+  "id_paciente": 1,
+  "nombre_paciente": "María González López",
+  "num_expediente": "EXP-001",
+  "id_expediente": 1,
+  "id_ingreso": 194,
+  "accion": "ENTRADA",
+  "timestamp": {
+    "$date": "2026-05-09T15:46:02.865Z"
+  },
+  "hora_local": "09:46:02",
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "69ff56ccd7b82ed0539afb0b"
+  },
+  "uid_hex": "DF45E68B",
+  "id_paciente": 21,
+  "nombre_paciente": "Marcelo Avila Garza",
+  "num_expediente": "EXP-021",
+  "id_expediente": 11,
+  "id_ingreso": 195,
+  "accion": "ENTRADA",
+  "timestamp": {
+    "$date": "2026-05-09T15:46:20.489Z"
+  },
+  "hora_local": "09:46:20",
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "69ff57aad7b82ed0539afb3c"
+  },
+  "uid_hex": "DF45E68B",
+  "id_paciente": 21,
+  "nombre_paciente": "Marcelo Avila Garza",
+  "num_expediente": "EXP-021",
+  "id_expediente": 11,
+  "id_ingreso": 195,
+  "accion": "SALIDA",
+  "timestamp": {
+    "$date": "2026-05-09T15:50:02.654Z"
+  },
+  "hora_local": "09:50:02",
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "6a020faa3ff0f25e6414ed28"
+  },
+  "uid_hex": "AB251607",
+  "id_paciente": 8,
+  "nombre_paciente": "Valentina Juárez Pacheco",
+  "num_expediente": "EXP-008",
+  "id_expediente": 8,
+  "id_ingreso": 196,
+  "accion": "ENTRADA",
+  "timestamp": {
+    "$date": "2026-05-11T17:19:38.917Z"
+  },
+  "hora_local": "11:19:38",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a020fc83ff0f25e6414ed30"
+  },
+  "uid_hex": "31B91507",
+  "id_paciente": 1,
+  "nombre_paciente": "María González López",
+  "num_expediente": "EXP-001",
+  "id_expediente": 1,
+  "id_ingreso": 197,
+  "accion": "ENTRADA",
+  "timestamp": {
+    "$date": "2026-05-11T17:20:08.011Z"
+  },
+  "hora_local": "11:20:08",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a020fd13ff0f25e6414ed33"
+  },
+  "uid_hex": "31B91507",
+  "id_paciente": 1,
+  "nombre_paciente": "María González López",
+  "num_expediente": "EXP-001",
+  "id_expediente": 1,
+  "id_ingreso": 197,
+  "accion": "SALIDA",
+  "timestamp": {
+    "$date": "2026-05-11T17:20:17.277Z"
+  },
+  "hora_local": "11:20:17",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a020fd93ff0f25e6414ed36"
+  },
+  "uid_hex": "AB251607",
+  "id_paciente": 8,
+  "nombre_paciente": "Valentina Juárez Pacheco",
+  "num_expediente": "EXP-008",
+  "id_expediente": 8,
+  "id_ingreso": 196,
+  "accion": "SALIDA",
+  "timestamp": {
+    "$date": "2026-05-11T17:20:25.933Z"
+  },
+  "hora_local": "11:20:25",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a020fef3ff0f25e6414ed3b"
+  },
+  "uid_hex": "31B91507",
+  "id_paciente": 1,
+  "nombre_paciente": "María González López",
+  "num_expediente": "EXP-001",
+  "id_expediente": 1,
+  "id_ingreso": 198,
+  "accion": "ENTRADA",
+  "timestamp": {
+    "$date": "2026-05-11T17:20:47.305Z"
+  },
+  "hora_local": "11:20:47",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025ab8d4d5e8b454d789c2"
+  },
+  "uid_hex": "AB251607",
+  "id_paciente": 8,
+  "nombre_paciente": "Valentina Juárez Pacheco",
+  "num_expediente": "EXP-008",
+  "id_expediente": 8,
+  "id_ingreso": 199,
+  "accion": "ENTRADA",
+  "timestamp": {
+    "$date": "2026-05-11T22:39:52.027Z"
+  },
+  "hora_local": "16:39:52",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025b54d4d5e8b454d789e3"
+  },
+  "uid_hex": "AB251607",
+  "id_paciente": 8,
+  "nombre_paciente": "Valentina Juárez Pacheco",
+  "num_expediente": "EXP-008",
+  "id_expediente": 8,
+  "id_ingreso": 200,
+  "accion": "ENTRADA",
+  "timestamp": {
+    "$date": "2026-05-11T22:42:28.606Z"
+  },
+  "hora_local": "16:42:28",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025b5bd4d5e8b454d789e5"
+  },
+  "uid_hex": "AB251607",
+  "id_paciente": 8,
+  "nombre_paciente": "Valentina Juárez Pacheco",
+  "num_expediente": "EXP-008",
+  "id_expediente": 8,
+  "id_ingreso": 200,
+  "accion": "SALIDA",
+  "timestamp": {
+    "$date": "2026-05-11T22:42:35.837Z"
+  },
+  "hora_local": "16:42:35",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025bb3d4d5e8b454d789fb"
+  },
+  "uid_hex": "AB251607",
+  "id_paciente": 8,
+  "nombre_paciente": "Valentina Juárez Pacheco",
+  "num_expediente": "EXP-008",
+  "id_expediente": 8,
+  "id_ingreso": 201,
+  "accion": "ENTRADA",
+  "timestamp": {
+    "$date": "2026-05-11T22:44:03.225Z"
+  },
+  "hora_local": "16:44:03",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025bc3d4d5e8b454d78a00"
+  },
+  "uid_hex": "AB251607",
+  "id_paciente": 8,
+  "nombre_paciente": "Valentina Juárez Pacheco",
+  "num_expediente": "EXP-008",
+  "id_expediente": 8,
+  "id_ingreso": 201,
+  "accion": "SALIDA",
+  "timestamp": {
+    "$date": "2026-05-11T22:44:19.872Z"
+  },
+  "hora_local": "16:44:19",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025de0d4d5e8b454d78a75"
+  },
+  "uid_hex": "AB251607",
+  "id_paciente": 8,
+  "nombre_paciente": "Valentina Juárez Pacheco",
+  "num_expediente": "EXP-008",
+  "id_expediente": 8,
+  "id_ingreso": 202,
+  "accion": "ENTRADA",
+  "timestamp": {
+    "$date": "2026-05-11T22:53:20.050Z"
+  },
+  "hora_local": "16:53:20",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025de6d4d5e8b454d78a77"
+  },
+  "uid_hex": "AB251607",
+  "id_paciente": 8,
+  "nombre_paciente": "Valentina Juárez Pacheco",
+  "num_expediente": "EXP-008",
+  "id_expediente": 8,
+  "id_ingreso": 202,
+  "accion": "SALIDA",
+  "timestamp": {
+    "$date": "2026-05-11T22:53:26.471Z"
+  },
+  "hora_local": "16:53:26",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025df1d4d5e8b454d78a7b"
+  },
+  "uid_hex": "AB251607",
+  "id_paciente": 8,
+  "nombre_paciente": "Valentina Juárez Pacheco",
+  "num_expediente": "EXP-008",
+  "id_expediente": 8,
+  "id_ingreso": 203,
+  "accion": "ENTRADA",
+  "timestamp": {
+    "$date": "2026-05-11T22:53:37.909Z"
+  },
+  "hora_local": "16:53:37",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025e4fd4d5e8b454d78a91"
+  },
+  "uid_hex": "AB251607",
+  "id_paciente": 8,
+  "nombre_paciente": "Valentina Juárez Pacheco",
+  "num_expediente": "EXP-008",
+  "id_expediente": 8,
+  "id_ingreso": 204,
+  "accion": "ENTRADA",
+  "timestamp": {
+    "$date": "2026-05-11T22:55:11.343Z"
+  },
+  "hora_local": "16:55:11",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025e8cd4d5e8b454d78aa1"
+  },
+  "uid_hex": "AB251607",
+  "id_paciente": 8,
+  "nombre_paciente": "Valentina Juárez Pacheco",
+  "num_expediente": "EXP-008",
+  "id_expediente": 8,
+  "id_ingreso": 204,
+  "accion": "SALIDA",
+  "timestamp": {
+    "$date": "2026-05-11T22:56:12.636Z"
+  },
+  "hora_local": "16:56:12",
+  "fecha_local": "2026-05-11"
+}]

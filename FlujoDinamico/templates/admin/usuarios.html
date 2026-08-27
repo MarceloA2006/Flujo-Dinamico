@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block title %}Usuarios{% endblock %}
+{% block page_title %}Usuarios{% endblock %}
+{% block page_subtitle %}Control de acceso y roles del sistema{% endblock %}
+{% block topbar_actions %}
+  {% if session.rol=='ADMIN' %}<a href="{{ url_for('usuario_nuevo') }}" class="btn btn-primary">Nuevo usuario</a>{% endif %}
+{% endblock %}
+{% block content %}
+<div class="search-bar"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" style="color:var(--muted);flex-shrink:0;"><circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><input type="text" placeholder="Buscar usuario o rol..." oninput="filtrar(this.value)"><span style="font-size:12px;color:var(--muted);" id="ct">{{ usuarios|length }}</span></div>
+<div id="grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-bottom:22px;">
+{% for u in usuarios %}
+{% if u.rol=='ADMIN' %}{% set rc='#5b21b6' %}{% set rb='#f5f3ff' %}{% set rbd='#ddd6fe' %}
+{% elif u.rol=='MEDICO' %}{% set rc='#1d4ed8' %}{% set rb='#eff6ff' %}{% set rbd='#bfdbfe' %}
+{% elif u.rol=='ENFERMERO' %}{% set rc='#065f46' %}{% set rb='#ecfdf5' %}{% set rbd='#a7f3d0' %}
+{% elif u.rol=='RECEPCION' %}{% set rc='#b45309' %}{% set rb='#fffbeb' %}{% set rbd='#fde68a' %}
+{% else %}{% set rc='#344054' %}{% set rb='#f9fafb' %}{% set rbd='#e4e7ec' %}{% endif %}
+<div class="person-card" data-q="{{ (u.username+' '+u.rol)|lower }}">
+  <div class="person-card-header">
+    <div style="position:relative;flex-shrink:0;">
+      <div style="width:46px;height:46px;border-radius:50%;background:{{ rb }};border:1.5px solid {{ rbd }};display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:700;color:{{ rc }};">{{ u.username[0].upper() }}</div>
+      <span class="status-dot {{ 'dot-active' if u.activo else 'dot-inactive' }}"></span>
+    </div>
+    <div style="flex:1;min-width:0;">
+      <p class="person-card-name" style="font-family:'JetBrains Mono',monospace;font-size:13px;">{{ u.username }}</p>
+      <span style="display:inline-block;font-size:9.5px;font-weight:700;padding:2px 8px;border-radius:4px;background:{{ rb }};color:{{ rc }};border:1px solid {{ rbd }};">{{ u.rol }}</span>
+    </div>
+    <span style="font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;flex-shrink:0;background:{{ 'var(--grn-bg)' if u.activo else 'var(--bg)' }};color:{{ 'var(--green)' if u.activo else 'var(--muted)' }};border:1px solid {{ 'var(--grn-bd)' if u.activo else 'var(--border)' }};">{{ 'Activo' if u.activo else 'Inactivo' }}</span>
+  </div>
+  <div class="person-card-body">
+    <div class="data-row">
+      <div class="data-icon" style="background:{{ rb }};border-color:{{ rbd }};"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><rect x="3" y="11" width="18" height="11" rx="2" stroke="{{ rc }}" stroke-width="2"/><path d="M7 11V7a5 5 0 0110 0v4" stroke="{{ rc }}" stroke-width="2" stroke-linecap="round"/></svg></div>
+      <div><div class="data-label">Identidad operativa</div><div class="data-value">{% if u.cedula_medico %}Cédula: <code>{{ u.cedula_medico }}</code>{% elif u.id_enfermero %}Enf. ID: <code>{{ u.id_enfermero }}</code>{% else %}Acceso administrativo{% endif %}</div></div>
+    </div>
+  </div>
+  {% if session.rol=='ADMIN' %}
+  <div class="person-card-footer">
+    <a href="{{ url_for('usuario_editar', id=u.id_usuario) }}" class="btn btn-outline btn-sm" style="flex:1;justify-content:center;">Editar</a>
+    <a href="{{ url_for('usuario_toggle', id=u.id_usuario) }}" onclick="return confirm('{{ 'Activar' if not u.activo else 'Desactivar' }} a {{ u.username }}?')" class="btn btn-sm {{ 'btn-success' if not u.activo else 'btn-ghost' }}" style="flex:1;justify-content:center;">{{ 'Activar' if not u.activo else 'Desactivar' }}</a>
+    {% if u.username!='admin' %}<a href="{{ url_for('usuario_eliminar', id=u.id_usuario) }}" onclick="return confirm('Eliminar a {{ u.username }}?')" class="btn btn-danger btn-sm">Eliminar</a>{% endif %}
+  </div>
+  {% endif %}
+</div>
+{% endfor %}
+</div>
+<!-- Matriz -->
+<div class="card">
+  <div class="card-header"><h3>Matriz de permisos por rol</h3></div>
+  <div class="table-container">
+    <table>
+      <thead><tr><th>Módulo</th><th>Admin</th><th>Médico</th><th>Enfermero</th><th>Recepción</th><th>Auditor</th></tr></thead>
+      <tbody>
+        {% for row in [('Dashboard','✓','✓','✓','✓','✓'),('Pacientes (editar)','✓','—','—','✓','—'),('Expedientes','✓','✓','✓','✓','—'),('Ingresos / Triajes','✓','✓','✓','✓','—'),('Médicos / Áreas / Beacons','✓','—','—','—','—'),('Alertas (resolver)','✓','—','✓','—','—'),('Reportes','✓','✓','—','—','✓'),('Bitácora','✓','—','—','—','✓'),('Usuarios','✓','—','—','—','—')] %}
+        <tr>{% for v in row %}<td style="color:{{ 'var(--green)' if v=='✓' else v=='—' and 'var(--border)' or 'var(--ink2)' }};font-weight:{{ '600' if v=='✓' else '400' }};">{{ v }}</td>{% endfor %}</tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+<script>function filtrar(q){q=q.toLowerCase();let v=0;document.querySelectorAll('#grid .person-card').forEach(c=>{const m=c.dataset.q.includes(q);c.style.display=m?'':'none';if(m)v++;});document.getElementById('ct').textContent=v;}</script>
+{% endblock %}

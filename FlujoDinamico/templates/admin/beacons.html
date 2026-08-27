@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block title %}Beacons{% endblock %}
+{% block page_title %}Gestión de Beacons{% endblock %}
+{% block page_subtitle %}Dispositivos IoT registrados por área{% endblock %}
+
+{% block topbar_actions %}
+  {% if session.rol == 'ADMIN' %}
+  <a href="{{ url_for('beacon_nuevo') }}" class="btn btn-primary">➕ Nuevo Beacon</a>
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="stats-grid" style="margin-bottom:24px;">
+  <div class="stat-card"><div class="stat-icon">📡</div><div class="stat-info"><p>{{ beacons|selectattr('estado','eq','ACTIVO')|list|length }}</p><span>Activos</span></div></div>
+  <div class="stat-card"><div class="stat-icon rojo">🔴</div><div class="stat-info"><p>{{ beacons|selectattr('estado','eq','INACTIVO')|list|length }}</p><span>Inactivos</span></div></div>
+  <div class="stat-card"><div class="stat-icon amarillo">🔧</div><div class="stat-info"><p>{{ beacons|selectattr('estado','eq','MANTENIMIENTO')|list|length }}</p><span>Mantenimiento</span></div></div>
+  <div class="stat-card"><div class="stat-icon">📊</div><div class="stat-info"><p>{{ beacons|length }}</p><span>Total</span></div></div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <h3>Beacons IoT</h3>
+    <span class="badge badge-activo">{{ beacons|length }} dispositivos</span>
+  </div>
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th><th>Nombre</th><th>Área</th><th>Protocolo</th>
+          <th>Fabricante/Modelo</th><th>Estado</th>
+          {% if session.rol == 'ADMIN' %}<th>Acciones</th>{% endif %}
+        </tr>
+      </thead>
+      <tbody>
+        {% for b in beacons %}
+        <tr>
+          <td><code style="font-size:12px;background:var(--slate-100);padding:2px 7px;border-radius:5px;">{{ b.id_beacon }}</code></td>
+          <td><strong>{{ b.nombre }}</strong></td>
+          <td>{{ b.area }}</td>
+          <td><span class="badge badge-enfermero">{{ b.protocolo }}</span></td>
+          <td style="font-size:12px;color:var(--text-secondary);">{{ b.fabricante }} / {{ b.modelo }}</td>
+          <td>
+            <span class="badge {% if b.estado=='ACTIVO' %}badge-activo{% elif b.estado=='INACTIVO' %}badge-inactivo{% else %}badge-mantenimiento{% endif %}">
+              {{ '📡' if b.estado=='ACTIVO' else '🔴' if b.estado=='INACTIVO' else '🔧' }} {{ b.estado }}
+            </span>
+          </td>
+          {% if session.rol == 'ADMIN' %}
+          <td>
+            <div class="flex gap-2">
+              <a href="{{ url_for('beacon_editar', id_beacon=b.id_beacon) }}" class="btn btn-outline btn-sm">✏️</a>
+              <a href="{{ url_for('beacon_eliminar', id_beacon=b.id_beacon) }}" class="btn btn-danger btn-sm"
+                 onclick="return confirm('¿Eliminar beacon {{ b.id_beacon }}?')">🗑️</a>
+            </div>
+          </td>
+          {% endif %}
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

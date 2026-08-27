@@ -1,0 +1,3991 @@
+[{
+  "_id": {
+    "$oid": "69fe40694e097ff80350f09a"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-08T19:58:33.591Z"
+  },
+  "hora_local": "13:58:33",
+  "fecha_local": "2026-05-08"
+},
+{
+  "_id": {
+    "$oid": "69fe406e4e097ff80350f09b"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-08T19:58:38.059Z"
+  },
+  "hora_local": "13:58:38",
+  "fecha_local": "2026-05-08"
+},
+{
+  "_id": {
+    "$oid": "69fe40724e097ff80350f09c"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -53,
+  "timestamp": {
+    "$date": "2026-05-08T19:58:42.685Z"
+  },
+  "hora_local": "13:58:42",
+  "fecha_local": "2026-05-08"
+},
+{
+  "_id": {
+    "$oid": "69fe40784e097ff80350f09d"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -61,
+  "timestamp": {
+    "$date": "2026-05-08T19:58:48.101Z"
+  },
+  "hora_local": "13:58:48",
+  "fecha_local": "2026-05-08"
+},
+{
+  "_id": {
+    "$oid": "69fe407c4e097ff80350f09f"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -63,
+  "timestamp": {
+    "$date": "2026-05-08T19:58:52.883Z"
+  },
+  "hora_local": "13:58:52",
+  "fecha_local": "2026-05-08"
+},
+{
+  "_id": {
+    "$oid": "69fe40814e097ff80350f0a0"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -59,
+  "timestamp": {
+    "$date": "2026-05-08T19:58:57.847Z"
+  },
+  "hora_local": "13:58:57",
+  "fecha_local": "2026-05-08"
+},
+{
+  "_id": {
+    "$oid": "69fe40864e097ff80350f0a1"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-08T19:59:02.971Z"
+  },
+  "hora_local": "13:59:02",
+  "fecha_local": "2026-05-08"
+},
+{
+  "_id": {
+    "$oid": "69ff5673d7b82ed0539afaf5"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-09T15:44:51.639Z"
+  },
+  "hora_local": "09:44:51",
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "69ff5678d7b82ed0539afaf6"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-09T15:44:56.534Z"
+  },
+  "hora_local": "09:44:56",
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "69ff567dd7b82ed0539afaf8"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-09T15:45:01.570Z"
+  },
+  "hora_local": "09:45:01",
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "69ff5682d7b82ed0539afaf9"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-09T15:45:06.670Z"
+  },
+  "hora_local": "09:45:06",
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "69ff5687d7b82ed0539afafa"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-09T15:45:11.714Z"
+  },
+  "hora_local": "09:45:11",
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "69ff568cd7b82ed0539afafc"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-09T15:45:16.806Z"
+  },
+  "hora_local": "09:45:16",
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "69ff5691d7b82ed0539afafe"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-09T15:45:21.839Z"
+  },
+  "hora_local": "09:45:21",
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "69ff5696d7b82ed0539afaff"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-09T15:45:26.947Z"
+  },
+  "hora_local": "09:45:26",
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "69ff569cd7b82ed0539afb00"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -39,
+  "timestamp": {
+    "$date": "2026-05-09T15:45:32.005Z"
+  },
+  "hora_local": "09:45:32",
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "69ff56a1d7b82ed0539afb01"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -50,
+  "timestamp": {
+    "$date": "2026-05-09T15:45:37.293Z"
+  },
+  "hora_local": "09:45:37",
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "69ff56a6d7b82ed0539afb02"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -51,
+  "timestamp": {
+    "$date": "2026-05-09T15:45:42.202Z"
+  },
+  "hora_local": "09:45:42",
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "69ff56abd7b82ed0539afb03"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-09T15:45:47.143Z"
+  },
+  "hora_local": "09:45:47",
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "69ff56b0d7b82ed0539afb04"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -44,
+  "timestamp": {
+    "$date": "2026-05-09T15:45:52.273Z"
+  },
+  "hora_local": "09:45:52",
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "69ff56b5d7b82ed0539afb05"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -53,
+  "timestamp": {
+    "$date": "2026-05-09T15:45:57.364Z"
+  },
+  "hora_local": "09:45:57",
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "69ff56bad7b82ed0539afb06"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -51,
+  "timestamp": {
+    "$date": "2026-05-09T15:46:02.475Z"
+  },
+  "hora_local": "09:46:02",
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "69ff56bfd7b82ed0539afb08"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -51,
+  "timestamp": {
+    "$date": "2026-05-09T15:46:07.501Z"
+  },
+  "hora_local": "09:46:07",
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "69ff56c4d7b82ed0539afb09"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -45,
+  "timestamp": {
+    "$date": "2026-05-09T15:46:12.566Z"
+  },
+  "hora_local": "09:46:12",
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "69ff56c9d7b82ed0539afb0a"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -55,
+  "timestamp": {
+    "$date": "2026-05-09T15:46:17.577Z"
+  },
+  "hora_local": "09:46:17",
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "69ff56ced7b82ed0539afb0c"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -43,
+  "timestamp": {
+    "$date": "2026-05-09T15:46:22.564Z"
+  },
+  "hora_local": "09:46:22",
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "69ff56d3d7b82ed0539afb0d"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -45,
+  "timestamp": {
+    "$date": "2026-05-09T15:46:27.653Z"
+  },
+  "hora_local": "09:46:27",
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "69ff56d8d7b82ed0539afb0e"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -44,
+  "timestamp": {
+    "$date": "2026-05-09T15:46:32.703Z"
+  },
+  "hora_local": "09:46:32",
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "69ff56ddd7b82ed0539afb0f"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -45,
+  "timestamp": {
+    "$date": "2026-05-09T15:46:37.839Z"
+  },
+  "hora_local": "09:46:37",
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "69ff56e2d7b82ed0539afb10"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -58,
+  "timestamp": {
+    "$date": "2026-05-09T15:46:42.949Z"
+  },
+  "hora_local": "09:46:42",
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "69ff56e8d7b82ed0539afb12"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -56,
+  "timestamp": {
+    "$date": "2026-05-09T15:46:48.034Z"
+  },
+  "hora_local": "09:46:48",
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "69ff56edd7b82ed0539afb13"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -57,
+  "timestamp": {
+    "$date": "2026-05-09T15:46:53.153Z"
+  },
+  "hora_local": "09:46:53",
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "69ff56f2d7b82ed0539afb15"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -51,
+  "timestamp": {
+    "$date": "2026-05-09T15:46:58.204Z"
+  },
+  "hora_local": "09:46:58",
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "69ff56f7d7b82ed0539afb16"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -51,
+  "timestamp": {
+    "$date": "2026-05-09T15:47:03.300Z"
+  },
+  "hora_local": "09:47:03",
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "69ff56fcd7b82ed0539afb17"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -45,
+  "timestamp": {
+    "$date": "2026-05-09T15:47:08.351Z"
+  },
+  "hora_local": "09:47:08",
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "69ff5701d7b82ed0539afb18"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -45,
+  "timestamp": {
+    "$date": "2026-05-09T15:47:13.495Z"
+  },
+  "hora_local": "09:47:13",
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "69ff5706d7b82ed0539afb19"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -45,
+  "timestamp": {
+    "$date": "2026-05-09T15:47:18.472Z"
+  },
+  "hora_local": "09:47:18",
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "69ff570bd7b82ed0539afb1b"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -44,
+  "timestamp": {
+    "$date": "2026-05-09T15:47:23.588Z"
+  },
+  "hora_local": "09:47:23",
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "69ff5710d7b82ed0539afb1c"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -52,
+  "timestamp": {
+    "$date": "2026-05-09T15:47:28.681Z"
+  },
+  "hora_local": "09:47:28",
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "69ff5715d7b82ed0539afb1d"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -61,
+  "timestamp": {
+    "$date": "2026-05-09T15:47:33.713Z"
+  },
+  "hora_local": "09:47:33",
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "69ff571ad7b82ed0539afb1e"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -61,
+  "timestamp": {
+    "$date": "2026-05-09T15:47:38.749Z"
+  },
+  "hora_local": "09:47:38",
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "69ff571fd7b82ed0539afb1f"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -57,
+  "timestamp": {
+    "$date": "2026-05-09T15:47:43.836Z"
+  },
+  "hora_local": "09:47:43",
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "69ff5724d7b82ed0539afb20"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -52,
+  "timestamp": {
+    "$date": "2026-05-09T15:47:48.827Z"
+  },
+  "hora_local": "09:47:48",
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "69ff5729d7b82ed0539afb21"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -57,
+  "timestamp": {
+    "$date": "2026-05-09T15:47:53.835Z"
+  },
+  "hora_local": "09:47:53",
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "69ff572ed7b82ed0539afb22"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -50,
+  "timestamp": {
+    "$date": "2026-05-09T15:47:58.960Z"
+  },
+  "hora_local": "09:47:58",
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "69ff5733d7b82ed0539afb23"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -53,
+  "timestamp": {
+    "$date": "2026-05-09T15:48:03.956Z"
+  },
+  "hora_local": "09:48:03",
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "69ff5739d7b82ed0539afb24"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-09T15:48:09.150Z"
+  },
+  "hora_local": "09:48:09",
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "69ff573ed7b82ed0539afb25"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-09T15:48:14.146Z"
+  },
+  "hora_local": "09:48:14",
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "69ff5743d7b82ed0539afb26"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-09T15:48:19.390Z"
+  },
+  "hora_local": "09:48:19",
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "69ff5748d7b82ed0539afb27"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -47,
+  "timestamp": {
+    "$date": "2026-05-09T15:48:24.306Z"
+  },
+  "hora_local": "09:48:24",
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "69ff574dd7b82ed0539afb28"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -47,
+  "timestamp": {
+    "$date": "2026-05-09T15:48:29.415Z"
+  },
+  "hora_local": "09:48:29",
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "69ff5752d7b82ed0539afb29"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -46,
+  "timestamp": {
+    "$date": "2026-05-09T15:48:34.490Z"
+  },
+  "hora_local": "09:48:34",
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "69ff5757d7b82ed0539afb2a"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -63,
+  "timestamp": {
+    "$date": "2026-05-09T15:48:39.589Z"
+  },
+  "hora_local": "09:48:39",
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "69ff575cd7b82ed0539afb2b"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -64,
+  "timestamp": {
+    "$date": "2026-05-09T15:48:44.715Z"
+  },
+  "hora_local": "09:48:44",
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "69ff5761d7b82ed0539afb2c"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -63,
+  "timestamp": {
+    "$date": "2026-05-09T15:48:49.703Z"
+  },
+  "hora_local": "09:48:49",
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "69ff5766d7b82ed0539afb2d"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -50,
+  "timestamp": {
+    "$date": "2026-05-09T15:48:54.753Z"
+  },
+  "hora_local": "09:48:54",
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "69ff576bd7b82ed0539afb2f"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -50,
+  "timestamp": {
+    "$date": "2026-05-09T15:48:59.844Z"
+  },
+  "hora_local": "09:48:59",
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "69ff5770d7b82ed0539afb30"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -46,
+  "timestamp": {
+    "$date": "2026-05-09T15:49:04.890Z"
+  },
+  "hora_local": "09:49:04",
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "69ff5775d7b82ed0539afb31"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -46,
+  "timestamp": {
+    "$date": "2026-05-09T15:49:09.977Z"
+  },
+  "hora_local": "09:49:09",
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "69ff577bd7b82ed0539afb32"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -63,
+  "timestamp": {
+    "$date": "2026-05-09T15:49:15.037Z"
+  },
+  "hora_local": "09:49:15",
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "69ff5780d7b82ed0539afb33"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -47,
+  "timestamp": {
+    "$date": "2026-05-09T15:49:20.120Z"
+  },
+  "hora_local": "09:49:20",
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "69ff5785d7b82ed0539afb34"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -47,
+  "timestamp": {
+    "$date": "2026-05-09T15:49:25.249Z"
+  },
+  "hora_local": "09:49:25",
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "69ff578ad7b82ed0539afb35"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -63,
+  "timestamp": {
+    "$date": "2026-05-09T15:49:30.190Z"
+  },
+  "hora_local": "09:49:30",
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "69ff578fd7b82ed0539afb36"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -51,
+  "timestamp": {
+    "$date": "2026-05-09T15:49:35.272Z"
+  },
+  "hora_local": "09:49:35",
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "69ff5794d7b82ed0539afb37"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -55,
+  "timestamp": {
+    "$date": "2026-05-09T15:49:40.386Z"
+  },
+  "hora_local": "09:49:40",
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "69ff5799d7b82ed0539afb38"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-09T15:49:45.334Z"
+  },
+  "hora_local": "09:49:45",
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "69ff579ed7b82ed0539afb39"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-09T15:49:50.426Z"
+  },
+  "hora_local": "09:49:50",
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "69ff57a3d7b82ed0539afb3a"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -52,
+  "timestamp": {
+    "$date": "2026-05-09T15:49:55.475Z"
+  },
+  "hora_local": "09:49:55",
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "69ff57a8d7b82ed0539afb3b"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -51,
+  "timestamp": {
+    "$date": "2026-05-09T15:50:00.587Z"
+  },
+  "hora_local": "09:50:00",
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "69ff57add7b82ed0539afb3d"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -57,
+  "timestamp": {
+    "$date": "2026-05-09T15:50:05.682Z"
+  },
+  "hora_local": "09:50:05",
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "69ff57b2d7b82ed0539afb3e"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -62,
+  "timestamp": {
+    "$date": "2026-05-09T15:50:10.731Z"
+  },
+  "hora_local": "09:50:10",
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "69ff57b8d7b82ed0539afb3f"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-09T15:50:16.030Z"
+  },
+  "hora_local": "09:50:16",
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "69ff57bcd7b82ed0539afb40"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-09T15:50:20.859Z"
+  },
+  "hora_local": "09:50:20",
+  "fecha_local": "2026-05-09"
+},
+{
+  "_id": {
+    "$oid": "6a020fa23ff0f25e6414ed26"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T17:19:30.736Z"
+  },
+  "hora_local": "11:19:30",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a020fa73ff0f25e6414ed27"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T17:19:35.162Z"
+  },
+  "hora_local": "11:19:35",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a020fac3ff0f25e6414ed29"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T17:19:40.283Z"
+  },
+  "hora_local": "11:19:40",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a020fb13ff0f25e6414ed2a"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T17:19:45.274Z"
+  },
+  "hora_local": "11:19:45",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a020fb63ff0f25e6414ed2b"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -58,
+  "timestamp": {
+    "$date": "2026-05-11T17:19:50.317Z"
+  },
+  "hora_local": "11:19:50",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a020fbb3ff0f25e6414ed2c"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -65,
+  "timestamp": {
+    "$date": "2026-05-11T17:19:55.434Z"
+  },
+  "hora_local": "11:19:55",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a020fc03ff0f25e6414ed2d"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -58,
+  "timestamp": {
+    "$date": "2026-05-11T17:20:00.538Z"
+  },
+  "hora_local": "11:20:00",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a020fc53ff0f25e6414ed2f"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -60,
+  "timestamp": {
+    "$date": "2026-05-11T17:20:05.637Z"
+  },
+  "hora_local": "11:20:05",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a020fca3ff0f25e6414ed31"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -57,
+  "timestamp": {
+    "$date": "2026-05-11T17:20:10.677Z"
+  },
+  "hora_local": "11:20:10",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a020fcf3ff0f25e6414ed32"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -72,
+  "timestamp": {
+    "$date": "2026-05-11T17:20:15.796Z"
+  },
+  "hora_local": "11:20:15",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a020fd43ff0f25e6414ed34"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -68,
+  "timestamp": {
+    "$date": "2026-05-11T17:20:20.793Z"
+  },
+  "hora_local": "11:20:20",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a020fd93ff0f25e6414ed35"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -54,
+  "timestamp": {
+    "$date": "2026-05-11T17:20:25.830Z"
+  },
+  "hora_local": "11:20:25",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a020fde3ff0f25e6414ed37"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -63,
+  "timestamp": {
+    "$date": "2026-05-11T17:20:30.956Z"
+  },
+  "hora_local": "11:20:30",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a020fe43ff0f25e6414ed38"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -61,
+  "timestamp": {
+    "$date": "2026-05-11T17:20:36.065Z"
+  },
+  "hora_local": "11:20:36",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a020fe93ff0f25e6414ed39"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -57,
+  "timestamp": {
+    "$date": "2026-05-11T17:20:41.140Z"
+  },
+  "hora_local": "11:20:41",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a020fee3ff0f25e6414ed3a"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -55,
+  "timestamp": {
+    "$date": "2026-05-11T17:20:46.197Z"
+  },
+  "hora_local": "11:20:46",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a020ff33ff0f25e6414ed3c"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -60,
+  "timestamp": {
+    "$date": "2026-05-11T17:20:51.314Z"
+  },
+  "hora_local": "11:20:51",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a020ff83ff0f25e6414ed3d"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -72,
+  "timestamp": {
+    "$date": "2026-05-11T17:20:56.457Z"
+  },
+  "hora_local": "11:20:56",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a020ffd3ff0f25e6414ed3e"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -66,
+  "timestamp": {
+    "$date": "2026-05-11T17:21:01.390Z"
+  },
+  "hora_local": "11:21:01",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a0210023ff0f25e6414ed40"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -78,
+  "timestamp": {
+    "$date": "2026-05-11T17:21:06.476Z"
+  },
+  "hora_local": "11:21:06",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a0210073ff0f25e6414ed42"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -67,
+  "timestamp": {
+    "$date": "2026-05-11T17:21:11.584Z"
+  },
+  "hora_local": "11:21:11",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a02100c3ff0f25e6414ed44"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -65,
+  "timestamp": {
+    "$date": "2026-05-11T17:21:16.639Z"
+  },
+  "hora_local": "11:21:16",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a0210113ff0f25e6414ed45"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T17:21:21.737Z"
+  },
+  "hora_local": "11:21:21",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a0210163ff0f25e6414ed46"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T17:21:26.838Z"
+  },
+  "hora_local": "11:21:26",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a02101b3ff0f25e6414ed48"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T17:21:31.888Z"
+  },
+  "hora_local": "11:21:31",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a0210203ff0f25e6414ed4a"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T17:21:36.996Z"
+  },
+  "hora_local": "11:21:36",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a0210263ff0f25e6414ed4b"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T17:21:42.103Z"
+  },
+  "hora_local": "11:21:42",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a02102b3ff0f25e6414ed4c"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T17:21:47.160Z"
+  },
+  "hora_local": "11:21:47",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a0210303ff0f25e6414ed4d"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T17:21:52.254Z"
+  },
+  "hora_local": "11:21:52",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a0210353ff0f25e6414ed4e"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T17:21:57.353Z"
+  },
+  "hora_local": "11:21:57",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a02103a3ff0f25e6414ed4f"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T17:22:02.405Z"
+  },
+  "hora_local": "11:22:02",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a02103f3ff0f25e6414ed50"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T17:22:07.509Z"
+  },
+  "hora_local": "11:22:07",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025aa2d4d5e8b454d789bc"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:39:30.783Z"
+  },
+  "hora_local": "16:39:30",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025aa7d4d5e8b454d789bd"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:39:35.776Z"
+  },
+  "hora_local": "16:39:35",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025aacd4d5e8b454d789bf"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:39:40.747Z"
+  },
+  "hora_local": "16:39:40",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025ab1d4d5e8b454d789c0"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:39:45.853Z"
+  },
+  "hora_local": "16:39:45",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025ab6d4d5e8b454d789c1"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:39:50.862Z"
+  },
+  "hora_local": "16:39:50",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025abbd4d5e8b454d789c3"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:39:55.905Z"
+  },
+  "hora_local": "16:39:55",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025ac1d4d5e8b454d789c4"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:40:01.009Z"
+  },
+  "hora_local": "16:40:01",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025ac6d4d5e8b454d789c5"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:40:06.061Z"
+  },
+  "hora_local": "16:40:06",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025acbd4d5e8b454d789c6"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:40:11.157Z"
+  },
+  "hora_local": "16:40:11",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025ad0d4d5e8b454d789c7"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:40:16.261Z"
+  },
+  "hora_local": "16:40:16",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025ad5d4d5e8b454d789c8"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:40:21.371Z"
+  },
+  "hora_local": "16:40:21",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025adad4d5e8b454d789c9"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:40:26.399Z"
+  },
+  "hora_local": "16:40:26",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025adfd4d5e8b454d789ca"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:40:31.507Z"
+  },
+  "hora_local": "16:40:31",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025ae4d4d5e8b454d789cc"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:40:36.569Z"
+  },
+  "hora_local": "16:40:36",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025ae9d4d5e8b454d789cd"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:40:41.652Z"
+  },
+  "hora_local": "16:40:41",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025aeed4d5e8b454d789ce"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:40:46.714Z"
+  },
+  "hora_local": "16:40:46",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025af3d4d5e8b454d789cf"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -42,
+  "timestamp": {
+    "$date": "2026-05-11T22:40:51.787Z"
+  },
+  "hora_local": "16:40:51",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025af8d4d5e8b454d789d0"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -66,
+  "timestamp": {
+    "$date": "2026-05-11T22:40:56.837Z"
+  },
+  "hora_local": "16:40:56",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025afdd4d5e8b454d789d1"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -60,
+  "timestamp": {
+    "$date": "2026-05-11T22:41:01.931Z"
+  },
+  "hora_local": "16:41:01",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025b02d4d5e8b454d789d2"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -54,
+  "timestamp": {
+    "$date": "2026-05-11T22:41:06.971Z"
+  },
+  "hora_local": "16:41:06",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025b08d4d5e8b454d789d3"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -45,
+  "timestamp": {
+    "$date": "2026-05-11T22:41:12.070Z"
+  },
+  "hora_local": "16:41:12",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025b0dd4d5e8b454d789d4"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -53,
+  "timestamp": {
+    "$date": "2026-05-11T22:41:17.171Z"
+  },
+  "hora_local": "16:41:17",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025b12d4d5e8b454d789d5"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -56,
+  "timestamp": {
+    "$date": "2026-05-11T22:41:22.212Z"
+  },
+  "hora_local": "16:41:22",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025b17d4d5e8b454d789d6"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -43,
+  "timestamp": {
+    "$date": "2026-05-11T22:41:27.319Z"
+  },
+  "hora_local": "16:41:27",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025b1cd4d5e8b454d789d7"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -67,
+  "timestamp": {
+    "$date": "2026-05-11T22:41:32.362Z"
+  },
+  "hora_local": "16:41:32",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025b21d4d5e8b454d789d8"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -75,
+  "timestamp": {
+    "$date": "2026-05-11T22:41:37.463Z"
+  },
+  "hora_local": "16:41:37",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025b26d4d5e8b454d789d9"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -75,
+  "timestamp": {
+    "$date": "2026-05-11T22:41:42.574Z"
+  },
+  "hora_local": "16:41:42",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025b2bd4d5e8b454d789da"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -70,
+  "timestamp": {
+    "$date": "2026-05-11T22:41:47.614Z"
+  },
+  "hora_local": "16:41:47",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025b30d4d5e8b454d789db"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -63,
+  "timestamp": {
+    "$date": "2026-05-11T22:41:52.716Z"
+  },
+  "hora_local": "16:41:52",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025b35d4d5e8b454d789dc"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -80,
+  "timestamp": {
+    "$date": "2026-05-11T22:41:57.771Z"
+  },
+  "hora_local": "16:41:57",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025b3ad4d5e8b454d789dd"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -56,
+  "timestamp": {
+    "$date": "2026-05-11T22:42:02.874Z"
+  },
+  "hora_local": "16:42:02",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025b3fd4d5e8b454d789de"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -64,
+  "timestamp": {
+    "$date": "2026-05-11T22:42:07.973Z"
+  },
+  "hora_local": "16:42:07",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025b45d4d5e8b454d789df"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -57,
+  "timestamp": {
+    "$date": "2026-05-11T22:42:13.032Z"
+  },
+  "hora_local": "16:42:13",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025b4ad4d5e8b454d789e0"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -41,
+  "timestamp": {
+    "$date": "2026-05-11T22:42:18.119Z"
+  },
+  "hora_local": "16:42:18",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025b4fd4d5e8b454d789e1"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -55,
+  "timestamp": {
+    "$date": "2026-05-11T22:42:23.219Z"
+  },
+  "hora_local": "16:42:23",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025b54d4d5e8b454d789e2"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -57,
+  "timestamp": {
+    "$date": "2026-05-11T22:42:28.345Z"
+  },
+  "hora_local": "16:42:28",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025b59d4d5e8b454d789e4"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -65,
+  "timestamp": {
+    "$date": "2026-05-11T22:42:33.290Z"
+  },
+  "hora_local": "16:42:33",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025b5ed4d5e8b454d789e6"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -52,
+  "timestamp": {
+    "$date": "2026-05-11T22:42:38.380Z"
+  },
+  "hora_local": "16:42:38",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025b63d4d5e8b454d789e7"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -69,
+  "timestamp": {
+    "$date": "2026-05-11T22:42:43.419Z"
+  },
+  "hora_local": "16:42:43",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025b68d4d5e8b454d789e8"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -57,
+  "timestamp": {
+    "$date": "2026-05-11T22:42:48.526Z"
+  },
+  "hora_local": "16:42:48",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025b6dd4d5e8b454d789e9"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -50,
+  "timestamp": {
+    "$date": "2026-05-11T22:42:53.639Z"
+  },
+  "hora_local": "16:42:53",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025b72d4d5e8b454d789ea"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -42,
+  "timestamp": {
+    "$date": "2026-05-11T22:42:58.593Z"
+  },
+  "hora_local": "16:42:58",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025b77d4d5e8b454d789eb"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -50,
+  "timestamp": {
+    "$date": "2026-05-11T22:43:03.683Z"
+  },
+  "hora_local": "16:43:03",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025b7cd4d5e8b454d789ec"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -43,
+  "timestamp": {
+    "$date": "2026-05-11T22:43:08.727Z"
+  },
+  "hora_local": "16:43:08",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025b81d4d5e8b454d789ed"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -41,
+  "timestamp": {
+    "$date": "2026-05-11T22:43:13.865Z"
+  },
+  "hora_local": "16:43:13",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025b86d4d5e8b454d789ee"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -42,
+  "timestamp": {
+    "$date": "2026-05-11T22:43:18.835Z"
+  },
+  "hora_local": "16:43:18",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025b8bd4d5e8b454d789ef"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -41,
+  "timestamp": {
+    "$date": "2026-05-11T22:43:23.876Z"
+  },
+  "hora_local": "16:43:23",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025b90d4d5e8b454d789f1"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -40,
+  "timestamp": {
+    "$date": "2026-05-11T22:43:28.994Z"
+  },
+  "hora_local": "16:43:28",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025b96d4d5e8b454d789f3"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -41,
+  "timestamp": {
+    "$date": "2026-05-11T22:43:34.124Z"
+  },
+  "hora_local": "16:43:34",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025b9bd4d5e8b454d789f4"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -49,
+  "timestamp": {
+    "$date": "2026-05-11T22:43:39.158Z"
+  },
+  "hora_local": "16:43:39",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025ba0d4d5e8b454d789f5"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -42,
+  "timestamp": {
+    "$date": "2026-05-11T22:43:44.150Z"
+  },
+  "hora_local": "16:43:44",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025ba5d4d5e8b454d789f8"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -41,
+  "timestamp": {
+    "$date": "2026-05-11T22:43:49.404Z"
+  },
+  "hora_local": "16:43:49",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025baad4d5e8b454d789f9"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -41,
+  "timestamp": {
+    "$date": "2026-05-11T22:43:54.257Z"
+  },
+  "hora_local": "16:43:54",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025bafd4d5e8b454d789fa"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -41,
+  "timestamp": {
+    "$date": "2026-05-11T22:43:59.300Z"
+  },
+  "hora_local": "16:43:59",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025bb4d4d5e8b454d789fc"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -43,
+  "timestamp": {
+    "$date": "2026-05-11T22:44:04.322Z"
+  },
+  "hora_local": "16:44:04",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025bb9d4d5e8b454d789fd"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -43,
+  "timestamp": {
+    "$date": "2026-05-11T22:44:09.413Z"
+  },
+  "hora_local": "16:44:09",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025bbed4d5e8b454d789fe"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -47,
+  "timestamp": {
+    "$date": "2026-05-11T22:44:14.468Z"
+  },
+  "hora_local": "16:44:14",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025bc3d4d5e8b454d789ff"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -48,
+  "timestamp": {
+    "$date": "2026-05-11T22:44:19.551Z"
+  },
+  "hora_local": "16:44:19",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025bc8d4d5e8b454d78a01"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -48,
+  "timestamp": {
+    "$date": "2026-05-11T22:44:24.586Z"
+  },
+  "hora_local": "16:44:24",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025bcdd4d5e8b454d78a03"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -48,
+  "timestamp": {
+    "$date": "2026-05-11T22:44:29.813Z"
+  },
+  "hora_local": "16:44:29",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025bd2d4d5e8b454d78a04"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -42,
+  "timestamp": {
+    "$date": "2026-05-11T22:44:34.814Z"
+  },
+  "hora_local": "16:44:34",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025bd7d4d5e8b454d78a05"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -41,
+  "timestamp": {
+    "$date": "2026-05-11T22:44:39.875Z"
+  },
+  "hora_local": "16:44:39",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025bddd4d5e8b454d78a06"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -41,
+  "timestamp": {
+    "$date": "2026-05-11T22:44:45.127Z"
+  },
+  "hora_local": "16:44:45",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025be2d4d5e8b454d78a07"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -42,
+  "timestamp": {
+    "$date": "2026-05-11T22:44:50.096Z"
+  },
+  "hora_local": "16:44:50",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025be7d4d5e8b454d78a08"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -41,
+  "timestamp": {
+    "$date": "2026-05-11T22:44:55.214Z"
+  },
+  "hora_local": "16:44:55",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025becd4d5e8b454d78a09"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -42,
+  "timestamp": {
+    "$date": "2026-05-11T22:45:00.353Z"
+  },
+  "hora_local": "16:45:00",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025bf1d4d5e8b454d78a0a"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -41,
+  "timestamp": {
+    "$date": "2026-05-11T22:45:05.223Z"
+  },
+  "hora_local": "16:45:05",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025bf6d4d5e8b454d78a0b"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -41,
+  "timestamp": {
+    "$date": "2026-05-11T22:45:10.337Z"
+  },
+  "hora_local": "16:45:10",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025bfbd4d5e8b454d78a0c"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -48,
+  "timestamp": {
+    "$date": "2026-05-11T22:45:15.382Z"
+  },
+  "hora_local": "16:45:15",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025c00d4d5e8b454d78a0d"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:45:20.482Z"
+  },
+  "hora_local": "16:45:20",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025c05d4d5e8b454d78a0e"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:45:25.524Z"
+  },
+  "hora_local": "16:45:25",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025c0ad4d5e8b454d78a0f"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:45:30.621Z"
+  },
+  "hora_local": "16:45:30",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025c0fd4d5e8b454d78a10"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:45:35.727Z"
+  },
+  "hora_local": "16:45:35",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025c14d4d5e8b454d78a11"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:45:40.779Z"
+  },
+  "hora_local": "16:45:40",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025c19d4d5e8b454d78a12"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:45:45.876Z"
+  },
+  "hora_local": "16:45:45",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025c1ed4d5e8b454d78a13"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:45:50.921Z"
+  },
+  "hora_local": "16:45:50",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025c24d4d5e8b454d78a14"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:45:56.016Z"
+  },
+  "hora_local": "16:45:56",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025c29d4d5e8b454d78a15"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:46:01.118Z"
+  },
+  "hora_local": "16:46:01",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025c2ed4d5e8b454d78a16"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:46:06.166Z"
+  },
+  "hora_local": "16:46:06",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025c33d4d5e8b454d78a17"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:46:11.270Z"
+  },
+  "hora_local": "16:46:11",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025c38d4d5e8b454d78a18"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:46:16.311Z"
+  },
+  "hora_local": "16:46:16",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025c3dd4d5e8b454d78a19"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:46:21.400Z"
+  },
+  "hora_local": "16:46:21",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025c42d4d5e8b454d78a1a"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:46:26.436Z"
+  },
+  "hora_local": "16:46:26",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025c47d4d5e8b454d78a1b"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:46:31.579Z"
+  },
+  "hora_local": "16:46:31",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025c4cd4d5e8b454d78a1c"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:46:36.659Z"
+  },
+  "hora_local": "16:46:36",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025c51d4d5e8b454d78a1d"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:46:41.711Z"
+  },
+  "hora_local": "16:46:41",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025c56d4d5e8b454d78a1e"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:46:46.806Z"
+  },
+  "hora_local": "16:46:46",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025c5bd4d5e8b454d78a1f"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:46:51.859Z"
+  },
+  "hora_local": "16:46:51",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025c60d4d5e8b454d78a20"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:46:56.981Z"
+  },
+  "hora_local": "16:46:56",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025c66d4d5e8b454d78a21"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:47:02.087Z"
+  },
+  "hora_local": "16:47:02",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025c6bd4d5e8b454d78a22"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:47:07.197Z"
+  },
+  "hora_local": "16:47:07",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025c70d4d5e8b454d78a23"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:47:12.318Z"
+  },
+  "hora_local": "16:47:12",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025c75d4d5e8b454d78a24"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:47:17.257Z"
+  },
+  "hora_local": "16:47:17",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025c7ad4d5e8b454d78a25"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:47:22.365Z"
+  },
+  "hora_local": "16:47:22",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025c7fd4d5e8b454d78a26"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:47:27.462Z"
+  },
+  "hora_local": "16:47:27",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025c84d4d5e8b454d78a27"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:47:32.512Z"
+  },
+  "hora_local": "16:47:32",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025c89d4d5e8b454d78a28"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:47:37.613Z"
+  },
+  "hora_local": "16:47:37",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025c8ed4d5e8b454d78a29"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:47:42.655Z"
+  },
+  "hora_local": "16:47:42",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025c93d4d5e8b454d78a2a"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:47:47.752Z"
+  },
+  "hora_local": "16:47:47",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025c98d4d5e8b454d78a2b"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:47:52.856Z"
+  },
+  "hora_local": "16:47:52",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025c9dd4d5e8b454d78a2c"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:47:57.915Z"
+  },
+  "hora_local": "16:47:57",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025ca3d4d5e8b454d78a2d"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:48:03.023Z"
+  },
+  "hora_local": "16:48:03",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025ca8d4d5e8b454d78a2e"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:48:08.121Z"
+  },
+  "hora_local": "16:48:08",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025cadd4d5e8b454d78a2f"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:48:13.177Z"
+  },
+  "hora_local": "16:48:13",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025cb2d4d5e8b454d78a31"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:48:18.340Z"
+  },
+  "hora_local": "16:48:18",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025cb7d4d5e8b454d78a32"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:48:23.284Z"
+  },
+  "hora_local": "16:48:23",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025cbcd4d5e8b454d78a33"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:48:28.336Z"
+  },
+  "hora_local": "16:48:28",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025cc1d4d5e8b454d78a34"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:48:33.419Z"
+  },
+  "hora_local": "16:48:33",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025cc6d4d5e8b454d78a35"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:48:38.471Z"
+  },
+  "hora_local": "16:48:38",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025ccbd4d5e8b454d78a36"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:48:43.561Z"
+  },
+  "hora_local": "16:48:43",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025cd0d4d5e8b454d78a37"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:48:48.616Z"
+  },
+  "hora_local": "16:48:48",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025cd5d4d5e8b454d78a38"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:48:53.693Z"
+  },
+  "hora_local": "16:48:53",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025cdad4d5e8b454d78a39"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:48:58.824Z"
+  },
+  "hora_local": "16:48:58",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025cdfd4d5e8b454d78a3a"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:49:03.921Z"
+  },
+  "hora_local": "16:49:03",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025ce4d4d5e8b454d78a3b"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:49:08.862Z"
+  },
+  "hora_local": "16:49:08",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025ce9d4d5e8b454d78a3c"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:49:13.959Z"
+  },
+  "hora_local": "16:49:13",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025cefd4d5e8b454d78a3d"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:49:19.015Z"
+  },
+  "hora_local": "16:49:19",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025cf4d4d5e8b454d78a3e"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:49:24.104Z"
+  },
+  "hora_local": "16:49:24",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025cf9d4d5e8b454d78a3f"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:49:29.140Z"
+  },
+  "hora_local": "16:49:29",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025cfed4d5e8b454d78a40"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:49:34.246Z"
+  },
+  "hora_local": "16:49:34",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025d03d4d5e8b454d78a41"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:49:39.289Z"
+  },
+  "hora_local": "16:49:39",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025d08d4d5e8b454d78a42"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:49:44.385Z"
+  },
+  "hora_local": "16:49:44",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025d0dd4d5e8b454d78a43"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:49:49.428Z"
+  },
+  "hora_local": "16:49:49",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025d12d4d5e8b454d78a44"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:49:54.526Z"
+  },
+  "hora_local": "16:49:54",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025d17d4d5e8b454d78a45"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:49:59.574Z"
+  },
+  "hora_local": "16:49:59",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025d1cd4d5e8b454d78a46"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:50:04.671Z"
+  },
+  "hora_local": "16:50:04",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025d21d4d5e8b454d78a47"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:50:09.773Z"
+  },
+  "hora_local": "16:50:09",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025d26d4d5e8b454d78a48"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:50:14.811Z"
+  },
+  "hora_local": "16:50:14",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025d2bd4d5e8b454d78a49"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:50:19.919Z"
+  },
+  "hora_local": "16:50:19",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025d31d4d5e8b454d78a4a"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:50:25.043Z"
+  },
+  "hora_local": "16:50:25",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025d36d4d5e8b454d78a4b"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:50:30.037Z"
+  },
+  "hora_local": "16:50:30",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025d3bd4d5e8b454d78a4c"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:50:35.088Z"
+  },
+  "hora_local": "16:50:35",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025d40d4d5e8b454d78a4d"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:50:40.182Z"
+  },
+  "hora_local": "16:50:40",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025d45d4d5e8b454d78a4e"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:50:45.203Z"
+  },
+  "hora_local": "16:50:45",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025d4ad4d5e8b454d78a4f"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:50:50.250Z"
+  },
+  "hora_local": "16:50:50",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025d4fd4d5e8b454d78a50"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:50:55.345Z"
+  },
+  "hora_local": "16:50:55",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025d54d4d5e8b454d78a51"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:51:00.391Z"
+  },
+  "hora_local": "16:51:00",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025d59d4d5e8b454d78a52"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:51:05.497Z"
+  },
+  "hora_local": "16:51:05",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025d5ed4d5e8b454d78a53"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:51:10.515Z"
+  },
+  "hora_local": "16:51:10",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025d63d4d5e8b454d78a54"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:51:15.606Z"
+  },
+  "hora_local": "16:51:15",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025d68d4d5e8b454d78a55"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:51:20.648Z"
+  },
+  "hora_local": "16:51:20",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025d6dd4d5e8b454d78a57"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:51:25.764Z"
+  },
+  "hora_local": "16:51:25",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025d72d4d5e8b454d78a59"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:51:30.866Z"
+  },
+  "hora_local": "16:51:30",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025d77d4d5e8b454d78a5a"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:51:35.917Z"
+  },
+  "hora_local": "16:51:35",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025d7dd4d5e8b454d78a5b"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:51:41.018Z"
+  },
+  "hora_local": "16:51:41",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025d82d4d5e8b454d78a5c"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:51:46.058Z"
+  },
+  "hora_local": "16:51:46",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025d87d4d5e8b454d78a5d"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:51:51.150Z"
+  },
+  "hora_local": "16:51:51",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025d8cd4d5e8b454d78a5e"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:51:56.252Z"
+  },
+  "hora_local": "16:51:56",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025d91d4d5e8b454d78a60"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:52:01.301Z"
+  },
+  "hora_local": "16:52:01",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025d96d4d5e8b454d78a62"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:52:06.406Z"
+  },
+  "hora_local": "16:52:06",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025d9bd4d5e8b454d78a63"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:52:11.520Z"
+  },
+  "hora_local": "16:52:11",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025da0d4d5e8b454d78a64"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:52:16.567Z"
+  },
+  "hora_local": "16:52:16",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025da5d4d5e8b454d78a65"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:52:21.662Z"
+  },
+  "hora_local": "16:52:21",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025daad4d5e8b454d78a66"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:52:26.736Z"
+  },
+  "hora_local": "16:52:26",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025dafd4d5e8b454d78a68"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:52:31.828Z"
+  },
+  "hora_local": "16:52:31",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025db4d4d5e8b454d78a6b"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:52:36.940Z"
+  },
+  "hora_local": "16:52:36",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025dbad4d5e8b454d78a6c"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:52:42.037Z"
+  },
+  "hora_local": "16:52:42",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025dbfd4d5e8b454d78a6d"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:52:47.085Z"
+  },
+  "hora_local": "16:52:47",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025dc4d4d5e8b454d78a6e"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:52:52.184Z"
+  },
+  "hora_local": "16:52:52",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025dc9d4d5e8b454d78a6f"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:52:57.290Z"
+  },
+  "hora_local": "16:52:57",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025dced4d5e8b454d78a70"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:53:02.344Z"
+  },
+  "hora_local": "16:53:02",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025dd3d4d5e8b454d78a72"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:53:07.453Z"
+  },
+  "hora_local": "16:53:07",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025dd8d4d5e8b454d78a73"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -52,
+  "timestamp": {
+    "$date": "2026-05-11T22:53:12.613Z"
+  },
+  "hora_local": "16:53:12",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025dddd4d5e8b454d78a74"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:53:17.593Z"
+  },
+  "hora_local": "16:53:17",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025de2d4d5e8b454d78a76"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -37,
+  "timestamp": {
+    "$date": "2026-05-11T22:53:22.589Z"
+  },
+  "hora_local": "16:53:22",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025de7d4d5e8b454d78a78"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -37,
+  "timestamp": {
+    "$date": "2026-05-11T22:53:27.616Z"
+  },
+  "hora_local": "16:53:27",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025decd4d5e8b454d78a79"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -35,
+  "timestamp": {
+    "$date": "2026-05-11T22:53:32.716Z"
+  },
+  "hora_local": "16:53:32",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025df1d4d5e8b454d78a7a"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -41,
+  "timestamp": {
+    "$date": "2026-05-11T22:53:37.760Z"
+  },
+  "hora_local": "16:53:37",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025df6d4d5e8b454d78a7c"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -36,
+  "timestamp": {
+    "$date": "2026-05-11T22:53:42.897Z"
+  },
+  "hora_local": "16:53:42",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025dfbd4d5e8b454d78a7d"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -51,
+  "timestamp": {
+    "$date": "2026-05-11T22:53:47.990Z"
+  },
+  "hora_local": "16:53:47",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025e01d4d5e8b454d78a7e"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -48,
+  "timestamp": {
+    "$date": "2026-05-11T22:53:53.032Z"
+  },
+  "hora_local": "16:53:53",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025e06d4d5e8b454d78a7f"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -38,
+  "timestamp": {
+    "$date": "2026-05-11T22:53:58.124Z"
+  },
+  "hora_local": "16:53:58",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025e0bd4d5e8b454d78a80"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -53,
+  "timestamp": {
+    "$date": "2026-05-11T22:54:03.167Z"
+  },
+  "hora_local": "16:54:03",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025e10d4d5e8b454d78a81"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -44,
+  "timestamp": {
+    "$date": "2026-05-11T22:54:08.263Z"
+  },
+  "hora_local": "16:54:08",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025e15d4d5e8b454d78a82"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -40,
+  "timestamp": {
+    "$date": "2026-05-11T22:54:13.366Z"
+  },
+  "hora_local": "16:54:13",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025e1ad4d5e8b454d78a85"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -47,
+  "timestamp": {
+    "$date": "2026-05-11T22:54:18.420Z"
+  },
+  "hora_local": "16:54:18",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025e1fd4d5e8b454d78a86"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -47,
+  "timestamp": {
+    "$date": "2026-05-11T22:54:23.518Z"
+  },
+  "hora_local": "16:54:23",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025e24d4d5e8b454d78a87"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -49,
+  "timestamp": {
+    "$date": "2026-05-11T22:54:28.621Z"
+  },
+  "hora_local": "16:54:28",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025e29d4d5e8b454d78a88"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -50,
+  "timestamp": {
+    "$date": "2026-05-11T22:54:33.662Z"
+  },
+  "hora_local": "16:54:33",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025e2ed4d5e8b454d78a89"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -44,
+  "timestamp": {
+    "$date": "2026-05-11T22:54:38.757Z"
+  },
+  "hora_local": "16:54:38",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025e33d4d5e8b454d78a8b"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -49,
+  "timestamp": {
+    "$date": "2026-05-11T22:54:43.814Z"
+  },
+  "hora_local": "16:54:43",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025e38d4d5e8b454d78a8c"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -40,
+  "timestamp": {
+    "$date": "2026-05-11T22:54:48.927Z"
+  },
+  "hora_local": "16:54:48",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025e3ed4d5e8b454d78a8d"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -83,
+  "timestamp": {
+    "$date": "2026-05-11T22:54:54.024Z"
+  },
+  "hora_local": "16:54:54",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025e43d4d5e8b454d78a8e"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -40,
+  "timestamp": {
+    "$date": "2026-05-11T22:54:59.061Z"
+  },
+  "hora_local": "16:54:59",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025e48d4d5e8b454d78a8f"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -54,
+  "timestamp": {
+    "$date": "2026-05-11T22:55:04.158Z"
+  },
+  "hora_local": "16:55:04",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025e4dd4d5e8b454d78a90"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -42,
+  "timestamp": {
+    "$date": "2026-05-11T22:55:09.199Z"
+  },
+  "hora_local": "16:55:09",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025e52d4d5e8b454d78a92"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -55,
+  "timestamp": {
+    "$date": "2026-05-11T22:55:14.208Z"
+  },
+  "hora_local": "16:55:14",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025e57d4d5e8b454d78a95"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -40,
+  "timestamp": {
+    "$date": "2026-05-11T22:55:19.296Z"
+  },
+  "hora_local": "16:55:19",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025e5cd4d5e8b454d78a96"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -40,
+  "timestamp": {
+    "$date": "2026-05-11T22:55:24.344Z"
+  },
+  "hora_local": "16:55:24",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025e61d4d5e8b454d78a98"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -41,
+  "timestamp": {
+    "$date": "2026-05-11T22:55:29.385Z"
+  },
+  "hora_local": "16:55:29",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025e66d4d5e8b454d78a99"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -36,
+  "timestamp": {
+    "$date": "2026-05-11T22:55:34.472Z"
+  },
+  "hora_local": "16:55:34",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025e6bd4d5e8b454d78a9a"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -46,
+  "timestamp": {
+    "$date": "2026-05-11T22:55:39.517Z"
+  },
+  "hora_local": "16:55:39",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025e70d4d5e8b454d78a9b"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -45,
+  "timestamp": {
+    "$date": "2026-05-11T22:55:44.622Z"
+  },
+  "hora_local": "16:55:44",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025e75d4d5e8b454d78a9c"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -50,
+  "timestamp": {
+    "$date": "2026-05-11T22:55:49.709Z"
+  },
+  "hora_local": "16:55:49",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025e7ad4d5e8b454d78a9d"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -45,
+  "timestamp": {
+    "$date": "2026-05-11T22:55:54.753Z"
+  },
+  "hora_local": "16:55:54",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025e7fd4d5e8b454d78a9e"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -57,
+  "timestamp": {
+    "$date": "2026-05-11T22:55:59.848Z"
+  },
+  "hora_local": "16:55:59",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025e84d4d5e8b454d78a9f"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -57,
+  "timestamp": {
+    "$date": "2026-05-11T22:56:04.903Z"
+  },
+  "hora_local": "16:56:04",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025e8ad4d5e8b454d78aa0"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -34,
+  "timestamp": {
+    "$date": "2026-05-11T22:56:10.009Z"
+  },
+  "hora_local": "16:56:10",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025e8fd4d5e8b454d78aa2"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -37,
+  "timestamp": {
+    "$date": "2026-05-11T22:56:15.118Z"
+  },
+  "hora_local": "16:56:15",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025e94d4d5e8b454d78aa3"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -40,
+  "timestamp": {
+    "$date": "2026-05-11T22:56:20.161Z"
+  },
+  "hora_local": "16:56:20",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025e99d4d5e8b454d78aa4"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": true,
+  "rssi": -51,
+  "timestamp": {
+    "$date": "2026-05-11T22:56:25.257Z"
+  },
+  "hora_local": "16:56:25",
+  "fecha_local": "2026-05-11"
+},
+{
+  "_id": {
+    "$oid": "6a025e9ed4d5e8b454d78aa5"
+  },
+  "id_beacon": "BCN-01",
+  "detectado": false,
+  "rssi": null,
+  "timestamp": {
+    "$date": "2026-05-11T22:56:30.382Z"
+  },
+  "hora_local": "16:56:30",
+  "fecha_local": "2026-05-11"
+}]

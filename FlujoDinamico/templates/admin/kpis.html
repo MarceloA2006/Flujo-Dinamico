@@ -1,0 +1,443 @@
+{% extends 'base.html' %}
+{% block title %}KPIs{% endblock %}
+{% block page_title %}Indicadores Clave de Desempeño{% endblock %}
+{% block page_subtitle %}15 KPIs en tiempo real — fuente: vistas PostgreSQL{% endblock %}
+
+{% block content %}
+
+<!-- ── Botón de actualizar ── -->
+<div style="display:flex;justify-content:flex-end;margin-bottom:20px;">
+  <button onclick="location.reload()"
+    style="padding:8px 18px;border-radius:8px;background:var(--navy);color:white;border:none;font-size:13px;font-weight:600;cursor:pointer;">
+    ↻ Actualizar KPIs
+  </button>
+</div>
+
+<!-- ════════════════════════════════════════════════════
+     KPI 15 — Resumen Ejecutivo (tarjetas principales)
+     View: vw_kpi_resumen_ejecutivo
+     ════════════════════════════════════════════════════ -->
+<div style="margin-bottom:10px;">
+  <p style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;">
+    KPI 15 — Resumen Ejecutivo · <code style="font-size:10px;">vw_kpi_resumen_ejecutivo</code>
+  </p>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin-bottom:28px;">
+  {% set ej = [
+    ('Pacientes',         kpi_ejecutivo.get('total_pacientes',0),         '#6366f1'),
+    ('Médicos activos',   kpi_ejecutivo.get('medicos_activos',0),          '#0ea5e9'),
+    ('En espera',         kpi_ejecutivo.get('pacientes_en_espera',0),      '#f59e0b'),
+    ('Ingresos hoy',      kpi_ejecutivo.get('ingresos_hoy',0),             '#22c55e'),
+    ('Espera prom (min)', kpi_ejecutivo.get('espera_prom_min','—'),        '#8b5cf6'),
+    ('Alertas activas',   kpi_ejecutivo.get('alertas_activas',0),          '#ef4444'),
+    ('Beacons activos',   kpi_ejecutivo.get('beacons_activos',0),          '#06b6d4'),
+    ('Tarjetas NFC',      kpi_ejecutivo.get('tarjetas_nfc_registradas',0), '#10b981'),
+    ('Expedientes',       kpi_ejecutivo.get('expedientes_abiertos',0),     '#64748b'),
+  ] %}
+  {% for nombre, valor, color in ej %}
+  <div style="background:white;border-radius:10px;padding:16px;box-shadow:var(--shadow-xs);border-top:3px solid {{ color }};text-align:center;">
+    <p style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;">{{ nombre }}</p>
+    <p style="font-size:26px;font-weight:700;color:{{ color }};">{{ valor }}</p>
+  </div>
+  {% endfor %}
+</div>
+
+<!-- ════════════════════════════════════════════════════
+     KPI 1 — Tiempo promedio de espera
+     View: vw_kpi_tiempo_espera_promedio
+     Fórmula: AVG(tiempo_espera_min) WHERE estado='ALTA'
+     ════════════════════════════════════════════════════ -->
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+  <div style="background:white;border-radius:12px;padding:20px;box-shadow:var(--shadow-xs);">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+      <div>
+        <p style="font-size:13px;font-weight:700;color:var(--navy);">KPI 1 — Tiempo de Espera Promedio</p>
+        <p style="font-size:11px;color:var(--muted);">View: <code>vw_kpi_tiempo_espera_promedio</code></p>
+      </div>
+      <span style="font-size:28px;font-weight:800;color:#8b5cf6;">
+        {{ t_espera.get('tiempo_espera_prom_min','—') }} <span style="font-size:13px;font-weight:400;">min</span>
+      </span>
+    </div>
+    <p style="font-size:11px;color:var(--muted);margin-bottom:8px;">
+      <strong>Fórmula:</strong> AVG(tiempo_espera_min) de ingresos con estado ALTA
+    </p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+      <div style="background:var(--bg);border-radius:7px;padding:10px;text-align:center;">
+        <p style="font-size:10px;color:var(--muted);">Mínimo</p>
+        <p style="font-size:16px;font-weight:700;color:#22c55e;">{{ t_espera.get('tiempo_minimo_min','—') }} min</p>
+      </div>
+      <div style="background:var(--bg);border-radius:7px;padding:10px;text-align:center;">
+        <p style="font-size:10px;color:var(--muted);">Máximo</p>
+        <p style="font-size:16px;font-weight:700;color:#ef4444;">{{ t_espera.get('tiempo_maximo_min','—') }} min</p>
+      </div>
+    </div>
+    <p style="font-size:11px;color:var(--muted);margin-top:10px;">
+      <strong>Interpretación:</strong> Un tiempo menor a 30 min indica eficiencia operativa óptima.
+    </p>
+  </div>
+
+  <!-- KPI 6 — Ingresos diarios -->
+  <div style="background:white;border-radius:12px;padding:20px;box-shadow:var(--shadow-xs);">
+    <div style="margin-bottom:14px;">
+      <p style="font-size:13px;font-weight:700;color:var(--navy);">KPI 6 — Ingresos por Período</p>
+      <p style="font-size:11px;color:var(--muted);">View: <code>vw_kpi_ingresos_diario</code></p>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
+      {% set periodos = [
+        ('Hoy',    ing_diario.get('ingresos_hoy',0),    '#22c55e'),
+        ('Ayer',   ing_diario.get('ingresos_ayer',0),   '#0ea5e9'),
+        ('Semana', ing_diario.get('ingresos_semana',0), '#6366f1'),
+        ('Mes',    ing_diario.get('ingresos_mes',0),    '#f59e0b'),
+      ] %}
+      {% for label, val, color in periodos %}
+      <div style="background:var(--bg);border-radius:7px;padding:10px;text-align:center;border-left:3px solid {{ color }};">
+        <p style="font-size:10px;color:var(--muted);">{{ label }}</p>
+        <p style="font-size:20px;font-weight:700;color:{{ color }};">{{ val }}</p>
+      </div>
+      {% endfor %}
+    </div>
+    <p style="font-size:11px;color:var(--muted);">
+      <strong>Fórmula:</strong> COUNT(ingresos) agrupado por período de tiempo.<br>
+      <strong>Interpretación:</strong> Permite detectar picos de demanda y planificar recursos.
+    </p>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════
+     KPI 2 — Ocupación de áreas
+     View: vw_kpi_ocupacion_areas
+     ════════════════════════════════════════════════════ -->
+<div style="background:white;border-radius:12px;padding:20px;box-shadow:var(--shadow-xs);margin-bottom:16px;">
+  <p style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:4px;">KPI 2 — Tasa de Ocupación por Área</p>
+  <p style="font-size:11px;color:var(--muted);margin-bottom:16px;">
+    View: <code>vw_kpi_ocupacion_areas</code> · Fórmula: (ocupacion_actual / capacidad) × 100
+    · Interpretación: >80% indica saturación, acción requerida
+  </p>
+  {% if ocupacion %}
+  <div style="display:grid;gap:10px;">
+    {% for area in ocupacion %}
+    {% set pct = area.tasa_ocupacion_pct | float %}
+    {% set color = '#ef4444' if pct > 80 else ('#f59e0b' if pct > 50 else '#22c55e') %}
+    <div style="display:flex;align-items:center;gap:12px;">
+      <p style="font-size:12px;color:var(--ink2);min-width:160px;font-weight:500;">{{ area.nombre_area }}</p>
+      <div style="flex:1;background:var(--bg);border-radius:99px;height:10px;overflow:hidden;">
+        <div style="width:{{ [pct,100]|min }}%;height:100%;background:{{ color }};border-radius:99px;transition:width .5s;"></div>
+      </div>
+      <p style="font-size:12px;font-weight:700;color:{{ color }};min-width:50px;text-align:right;">{{ pct }}%</p>
+      <p style="font-size:11px;color:var(--muted);min-width:80px;">{{ area.ocupacion_actual }}/{{ area.capacidad }}</p>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <p style="color:var(--muted);text-align:center;padding:20px;">Sin datos de ocupación</p>
+  {% endif %}
+</div>
+
+<!-- ════════════════════════════════════════════════════
+     KPI 3 y KPI 4 — Ingresos por tipo + Productividad médico
+     ════════════════════════════════════════════════════ -->
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+
+  <!-- KPI 3 -->
+  <div style="background:white;border-radius:12px;padding:20px;box-shadow:var(--shadow-xs);">
+    <p style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:4px;">KPI 3 — Ingresos por Tipo</p>
+    <p style="font-size:11px;color:var(--muted);margin-bottom:14px;">
+      View: <code>vw_kpi_ingresos_por_tipo</code> · COUNT agrupado por tipo_ingreso del mes
+    </p>
+    {% if ing_tipo %}
+    <div style="display:grid;gap:8px;">
+      {% for t in ing_tipo %}
+      {% set color = '#ef4444' if t.tipo_ingreso=='URGENCIA' else ('#f59e0b' if t.tipo_ingreso=='EMERGENCIA' else '#0ea5e9') %}
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:var(--bg);border-radius:8px;border-left:3px solid {{ color }};">
+        <p style="font-size:12px;font-weight:600;color:var(--ink2);">{{ t.tipo_ingreso }}</p>
+        <div style="text-align:right;">
+          <p style="font-size:16px;font-weight:700;color:{{ color }};">{{ t.total }}</p>
+          <p style="font-size:10px;color:var(--muted);">{{ t.porcentaje }}%</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <p style="color:var(--muted);text-align:center;padding:20px;">Sin ingresos este mes</p>
+    {% endif %}
+  </div>
+
+  <!-- KPI 4 -->
+  <div style="background:white;border-radius:12px;padding:20px;box-shadow:var(--shadow-xs);">
+    <p style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:4px;">KPI 4 — Productividad por Médico</p>
+    <p style="font-size:11px;color:var(--muted);margin-bottom:14px;">
+      View: <code>vw_kpi_productividad_medico</code> · Ingresos atendidos y espera promedio
+    </p>
+    {% if productividad %}
+    <div style="display:grid;gap:8px;">
+      {% for m in productividad[:5] %}
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:var(--bg);border-radius:8px;">
+        <div>
+          <p style="font-size:12px;font-weight:600;color:var(--ink2);">{{ m.medico }}</p>
+          <p style="font-size:10px;color:var(--muted);">{{ m.especialidad }}</p>
+        </div>
+        <div style="text-align:right;">
+          <p style="font-size:15px;font-weight:700;color:#6366f1;">{{ m.ingresos_mes }}</p>
+          <p style="font-size:10px;color:var(--muted);">{{ m.espera_promedio_min or '—' }} min prom</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <p style="color:var(--muted);text-align:center;padding:20px;">Sin datos este mes</p>
+    {% endif %}
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════
+     KPI 5 y KPI 8 — Alertas + Adopción NFC
+     ════════════════════════════════════════════════════ -->
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+
+  <!-- KPI 5 -->
+  <div style="background:white;border-radius:12px;padding:20px;box-shadow:var(--shadow-xs);">
+    <p style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:4px;">KPI 5 — Resolución de Alertas</p>
+    <p style="font-size:11px;color:var(--muted);margin-bottom:14px;">
+      View: <code>vw_kpi_alertas_resolucion</code> · Tasa de resolución de alertas del sistema
+    </p>
+    <div style="text-align:center;margin-bottom:14px;">
+      <p style="font-size:42px;font-weight:800;color:{% if alertas_res.get('tasa_resolucion_pct',0)|float > 70 %}#22c55e{% else %}#ef4444{% endif %};">
+        {{ alertas_res.get('tasa_resolucion_pct','0') }}%
+      </p>
+      <p style="font-size:12px;color:var(--muted);">tasa de resolución</p>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+      <div style="background:#fee2e2;border-radius:8px;padding:10px;text-align:center;">
+        <p style="font-size:10px;color:#ef4444;">Activas</p>
+        <p style="font-size:20px;font-weight:700;color:#ef4444;">{{ alertas_res.get('alertas_activas',0) }}</p>
+      </div>
+      <div style="background:#dcfce7;border-radius:8px;padding:10px;text-align:center;">
+        <p style="font-size:10px;color:#22c55e;">Resueltas</p>
+        <p style="font-size:20px;font-weight:700;color:#22c55e;">{{ alertas_res.get('alertas_resueltas',0) }}</p>
+      </div>
+    </div>
+    <p style="font-size:11px;color:var(--muted);margin-top:10px;">
+      <strong>Interpretación:</strong> Meta: >80% resueltas. Activas requieren atención inmediata.
+    </p>
+  </div>
+
+  <!-- KPI 8 -->
+  <div style="background:white;border-radius:12px;padding:20px;box-shadow:var(--shadow-xs);">
+    <p style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:4px;">KPI 8 — Adopción de Tarjetas NFC</p>
+    <p style="font-size:11px;color:var(--muted);margin-bottom:14px;">
+      View: <code>vw_kpi_adopcion_nfc</code> · % pacientes con tarjeta NFC registrada
+    </p>
+    <div style="text-align:center;margin-bottom:14px;">
+      <p style="font-size:42px;font-weight:800;color:#10b981;">
+        {{ adopcion_nfc.get('tasa_adopcion_pct','0') }}%
+      </p>
+      <p style="font-size:12px;color:var(--muted);">tasa de adopción NFC</p>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+      <div style="background:#d1fae5;border-radius:8px;padding:10px;text-align:center;">
+        <p style="font-size:10px;color:#10b981;">Con NFC</p>
+        <p style="font-size:20px;font-weight:700;color:#10b981;">{{ adopcion_nfc.get('pacientes_con_nfc',0) }}</p>
+      </div>
+      <div style="background:#f1f5f9;border-radius:8px;padding:10px;text-align:center;">
+        <p style="font-size:10px;color:var(--muted);">Sin NFC</p>
+        <p style="font-size:20px;font-weight:700;color:var(--muted);">{{ adopcion_nfc.get('pacientes_sin_nfc',0) }}</p>
+      </div>
+    </div>
+    <p style="font-size:11px;color:var(--muted);margin-top:10px;">
+      <strong>Interpretación:</strong> Meta: >90%. Refleja integración del sistema IoT con pacientes.
+    </p>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════
+     KPI 9, 10, 11 — Beacons, Triajes, Expedientes
+     ════════════════════════════════════════════════════ -->
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:16px;">
+
+  <!-- KPI 9 -->
+  <div style="background:white;border-radius:12px;padding:20px;box-shadow:var(--shadow-xs);">
+    <p style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:4px;">KPI 9 — Estado Beacons</p>
+    <p style="font-size:11px;color:var(--muted);margin-bottom:12px;"><code>vw_kpi_estado_beacons</code></p>
+    {% for b in estado_bea %}
+    {% set color = '#22c55e' if b.estado=='ACTIVO' else ('#f59e0b' if b.estado=='INACTIVO' else '#ef4444') %}
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);">
+      <span style="font-size:11px;font-weight:600;color:{{ color }};background:{{ color }}15;padding:2px 8px;border-radius:4px;">{{ b.estado }}</span>
+      <div style="text-align:right;">
+        <p style="font-size:16px;font-weight:700;color:var(--ink2);">{{ b.total }}</p>
+        <p style="font-size:10px;color:var(--muted);">{{ b.porcentaje }}%</p>
+      </div>
+    </div>
+    {% else %}
+    <p style="color:var(--muted);text-align:center;padding:16px;font-size:12px;">Sin datos</p>
+    {% endfor %}
+    <p style="font-size:11px;color:var(--muted);margin-top:10px;">
+      <strong>Interpretación:</strong> Todos deben estar ACTIVO durante horario de operación.
+    </p>
+  </div>
+
+  <!-- KPI 10 -->
+  <div style="background:white;border-radius:12px;padding:20px;box-shadow:var(--shadow-xs);">
+    <p style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:4px;">KPI 10 — Triajes por Nivel</p>
+    <p style="font-size:11px;color:var(--muted);margin-bottom:12px;"><code>vw_kpi_triajes_por_nivel</code></p>
+    {% set colores_triaje = {'ROJO':'#ef4444','NARANJA':'#f97316','AMARILLO':'#eab308','VERDE':'#22c55e','AZUL':'#3b82f6'} %}
+    {% for t in triajes_niv %}
+    {% set color = colores_triaje.get(t.nivel_triaje,'#64748b') %}
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border);">
+      <span style="font-size:11px;font-weight:700;color:{{ color }};">● {{ t.nivel_triaje }}</span>
+      <div style="text-align:right;">
+        <p style="font-size:15px;font-weight:700;color:var(--ink2);">{{ t.total }}</p>
+        <p style="font-size:10px;color:var(--muted);">{{ t.porcentaje }}%</p>
+      </div>
+    </div>
+    {% else %}
+    <p style="color:var(--muted);text-align:center;padding:16px;font-size:12px;">Sin triajes en 30 días</p>
+    {% endfor %}
+    <p style="font-size:11px;color:var(--muted);margin-top:10px;">
+      <strong>Interpretación:</strong> Alto % ROJO indica mayor gravedad de pacientes atendidos.
+    </p>
+  </div>
+
+  <!-- KPI 11 -->
+  <div style="background:white;border-radius:12px;padding:20px;box-shadow:var(--shadow-xs);">
+    <p style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:4px;">KPI 11 — Expedientes Activos</p>
+    <p style="font-size:11px;color:var(--muted);margin-bottom:12px;"><code>vw_kpi_expedientes_activos</code></p>
+    <div style="text-align:center;margin-bottom:12px;">
+      <p style="font-size:38px;font-weight:800;color:#6366f1;">{{ exp_activos.get('tasa_activos_pct','0') }}%</p>
+      <p style="font-size:11px;color:var(--muted);">expedientes activos</p>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+      <div style="background:#ede9fe;border-radius:7px;padding:8px;text-align:center;">
+        <p style="font-size:9px;color:#6366f1;">Activos</p>
+        <p style="font-size:18px;font-weight:700;color:#6366f1;">{{ exp_activos.get('expedientes_activos',0) }}</p>
+      </div>
+      <div style="background:var(--bg);border-radius:7px;padding:8px;text-align:center;">
+        <p style="font-size:9px;color:var(--muted);">Cerrados</p>
+        <p style="font-size:18px;font-weight:700;color:var(--muted);">{{ exp_activos.get('expedientes_cerrados',0) }}</p>
+      </div>
+    </div>
+    <p style="font-size:11px;color:var(--muted);margin-top:10px;">
+      <strong>Interpretación:</strong> Refleja volumen de pacientes en seguimiento activo.
+    </p>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════
+     KPI 7 — Duración de estancia por área
+     ════════════════════════════════════════════════════ -->
+<div style="background:white;border-radius:12px;padding:20px;box-shadow:var(--shadow-xs);margin-bottom:16px;">
+  <p style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:4px;">KPI 7 — Duración Promedio de Estancia por Área</p>
+  <p style="font-size:11px;color:var(--muted);margin-bottom:16px;">
+    View: <code>vw_kpi_duracion_estancia_area</code> · AVG(duracion_min) por área ·
+    Interpretación: tiempos altos pueden indicar cuellos de botella operativos
+  </p>
+  {% if dur_estancia %}
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;">
+    {% for d in dur_estancia %}
+    <div style="background:var(--bg);border-radius:8px;padding:14px;border-left:3px solid #0ea5e9;">
+      <p style="font-size:12px;font-weight:600;color:var(--ink2);margin-bottom:8px;">{{ d.nombre_area }}</p>
+      <p style="font-size:22px;font-weight:700;color:#0ea5e9;">{{ d.duracion_prom_min }} <span style="font-size:11px;font-weight:400;color:var(--muted);">min prom</span></p>
+      <p style="font-size:11px;color:var(--muted);">Máx: {{ d.duracion_max_min }} min · {{ d.total_estancias }} estancias</p>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <p style="color:var(--muted);text-align:center;padding:20px;">Sin estancias completadas registradas</p>
+  {% endif %}
+</div>
+
+<!-- ════════════════════════════════════════════════════
+     KPI 12 y 14 — Vitales por nivel + Disponibilidad médicos
+     ════════════════════════════════════════════════════ -->
+<div style="display:grid;grid-template-columns:2fr 1fr;gap:16px;margin-bottom:16px;">
+
+  <!-- KPI 12 -->
+  <div style="background:white;border-radius:12px;padding:20px;box-shadow:var(--shadow-xs);">
+    <p style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:4px;">KPI 12 — Signos Vitales Promedio por Nivel de Triaje</p>
+    <p style="font-size:11px;color:var(--muted);margin-bottom:14px;">
+      View: <code>vw_kpi_vitales_por_nivel</code> · AVG de signos vitales agrupados por nivel
+    </p>
+    {% if vitales %}
+    <table style="width:100%;border-collapse:collapse;font-size:12px;">
+      <thead>
+        <tr style="border-bottom:2px solid var(--border);">
+          <th style="text-align:left;padding:8px;color:var(--muted);font-weight:600;">Nivel</th>
+          <th style="text-align:center;padding:8px;color:var(--muted);font-weight:600;">FC</th>
+          <th style="text-align:center;padding:8px;color:var(--muted);font-weight:600;">PS</th>
+          <th style="text-align:center;padding:8px;color:var(--muted);font-weight:600;">Temp</th>
+          <th style="text-align:center;padding:8px;color:var(--muted);font-weight:600;">SatO2</th>
+          <th style="text-align:center;padding:8px;color:var(--muted);font-weight:600;">Glasgow</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% set colores_triaje = {'ROJO':'#ef4444','NARANJA':'#f97316','AMARILLO':'#eab308','VERDE':'#22c55e','AZUL':'#3b82f6'} %}
+        {% for v in vitales %}
+        {% set color = colores_triaje.get(v.nivel_triaje,'#64748b') %}
+        <tr style="border-bottom:1px solid var(--border);">
+          <td style="padding:8px;font-weight:700;color:{{ color }};">{{ v.nivel_triaje }}</td>
+          <td style="padding:8px;text-align:center;color:var(--ink2);">{{ v.fc_prom or '—' }}</td>
+          <td style="padding:8px;text-align:center;color:var(--ink2);">{{ v.ps_prom or '—' }}</td>
+          <td style="padding:8px;text-align:center;color:var(--ink2);">{{ v.temp_prom or '—' }}°</td>
+          <td style="padding:8px;text-align:center;color:var(--ink2);">{{ v.sato2_prom or '—' }}%</td>
+          <td style="padding:8px;text-align:center;color:var(--ink2);">{{ v.glasgow_prom or '—' }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <p style="color:var(--muted);text-align:center;padding:20px;">Sin datos de triajes</p>
+    {% endif %}
+  </div>
+
+  <!-- KPI 14 -->
+  <div style="background:white;border-radius:12px;padding:20px;box-shadow:var(--shadow-xs);">
+    <p style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:4px;">KPI 14 — Disponibilidad Médicos</p>
+    <p style="font-size:11px;color:var(--muted);margin-bottom:14px;"><code>vw_kpi_disponibilidad_medicos</code></p>
+    <div style="text-align:center;margin-bottom:14px;">
+      <p style="font-size:42px;font-weight:800;color:#0ea5e9;">{{ disp_med.get('tasa_disponibilidad_pct','0') }}%</p>
+      <p style="font-size:11px;color:var(--muted);">médicos disponibles</p>
+    </div>
+    <div style="display:grid;gap:8px;">
+      <div style="background:#dbeafe;border-radius:8px;padding:10px;text-align:center;">
+        <p style="font-size:10px;color:#0ea5e9;">Activos</p>
+        <p style="font-size:22px;font-weight:700;color:#0ea5e9;">{{ disp_med.get('medicos_activos',0) }}</p>
+      </div>
+      <div style="background:var(--bg);border-radius:8px;padding:10px;text-align:center;">
+        <p style="font-size:10px;color:var(--muted);">Inactivos</p>
+        <p style="font-size:22px;font-weight:700;color:var(--muted);">{{ disp_med.get('medicos_inactivos',0) }}</p>
+      </div>
+    </div>
+    <p style="font-size:11px;color:var(--muted);margin-top:10px;">
+      <strong>Interpretación:</strong> Meta: 100% activos en horario de servicio.
+    </p>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════
+     KPI 13 — Actividad por hora del día
+     View: vw_kpi_actividad_por_hora
+     ════════════════════════════════════════════════════ -->
+<div style="background:white;border-radius:12px;padding:20px;box-shadow:var(--shadow-xs);">
+  <p style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:4px;">KPI 13 — Actividad del Sistema por Hora del Día</p>
+  <p style="font-size:11px;color:var(--muted);margin-bottom:16px;">
+    View: <code>vw_kpi_actividad_por_hora</code> · COUNT(ingresos) agrupado por hora ·
+    Interpretación: identifica horas pico para optimizar personal y recursos
+  </p>
+  {% if act_hora %}
+  {% set max_val = act_hora | map(attribute='total_ingresos') | max %}
+  <div style="display:flex;align-items:flex-end;gap:4px;height:80px;padding-bottom:24px;position:relative;">
+    {% for h in act_hora %}
+    {% set pct = (h.total_ingresos / max_val * 100) if max_val > 0 else 0 %}
+    {% set color = '#ef4444' if pct > 80 else ('#f59e0b' if pct > 50 else '#6366f1') %}
+    <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;">
+      <div title="{{ h.hora }}:00 — {{ h.total_ingresos }} ingresos"
+           style="width:100%;background:{{ color }};border-radius:3px 3px 0 0;height:{{ pct }}%;min-height:2px;"></div>
+      <p style="font-size:9px;color:var(--muted);transform:rotate(-45deg);transform-origin:top left;margin-top:4px;white-space:nowrap;">{{ h.hora }}h</p>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <p style="color:var(--muted);text-align:center;padding:20px;">Sin datos de actividad por hora</p>
+  {% endif %}
+</div>
+
+{% endblock %}

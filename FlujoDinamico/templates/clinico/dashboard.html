@@ -1,0 +1,249 @@
+{% extends 'base.html' %}
+{% block title %}Mis Pacientes{% endblock %}
+{% block page_title %}Vista Clínica{% endblock %}
+{% block page_subtitle %}Dr. {{ session.nombre }} — ingresos activos y consultorios{% endblock %}
+
+{% block content %}
+
+<!-- Stats -->
+<div class="stats-grid" style="grid-template-columns:repeat(3,1fr);margin-bottom:22px;">
+  <div class="stat-card">
+    <div class="stat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke="#0077b6" stroke-width="2" stroke-linecap="round"/><circle cx="9" cy="7" r="4" stroke="#0077b6" stroke-width="2"/></svg></div>
+    <div class="stat-info"><p>{{ ingresos|length }}</p><span>Ingresos asignados</span></div>
+  </div>
+  <div class="stat-card amber">
+    <div class="stat-icon amarillo"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#b45309" stroke-width="2"/><path d="M12 6v6l4 2" stroke="#b45309" stroke-width="2" stroke-linecap="round"/></svg></div>
+    <div class="stat-info">
+      <p>{% set ts=ingresos|map(attribute='tiempo_espera_min')|select('number')|list %}{{ (ts|sum/ts|length)|round(1) if ts else '—' }}<span style="font-size:14px;"> min</span></p>
+      <span>Espera promedio</span>
+    </div>
+  </div>
+  <div class="stat-card rojo">
+    <div class="stat-icon rojo"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0zM12 9v4M12 17h.01" stroke="#b91c1c" stroke-width="2" stroke-linecap="round"/></svg></div>
+    <div class="stat-info"><p style="color:var(--red);">{{ ingresos|selectattr('min_desde_ingreso','gt',120)|list|length }}</p><span>Permanencia crítica</span></div>
+  </div>
+</div>
+
+<!-- Consultorios -->
+<div class="card" style="margin-bottom:22px;">
+  <div class="card-header">
+    <h3>Consultorios — Estado en tiempo real</h3>
+    <span class="badge badge-iot">Beacon BLE</span>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1px;background:var(--border);">
+    {% for c in consultorios %}
+    <div class="consultorio-card" data-beacon="{{ c.id_beacon or '' }}"
+         style="background:var(--white);padding:14px 18px;display:flex;align-items:center;gap:12px;">
+      <img src="{{ c.foto }}" alt="{{ c.medico }}"
+           style="width:40px;height:40px;border-radius:50%;object-fit:cover;border:1.5px solid var(--border);flex-shrink:0;"
+           onerror="this.src='https://ui-avatars.com/api/?name={{ c.medico }}&background=e0f4ff&color=03045e&size=64'">
+      <div style="flex:1;min-width:0;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:2px;">
+          <span style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;">{{ c.numero }}</span>
+          <div style="display:flex;align-items:center;gap:4px;">
+            <span class="beacon-status-dot" style="width:7px;height:7px;border-radius:50%;background:{{ '#22c55e' if c.beacon_activo else '#d1d5db' }};{% if c.beacon_activo %}box-shadow:0 0 0 2px rgba(34,197,94,.2);animation:pulse 2s infinite;{% endif %}"></span>
+            <span class="beacon-status-label" style="font-size:10.5px;font-weight:600;color:{{ 'var(--green)' if c.beacon_activo else 'var(--muted)' }};">{{ 'Abierto' if c.beacon_activo else 'Cerrado' }}</span>
+          </div>
+        </div>
+        <p style="font-size:13px;font-weight:600;color:var(--ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ c.especialidad }}</p>
+        <p style="font-size:11.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ c.medico }}</p>
+        <p style="font-size:10.5px;color:var(--muted);margin-top:1px;">{{ c.horario }}</p>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<style>@keyframes pulse{0%,100%{box-shadow:0 0 0 2px rgba(34,197,94,.2)}50%{box-shadow:0 0 0 5px rgba(34,197,94,.05)}}</style>
+
+<!-- Mis pacientes -->
+<div style="margin-bottom:10px;display:flex;align-items:center;justify-content:space-between;">
+  <h3 style="font-size:14px;font-weight:600;color:var(--ink2);">Mis pacientes activos</h3>
+  <span class="badge badge-medico" id="badge-ingresos">{{ ingresos|length }} ingresos</span>
+</div>
+
+<div id="grid-ingresos" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px;">
+{% for i in ingresos %}
+{% set urgente = i.tipo_ingreso=='URGENCIA' %}
+{% set critico = i.min_desde_ingreso and i.min_desde_ingreso>120 %}
+<div style="background:white;border-radius:10px;border:1px solid {{ 'var(--red-bd)' if critico else 'var(--border)' }};box-shadow:var(--shadow-xs);overflow:hidden;transition:box-shadow .15s,transform .15s;"
+  onmouseover="this.style.boxShadow='var(--shadow-lg)';this.style.transform='translateY(-2px)'"
+  onmouseout="this.style.boxShadow='var(--shadow-xs)';this.style.transform=''">
+  <div style="background:{{ '#7f1d1d' if urgente else 'var(--navy)' }};padding:14px 16px;display:flex;align-items:center;justify-content:space-between;">
+    <div style="display:flex;align-items:center;gap:10px;">
+      <img src="{{ i.foto }}" alt="{{ i.paciente }}"
+           style="width:38px;height:38px;border-radius:50%;border:2px solid rgba(255,255,255,.3);object-fit:cover;"
+           onerror="this.src='https://ui-avatars.com/api/?name={{ i.paciente }}&background=fff&color=03045e&size=64'">
+      <div>
+        <p style="font-weight:600;font-size:13px;color:white;">{{ i.paciente }}</p>
+        <code style="font-size:9.5px;background:rgba(255,255,255,.15);color:rgba(255,255,255,.8);padding:1px 6px;border-radius:3px;">{{ i.expediente }}</code>
+      </div>
+    </div>
+    <span style="font-size:9.5px;font-weight:700;padding:3px 9px;border-radius:99px;background:rgba(255,255,255,.15);color:white;">{{ i.tipo_ingreso }}</span>
+  </div>
+  <div style="padding:13px 16px;">
+    <p style="font-size:12.5px;color:var(--sub);line-height:1.5;margin-bottom:12px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">{{ i.motivo_ingreso }}</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;">
+      <div style="background:var(--bg);border-radius:7px;padding:8px 11px;">
+        <p style="font-size:9.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px;">Área</p>
+        <p style="font-size:12.5px;font-weight:500;color:var(--ink2);display:flex;align-items:center;gap:4px;"><span style="width:5px;height:5px;border-radius:50%;background:#22c55e;flex-shrink:0;"></span>{{ i.area_actual or '—' }}</p>
+      </div>
+      <div style="background:{{ 'var(--red-bg)' if critico else 'var(--bg)' }};border-radius:7px;padding:8px 11px;">
+        <p style="font-size:9.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px;">Tiempo activo</p>
+        <p style="font-size:15px;font-weight:700;color:{{ 'var(--red)' if critico else 'var(--navy)' }};letter-spacing:-.5px;">{{ i.min_desde_ingreso|int if i.min_desde_ingreso else '—' }} min</p>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;justify-content:space-between;padding-top:10px;border-top:1px solid var(--border);">
+      <span style="font-size:10.5px;font-weight:600;padding:2px 8px;border-radius:4px;background:{{ 'var(--grn-bg)' if i.estado=='COMPLETADO' else 'var(--amb-bg)' if i.estado=='EN_ESPERA' else 'var(--ice)' }};color:{{ 'var(--green)' if i.estado=='COMPLETADO' else 'var(--amber)' if i.estado=='EN_ESPERA' else 'var(--blue)' }};">{{ i.estado }}</span>
+      <div style="display:flex;gap:6px;">
+        <a href="{{ url_for('clinico_detalle', id_ingreso=i.id_ingreso) }}"
+           style="padding:6px 13px;border-radius:6px;font-size:12px;font-weight:600;text-decoration:none;background:var(--ice);color:var(--navy);border:1px solid var(--light);transition:all .12s;"
+           onmouseover="this.style.background='var(--blue)';this.style.color='white'"
+           onmouseout="this.style.background='var(--ice)';this.style.color='var(--navy)'">Ver recorrido</a>
+
+        {% if i.estado == 'EN_ESPERA' %}
+        <!-- Botón Admitir: cambia EN_ESPERA → EN_ATENCION -->
+        <form method="POST" action="{{ url_for('ingreso_admitir', id=i.id_ingreso) }}" style="display:inline;">
+          <input type="hidden" name="cedula_medico" value="{{ session.get('cedula_medico','') }}">
+          <button type="submit"
+            onclick="return confirm('¿Admitir a {{ i.paciente }} al consultorio?')"
+            style="padding:6px 13px;border-radius:6px;font-size:12px;font-weight:600;background:#6366f1;color:white;border:none;cursor:pointer;transition:all .12s;"
+            onmouseover="this.style.background='#4338ca'"
+            onmouseout="this.style.background='#6366f1'">Admitir</button>
+        </form>
+        {% endif %}
+
+        {% if i.estado != 'ALTA' and i.estado != 'COMPLETADO' %}
+        <!-- Botón Dar de alta -->
+        <form method="POST" action="{{ url_for('ingreso_cambiar_estado', id=i.id_ingreso) }}" style="display:inline;">
+          <input type="hidden" name="estado" value="ALTA">
+          <button type="submit"
+            onclick="return confirm('¿Dar de alta a {{ i.paciente }}?')"
+            style="padding:6px 13px;border-radius:6px;font-size:12px;font-weight:600;background:var(--grn-bg);color:var(--green);border:1px solid var(--grn-bd);cursor:pointer;transition:all .12s;"
+            onmouseover="this.style.background='var(--green)';this.style.color='white'"
+            onmouseout="this.style.background='var(--grn-bg)';this.style.color='var(--green)'">Alta</button>
+        </form>
+        {% endif %}
+
+      </div>
+    </div>
+  </div>
+</div>
+{% else %}
+<div style="grid-column:1/-1;text-align:center;padding:48px;color:var(--muted);">
+  <p style="font-size:14px;font-weight:500;">Sin ingresos activos asignados</p>
+</div>
+{% endfor %}
+</div>
+
+<!-- Polling JS -->
+<script>
+(function () {
+
+  function actualizarBeacon() {
+    fetch('/iot/estado')
+      .then(r => r.json())
+      .then(data => {
+        const det      = data.beacon.detectado;
+        const idBeacon = data.beacon.id_beacon;
+        document.querySelectorAll('.consultorio-card').forEach(card => {
+          const activo = det && card.dataset.beacon === idBeacon;
+          const dot    = card.querySelector('.beacon-status-dot');
+          const label  = card.querySelector('.beacon-status-label');
+          if (dot) {
+            dot.style.background = activo ? '#22c55e' : '#d1d5db';
+            dot.style.boxShadow  = activo ? '0 0 0 3px rgba(34,197,94,.2)' : 'none';
+            dot.style.animation  = activo ? 'pulse 2s infinite' : 'none';
+          }
+          if (label) {
+            label.textContent = activo ? 'Abierto' : 'Cerrado';
+            label.style.color = activo ? 'var(--green)' : 'var(--muted)';
+          }
+        });
+      }).catch(() => {});
+  }
+
+  function tarjetaHTML(i) {
+    const urgente = i.tipo_ingreso === 'URGENCIA';
+    const min     = i.min_desde_ingreso ? Math.round(Number(i.min_desde_ingreso)) : 0;
+    const critico = min > 120;
+
+    const btnAdmitir = i.estado === 'EN_ESPERA' ? `
+      <form method="POST" action="/admin/ingresos/admitir/${i.id_ingreso}" style="display:inline;">
+        <button type="submit" onclick="return confirm('¿Admitir al consultorio?')"
+          style="padding:6px 13px;border-radius:6px;font-size:12px;font-weight:600;background:#6366f1;color:white;border:none;cursor:pointer;">
+          Admitir
+        </button>
+      </form>` : '';
+
+    const btnAlta = (i.estado !== 'ALTA' && i.estado !== 'COMPLETADO') ? `
+      <form method="POST" action="/admin/ingresos/cambiar-estado/${i.id_ingreso}" style="display:inline;">
+        <input type="hidden" name="estado" value="ALTA">
+        <button type="submit" onclick="return confirm('¿Dar de alta?')"
+          style="padding:6px 13px;border-radius:6px;font-size:12px;font-weight:600;background:var(--grn-bg);color:var(--green);border:1px solid var(--grn-bd);cursor:pointer;">
+          Alta
+        </button>
+      </form>` : '';
+
+    return `
+    <div style="background:white;border-radius:10px;border:1px solid ${critico ? 'var(--red-bd)' : 'var(--border)'};box-shadow:var(--shadow-xs);overflow:hidden;">
+      <div style="background:${urgente ? '#7f1d1d' : 'var(--navy)'};padding:14px 16px;display:flex;align-items:center;justify-content:space-between;">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <img src="${i.foto}" style="width:38px;height:38px;border-radius:50%;border:2px solid rgba(255,255,255,.3);object-fit:cover;"
+               onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(i.paciente)}&background=fff&color=03045e&size=64'">
+          <div>
+            <p style="font-weight:600;font-size:13px;color:white;">${i.paciente}</p>
+            <code style="font-size:9.5px;background:rgba(255,255,255,.15);color:rgba(255,255,255,.8);padding:1px 6px;border-radius:3px;">${i.expediente}</code>
+          </div>
+        </div>
+        <span style="font-size:9.5px;font-weight:700;padding:3px 9px;border-radius:99px;background:rgba(255,255,255,.15);color:white;">${i.tipo_ingreso}</span>
+      </div>
+      <div style="padding:13px 16px;">
+        <p style="font-size:12.5px;color:var(--sub);line-height:1.5;margin-bottom:12px;">${i.motivo_ingreso || '—'}</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;">
+          <div style="background:var(--bg);border-radius:7px;padding:8px 11px;">
+            <p style="font-size:9.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px;">Área</p>
+            <p style="font-size:12.5px;font-weight:500;color:var(--ink2);">${i.area_actual || '—'}</p>
+          </div>
+          <div style="background:${critico ? 'var(--red-bg)' : 'var(--bg)'};border-radius:7px;padding:8px 11px;">
+            <p style="font-size:9.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px;">Tiempo activo</p>
+            <p style="font-size:15px;font-weight:700;color:${critico ? 'var(--red)' : 'var(--navy)'};">${min} min</p>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding-top:10px;border-top:1px solid var(--border);">
+          <span style="font-size:10.5px;font-weight:600;padding:2px 8px;border-radius:4px;background:${i.estado==='EN_ESPERA' ? 'var(--amb-bg)' : i.estado==='ALTA'||i.estado==='COMPLETADO' ? 'var(--grn-bg)' : 'var(--ice)'};color:${i.estado==='EN_ESPERA' ? 'var(--amber)' : i.estado==='ALTA'||i.estado==='COMPLETADO' ? 'var(--green)' : 'var(--blue)'};">${i.estado}</span>
+          <div style="display:flex;gap:6px;">
+            <a href="/clinico/paciente/${i.id_ingreso}"
+               style="padding:6px 13px;border-radius:6px;font-size:12px;font-weight:600;text-decoration:none;background:var(--ice);color:var(--navy);border:1px solid var(--light);">Ver recorrido</a>
+            ${btnAdmitir}
+            ${btnAlta}
+          </div>
+        </div>
+      </div>
+    </div>`;
+  }
+
+  function actualizarIngresos() {
+    fetch('/iot/ingresos')
+      .then(r => r.json())
+      .then(data => {
+        const grid  = document.getElementById('grid-ingresos');
+        const badge = document.getElementById('badge-ingresos');
+        if (!grid) return;
+        if (badge) badge.textContent = data.total + ' ingresos';
+        if (data.total === 0) {
+          grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:48px;color:var(--muted);">
+            <p style="font-size:14px;font-weight:500;">Sin ingresos activos asignados</p></div>`;
+        } else {
+          grid.innerHTML = data.ingresos.map(tarjetaHTML).join('');
+        }
+      }).catch(() => {});
+  }
+
+  actualizarBeacon();
+  actualizarIngresos();
+  setInterval(actualizarBeacon,   3000);
+  setInterval(actualizarIngresos, 5000);
+})();
+</script>
+{% endblock %}

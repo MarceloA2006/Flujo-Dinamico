@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}Ingresos{% endblock %}
+{% block page_title %}Ingresos{% endblock %}
+{% block page_subtitle %}Historial de ingresos hospitalarios{% endblock %}
+{% block topbar_actions %}
+  {% if session.rol in ['ADMIN','RECEPCION','ENFERMERO'] %}
+  <a href="#" class="btn btn-primary">Nuevo ingreso</a>
+  {% endif %}
+{% endblock %}
+{% block content %}
+<div class="stats-grid" style="grid-template-columns:repeat(4,1fr);margin-bottom:18px;">
+  <div class="stat-card rojo"><div class="stat-icon rojo"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M22 12h-4l-3 9L9 3l-3 9H2" stroke="#b91c1c" stroke-width="2" stroke-linecap="round"/></svg></div><div class="stat-info"><p>{{ ingresos|selectattr('tipo_ingreso','eq','URGENCIA')|list|length }}</p><span>Urgencias</span></div></div>
+  <div class="stat-card"><div class="stat-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="#0077b6" stroke-width="2"/><path d="M16 2v4M8 2v4M3 10h18" stroke="#0077b6" stroke-width="2" stroke-linecap="round"/></svg></div><div class="stat-info"><p>{{ ingresos|selectattr('tipo_ingreso','eq','PROGRAMADO')|list|length }}</p><span>Programados</span></div></div>
+  <div class="stat-card verde"><div class="stat-icon verde"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M22 11.08V12a10 10 0 11-5.93-9.14" stroke="#065f46" stroke-width="2"/><polyline points="22 4 12 14.01 9 11.01" stroke="#065f46" stroke-width="2" stroke-linecap="round"/></svg></div><div class="stat-info"><p>{{ ingresos|selectattr('estado','eq','COMPLETADO')|list|length }}</p><span>Completados</span></div></div>
+  <div class="stat-card amber"><div class="stat-icon amarillo"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#b45309" stroke-width="2"/><path d="M12 6v6l4 2" stroke="#b45309" stroke-width="2" stroke-linecap="round"/></svg></div><div class="stat-info"><p>{{ ingresos|selectattr('estado','eq','EN_ESPERA')|list|length }}</p><span>En espera</span></div></div>
+</div>
+<div class="search-bar"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" style="color:var(--muted);flex-shrink:0;"><circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><input type="text" placeholder="Buscar por paciente, médico o expediente..." oninput="filtrar(this.value)"><span style="font-size:12px;color:var(--muted);" id="ct">{{ ingresos|length }}</span></div>
+<div class="card">
+  <div class="table-container">
+    <table>
+      <thead><tr><th>Paciente</th><th>Tipo</th><th>Motivo</th><th>Médico</th><th>Área</th><th>Espera</th><th>Estado</th><th>Acciones</th></tr></thead>
+      <tbody id="tbody">
+      {% for i in ingresos %}
+      <tr data-q="{{ (i.paciente+' '+i.expediente+' '+i.medico)|lower }}">
+        <td><div style="display:flex;align-items:center;gap:9px;"><img src="{{ i.foto }}" style="width:32px;height:32px;border-radius:50%;object-fit:cover;border:1.5px solid var(--border);flex-shrink:0;" onerror="this.src='https://ui-avatars.com/api/?name={{ i.paciente }}&background=e0f4ff&color=03045e&size=48'"><div><p style="font-weight:600;font-size:13px;">{{ i.paciente }}</p><code style="font-size:10px;">{{ i.expediente }}</code></div></div></td>
+        <td><span class="badge {{ 'badge-mantenimiento' if i.tipo_ingreso=='URGENCIA' else 'badge-medico' }}">{{ i.tipo_ingreso }}</span></td>
+        <td style="font-size:12.5px;color:var(--sub);max-width:150px;white-space:normal;">{{ i.motivo_ingreso }}</td>
+        <td style="font-size:12.5px;color:var(--ink3);">{{ i.medico }}</td>
+        <td style="font-size:12.5px;"><span style="display:flex;align-items:center;gap:5px;"><span style="width:5px;height:5px;border-radius:50%;background:#22c55e;flex-shrink:0;"></span>{{ i.area_actual or '—' }}</span></td>
+        <td style="font-weight:600;font-size:13px;color:{{ 'var(--red)' if i.tiempo_espera_min and i.tiempo_espera_min>30 else 'var(--ink2)' }};">{{ i.tiempo_espera_min or '—' }}{% if i.tiempo_espera_min %} min{% endif %}</td>
+        <td><span class="badge {{ 'badge-activo' if i.estado=='COMPLETADO' else 'badge-recepcion' if i.estado=='EN_ESPERA' else 'badge-medico' }}">{{ i.estado }}</span></td>
+        <td><div style="display:flex;gap:5px;"><a href="{{ url_for('clinico_detalle', id_ingreso=i.id_ingreso) }}" style="padding:5px 10px;border-radius:5px;font-size:11.5px;font-weight:600;text-decoration:none;background:var(--ice);color:var(--navy);border:1px solid var(--light);transition:all .12s;" onmouseover="this.style.background='var(--blue)';this.style.color='white'" onmouseout="this.style.background='var(--ice)';this.style.color='var(--navy)'">Ver</a>{% if session.rol in ['ADMIN','ENFERMERO','RECEPCION'] %}<a href="{{ url_for('ingreso_editar', id=i.id_ingreso) }}" style="padding:5px 10px;border-radius:5px;font-size:11.5px;font-weight:600;text-decoration:none;background:var(--bg);color:var(--sub);border:1px solid var(--border);transition:all .12s;" onmouseover="this.style.background='var(--ink2)';this.style.color='white'" onmouseout="this.style.background='var(--bg)';this.style.color='var(--sub)'">Editar</a>{% endif %}</div></td>
+      </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+<script>function filtrar(q){q=q.toLowerCase();let v=0;document.querySelectorAll('#tbody tr').forEach(r=>{const m=r.dataset.q&&r.dataset.q.includes(q);r.style.display=m?'':'none';if(m)v++;});document.getElementById('ct').textContent=v;}</script>
+{% endblock %}

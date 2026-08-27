@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block title %}Editar Ingreso{% endblock %}
+{% block page_title %}Editar Ingreso{% endblock %}
+{% block page_subtitle %}Modificar datos del ingreso #{{ ingreso.id_ingreso }}{% endblock %}
+
+{% block content %}
+<div class="card" style="max-width:600px;">
+  <div class="card-header"><h3>Datos del ingreso</h3></div>
+  <div style="padding:24px;">
+    <form method="POST">
+      <div style="display:grid;gap:16px;">
+
+        <div>
+          <label style="font-size:12px;font-weight:600;color:var(--muted);display:block;margin-bottom:6px;">Tipo de ingreso</label>
+          <select name="tipo_ingreso" style="width:100%;padding:10px 12px;border-radius:8px;border:1px solid var(--border);font-size:13px;">
+            {% for tipo in ['URGENCIA','PROGRAMADO','EMERGENCIA','REFERIDO'] %}
+            <option value="{{ tipo }}" {% if ingreso.tipo_ingreso == tipo %}selected{% endif %}>{{ tipo }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div>
+          <label style="font-size:12px;font-weight:600;color:var(--muted);display:block;margin-bottom:6px;">Motivo</label>
+          <textarea name="motivo_ingreso" rows="3"
+            style="width:100%;padding:10px 12px;border-radius:8px;border:1px solid var(--border);font-size:13px;resize:vertical;">{{ ingreso.motivo_ingreso or '' }}</textarea>
+        </div>
+
+        <div>
+          <label style="font-size:12px;font-weight:600;color:var(--muted);display:block;margin-bottom:6px;">Médico responsable</label>
+          <select name="cedula_medico" style="width:100%;padding:10px 12px;border-radius:8px;border:1px solid var(--border);font-size:13px;">
+            {% for m in medicos %}
+            <option value="{{ m.cedula_medico }}" {% if ingreso.cedula_medico == m.cedula_medico %}selected{% endif %}>{{ m.nombre }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div>
+          <label style="font-size:12px;font-weight:600;color:var(--muted);display:block;margin-bottom:6px;">Estado</label>
+          <select name="estado" style="width:100%;padding:10px 12px;border-radius:8px;border:1px solid var(--border);font-size:13px;">
+            {% for est in ['EN_ESPERA','EN_ATENCION','COMPLETADO','ALTA','TRASLADADO'] %}
+            <option value="{{ est }}" {% if ingreso.estado == est %}selected{% endif %}>{{ est }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div style="display:flex;gap:10px;padding-top:8px;">
+          <button type="submit" class="btn btn-primary">Guardar cambios</button>
+          <a href="{{ url_for('ingresos') }}" class="btn btn-ghost">Cancelar</a>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

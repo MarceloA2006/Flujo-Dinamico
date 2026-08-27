@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% block title %}{{ accion }} Beacon{% endblock %}
+{% block page_title %}{{ accion }} Beacon{% endblock %}
+{% block page_subtitle %}Formulario de registro de dispositivo IoT{% endblock %}
+{% block topbar_actions %}<a href="{{ url_for('beacons') }}" class="btn btn-outline">← Volver</a>{% endblock %}
+
+{% block content %}
+<div class="card" style="max-width:640px;">
+  <div class="card-header"><h3>{{ '✏️ Editar' if accion == 'Editar' else '➕ Nuevo' }} Beacon</h3></div>
+  <div class="card-body">
+    <form method="POST">
+      {% if accion != 'Editar' %}
+      <div class="form-group">
+        <label class="form-label">ID del Beacon * <small>(ej: BCN-09)</small></label>
+        <input type="text" name="id_beacon" class="form-control" placeholder="BCN-09"
+               value="{{ beacon.id_beacon if beacon else '' }}" required>
+      </div>
+      {% endif %}
+      <div class="form-group">
+        <label class="form-label">Nombre *</label>
+        <input type="text" name="nombre" class="form-control"
+               value="{{ beacon.nombre if beacon else '' }}" required>
+      </div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Área *</label>
+          <select name="area" class="form-control" required>
+            {% for a in areas %}
+            <option value="{{ a.nombre_area }}" {{ 'selected' if beacon and beacon.area == a.nombre_area }}>
+              {{ a.id_area }} — {{ a.nombre_area }}
+            </option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Protocolo</label>
+          <select name="protocolo" class="form-control">
+            {% for p in ['BLE','WiFi','UWB','NFC','RFID'] %}
+            <option value="{{ p }}" {{ 'selected' if beacon and beacon.protocolo == p }}>{{ p }}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Fabricante</label>
+          <input type="text" name="fabricante" class="form-control"
+                 value="{{ beacon.fabricante if beacon else '' }}">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Modelo</label>
+          <input type="text" name="modelo" class="form-control"
+                 value="{{ beacon.modelo if beacon else '' }}">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">UUID</label>
+        <input type="text" name="uuid_beacon" class="form-control"
+               placeholder="550e8400-e29b-41d4-a716-446655440009"
+               value="{{ beacon.uuid_beacon if beacon else '' }}">
+      </div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Estado</label>
+          <select name="estado" class="form-control">
+            {% for e in ['ACTIVO','INACTIVO','MANTENIMIENTO'] %}
+            <option value="{{ e }}" {{ 'selected' if beacon and beacon.estado == e }}>{{ e }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Fecha Instalación</label>
+          <input type="date" name="fecha_instalacion" class="form-control"
+                 value="{{ beacon.fecha_instalacion if beacon else '' }}">
+        </div>
+      </div>
+      <div style="display:flex;gap:12px;margin-top:20px;">
+        <button type="submit" class="btn btn-primary">💾 {{ 'Actualizar' if accion == 'Editar' else 'Registrar' }} Beacon</button>
+        <a href="{{ url_for('beacons') }}" class="btn btn-outline">Cancelar</a>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

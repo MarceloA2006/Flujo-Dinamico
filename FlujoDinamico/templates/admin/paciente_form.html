@@ -1,0 +1,198 @@
+{% extends 'base.html' %}
+{% block title %}{{ accion }} Paciente{% endblock %}
+{% block page_title %}{{ accion }} Paciente{% endblock %}
+{% block page_subtitle %}Formulario de registro clínico{% endblock %}
+
+{% block topbar_actions %}
+  <a href="{{ url_for('pacientes') }}" class="btn btn-outline">← Volver</a>
+{% endblock %}
+
+{% block content %}
+<div class="card" style="max-width:720px;">
+  <div class="card-header">
+    <h3>{{ '✏️ Editar' if accion == 'Editar' else '➕ Nuevo' }} Paciente</h3>
+  </div>
+  <div class="card-body">
+    <form method="POST" novalidate>
+
+      {% if accion != 'Editar' %}
+      <div class="form-group">
+        <label class="form-label">
+          CURP *
+          <span style="font-size:11px;color:#888;font-weight:normal;">
+            — 18 caracteres, ej: GOLM900512MNLPZR09
+          </span>
+        </label>
+        <input type="text" name="curp" class="form-control"
+               placeholder="GOLM900512MNLPZR09"
+               value="{{ paciente.curp if paciente else '' }}"
+               maxlength="18" minlength="18"
+               pattern="[A-Z]{4}\d{6}[HM][A-Z]{5}[A-Z0-9]\d"
+               title="Formato: 4 letras + 6 dígitos fecha + H/M + 2 letras estado + 3 letras apellido + 1 + 1"
+               style="text-transform:uppercase;"
+               required>
+        <small style="color:#888;">Exactamente 18 caracteres en mayúsculas. Formato CURP oficial.</small>
+      </div>
+      {% endif %}
+
+      <div class="form-grid-3">
+        <div class="form-group">
+          <label class="form-label">Nombre(s) *</label>
+          <input type="text" name="nombre" class="form-control"
+                 placeholder="Nombre(s)"
+                 value="{{ paciente.nombre if paciente else '' }}"
+                 required minlength="2" maxlength="60">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Apellido Paterno *</label>
+          <input type="text" name="apellidop" class="form-control"
+                 placeholder="Apellido paterno"
+                 value="{{ paciente.apellidop if paciente else '' }}"
+                 required minlength="2" maxlength="60">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Apellido Materno</label>
+          <input type="text" name="apellidom" class="form-control"
+                 placeholder="Apellido materno (opcional)"
+                 value="{{ paciente.apellidom if paciente else '' }}"
+                 maxlength="60">
+        </div>
+      </div>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">
+            Fecha de Nacimiento *
+            <span style="font-size:11px;color:#888;font-weight:normal;">— debe ser anterior a hoy</span>
+          </label>
+          <input type="date" name="fecha_nac" class="form-control"
+                 value="{{ paciente.fecha_nac if paciente else '' }}"
+                 max="{{ today }}"
+                 required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Sexo *</label>
+          <select name="sexo" class="form-control" required>
+            <option value="">— Seleccionar —</option>
+            <option value="F" {{ 'selected' if paciente and paciente.get('sexo') == 'F' }}>♀ Femenino</option>
+            <option value="M" {{ 'selected' if paciente and paciente.get('sexo') == 'M' }}>♂ Masculino</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Tipo de Sangre</label>
+          <select name="tipo_sangre" class="form-control">
+            <option value="">— Desconocido —</option>
+            {% for tipo in ['A+','A-','B+','B-','AB+','AB-','O+','O-'] %}
+            <option value="{{ tipo }}"
+              {{ 'selected' if paciente and paciente.get('tipo_sangre') == tipo }}>
+              {{ tipo }}
+            </option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">
+            Teléfono
+            <span style="font-size:11px;color:#888;font-weight:normal;">— ej: 81-1234-5678</span>
+          </label>
+          <input type="tel" name="telefono" class="form-control"
+                 placeholder="81-1234-5678"
+                 value="{{ paciente.telefono if paciente else '' }}"
+                 pattern="[\d\-\s\+\(\)]{7,20}"
+                 title="Solo dígitos, guiones, espacios, +, paréntesis. Entre 7 y 20 caracteres."
+                 maxlength="20">
+          <small style="color:#888;">Formato libre: 81-1234-5678, (81)12345678, etc.</small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">
+          Correo Electrónico
+          <span style="font-size:11px;color:#888;font-weight:normal;">— debe contener @ y dominio</span>
+        </label>
+        <input type="email" name="email" class="form-control"
+               placeholder="ejemplo@correo.com"
+               value="{{ paciente.email if paciente else '' }}"
+               maxlength="100">
+      </div>
+
+
+      <!-- Foto del paciente -->
+      <div class="form-group">
+        <label class="form-label">Foto del paciente</label>
+        <div style="display:flex;align-items:flex-start;gap:16px;">
+          <!-- Preview -->
+          <div style="flex-shrink:0;">
+            <img id="fotoPreview"
+                 src="{{ paciente.foto if paciente and paciente.get('foto') else '' }}"
+                 style="width:80px;height:80px;border-radius:50%;object-fit:cover;border:2px solid var(--border);background:var(--bg);"
+                 onerror="this.src=defaultAvatar">
+          </div>
+          <!-- Input URL -->
+          <div style="flex:1;">
+            <input type="url" name="foto" class="form-control" id="fotoInput"
+                   placeholder="https://... o dejar vacío para foto automática"
+                   value="{{ paciente.foto if paciente and paciente.get('foto') else '' }}"
+                   oninput="actualizarFoto(this.value)">
+            <small style="color:var(--muted);font-size:11px;margin-top:4px;display:block;">
+              Pega un URL de imagen (jpg, png). Si lo dejas vacío se genera una foto automática con las iniciales.
+            </small>
+            <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;">
+              <button type="button" onclick="limpiarFoto()"
+                style="font-size:11px;padding:4px 10px;border-radius:5px;border:1px solid var(--border);background:var(--bg);color:var(--sub);cursor:pointer;">
+                ✕ Quitar foto
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:12px;margin-top:20px;padding-top:16px;border-top:1px solid var(--border);">
+        <button type="submit" class="btn btn-primary">
+          💾 {{ 'Actualizar' if accion == 'Editar' else 'Registrar' }} Paciente
+        </button>
+        <a href="{{ url_for('pacientes') }}" class="btn btn-outline">Cancelar</a>
+      </div>
+
+      <script>
+        const nombreInput  = document.querySelector('[name="nombre"]');
+        const apellidoInput = document.querySelector('[name="apellidop"]');
+        const preview = document.getElementById('fotoPreview');
+
+        function getDefaultAvatar() {
+          const nombre   = nombreInput ? nombreInput.value.trim() : '';
+          const apellido = apellidoInput ? apellidoInput.value.trim() : '';
+          const nombre_enc = encodeURIComponent((nombre + '+' + apellido).trim() || 'P');
+          return `https://ui-avatars.com/api/?name=${nombre_enc}&background=6366f1&color=fff&size=128`;
+        }
+
+        const defaultAvatar = getDefaultAvatar();
+
+        function actualizarFoto(url) {
+          preview.src = url || getDefaultAvatar();
+        }
+
+        function limpiarFoto() {
+          document.getElementById('fotoInput').value = '';
+          preview.src = getDefaultAvatar();
+        }
+
+        // Actualizar avatar por defecto cuando cambia el nombre
+        if (nombreInput)   nombreInput.addEventListener('input', () => { if (!document.getElementById('fotoInput').value) preview.src = getDefaultAvatar(); });
+        if (apellidoInput) apellidoInput.addEventListener('input', () => { if (!document.getElementById('fotoInput').value) preview.src = getDefaultAvatar(); });
+
+        // Cargar avatar si no hay foto
+        window.addEventListener('load', () => {
+          if (!document.getElementById('fotoInput').value) {
+            preview.src = getDefaultAvatar();
+          }
+        });
+      </script>
+
+    </form>
+  </div>
+</div>
+{% endblock %}

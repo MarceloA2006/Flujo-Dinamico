@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FlujoDinamico — Acceso</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    body{
+      font-family:'Outfit',sans-serif;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:#03045e;
+      -webkit-font-smoothing:antialiased;
+      overflow:hidden;
+    }
+    .bg{
+      position:fixed;inset:0;z-index:0;
+      background:
+        linear-gradient(to bottom right,rgba(3,4,94,0.95) 0%,rgba(0,60,120,0.85) 50%,rgba(3,4,94,0.92) 100%),
+        url('https://images.unsplash.com/photo-1632833239869-a37e3a5806d2?w=1920&q=90')
+        center/cover no-repeat;
+    }
+    /* líneas sutiles */
+    .bg::after{
+      content:'';position:absolute;inset:0;
+      background-image:linear-gradient(rgba(202,240,248,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(202,240,248,0.03) 1px,transparent 1px);
+      background-size:60px 60px;
+    }
+    /* logo fijo */
+    .topbar{position:fixed;top:0;left:0;right:0;z-index:10;padding:18px 36px;display:flex;align-items:center;gap:10px;}
+    .logo-box{width:32px;height:32px;background:#0077b6;border-radius:7px;display:flex;align-items:center;justify-content:center;}
+    .logo-name{font-size:15px;font-weight:700;color:white;letter-spacing:-.3px;}
+    .logo-sub{font-size:8.5px;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:1.5px;display:block;}
+    /* card */
+    .card{
+      position:relative;z-index:5;
+      width:100%;max-width:400px;
+      background:white;
+      border-radius:12px;
+      padding:36px 34px 30px;
+      box-shadow:0 24px 64px rgba(0,0,0,.4),0 8px 20px rgba(0,0,0,.2);
+      animation:up .3s cubic-bezier(.16,1,.3,1);
+    }
+    @keyframes up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+    .card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#03045e,#0077b6,#00b4d8);border-radius:12px 12px 0 0;}
+    /* header */
+    .chip{display:inline-flex;align-items:center;gap:5px;background:#e0f4ff;border:1px solid #90e0ef;color:#0077b6;font-size:9.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:3px 10px;border-radius:99px;margin-bottom:12px;}
+    .chip::before{content:'';width:5px;height:5px;border-radius:50%;background:#00b4d8;}
+    h1{font-size:24px;font-weight:700;color:#03045e;letter-spacing:-.5px;margin-bottom:4px;}
+    .sub{font-size:13px;color:#667085;margin-bottom:24px;line-height:1.5;}
+    /* error */
+    .err{background:#fef2f2;border:1px solid #fecaca;border-radius:7px;padding:9px 13px;font-size:12.5px;color:#b91c1c;margin-bottom:16px;display:flex;align-items:center;gap:7px;}
+    /* fields */
+    .fl{margin-bottom:13px;}
+    .fl label{display:block;font-size:11px;font-weight:600;color:#344054;margin-bottom:5px;letter-spacing:.1px;}
+    .fw{position:relative;}
+    .fi{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:#98a2b3;display:flex;pointer-events:none;}
+    .fi svg{display:block;}
+    input[type=text],input[type=password]{
+      width:100%;padding:9px 12px 9px 36px;
+      border:1px solid #e4e7ec;border-radius:7px;
+      font-size:13.5px;font-family:'Outfit',sans-serif;
+      color:#0c111d;background:white;outline:none;
+      transition:border-color .12s,box-shadow .12s;
+    }
+    input:focus{border-color:#0077b6;box-shadow:0 0 0 3px rgba(0,119,182,.12);}
+    input::placeholder{color:#98a2b3;}
+    /* submit */
+    button[type=submit]{
+      width:100%;padding:11px;
+      background:#0077b6;color:white;border:none;border-radius:7px;
+      font-size:14px;font-weight:600;font-family:'Outfit',sans-serif;
+      cursor:pointer;margin-top:4px;
+      box-shadow:0 3px 10px rgba(0,119,182,.3);
+      transition:all .12s;
+    }
+    button[type=submit]:hover{background:#005f8a;transform:translateY(-1px);box-shadow:0 5px 16px rgba(0,119,182,.4);}
+    /* divider */
+    .dv{display:flex;align-items:center;gap:10px;margin:18px 0 13px;}
+    .dv::before,.dv::after{content:'';flex:1;height:1px;background:#e4e7ec;}
+    .dv span{font-size:11px;color:#98a2b3;white-space:nowrap;}
+    /* creds */
+    .creds{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
+    .cb{background:white;border:1px solid #e4e7ec;border-radius:7px;padding:8px 10px;cursor:pointer;transition:all .12s;text-align:left;font-family:'Outfit',sans-serif;}
+    .cb:hover{border-color:#0077b6;background:#f0f9ff;}
+    .cr{font-size:8.5px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#0077b6;margin-bottom:2px;display:flex;align-items:center;gap:3px;}
+    .cr::before{content:'';width:4px;height:4px;border-radius:50%;background:#00b4d8;flex-shrink:0;}
+    .cu{font-size:12px;font-weight:600;color:#1d2939;font-family:monospace;}
+    .cp{font-size:10.5px;color:#98a2b3;}
+    .hint{font-size:11px;color:#98a2b3;text-align:center;margin-top:8px;line-height:1.5;}
+    .hint a{color:#0077b6;font-weight:600;text-decoration:none;}
+    .flink{display:block;text-align:center;margin-top:16px;padding-top:14px;border-top:1px solid #e4e7ec;font-size:12.5px;color:#0077b6;text-decoration:none;font-weight:500;transition:color .12s;}
+    .flink:hover{color:#03045e;}
+  </style>
+</head>
+<body>
+<div class="bg"></div>
+<div class="topbar">
+  <div class="logo-box"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M22 12h-4l-3 9L9 3l-3 9H2" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+  <div><div class="logo-name">FlujoDinamico</div><span class="logo-sub">Hospital General Regional · Monterrey</span></div>
+</div>
+<div class="card">
+  <div class="chip">Acceso al Sistema</div>
+  <h1>Bienvenido</h1>
+  <p class="sub">Ingresa tus credenciales institucionales para continuar</p>
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% for category, message in messages %}
+    <div class="err"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><line x1="12" y1="8" x2="12" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="16" r="1" fill="currentColor"/></svg>{{ message }}</div>
+    {% endfor %}
+  {% endwith %}
+  <form method="POST" id="lf">
+    <div class="fl">
+      <label>Usuario</label>
+      <div class="fw">
+        <span class="fi"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="2"/></svg></span>
+        <input type="text" name="username" id="u" placeholder="nombre.usuario" required autofocus>
+      </div>
+    </div>
+    <div class="fl">
+      <label>Contraseña</label>
+      <div class="fw">
+        <span class="fi"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><rect x="3" y="11" width="18" height="11" rx="2" stroke="currentColor" stroke-width="2"/><path d="M7 11V7a5 5 0 0110 0v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+        <input type="password" name="password" id="p" placeholder="••••••••" required>
+      </div>
+    </div>
+    <button type="submit">Iniciar sesión</button>
+  </form>
+  <div class="dv"><span>Cuentas de prueba</span></div>
+  <div class="creds">
+    <button class="cb" onclick="go('dr_ramirez','medico123')"><div class="cr">Médico</div><div class="cu">dr_ramirez</div><div class="cp">medico123</div></button>
+    <button class="cb" onclick="go('enf_salinas','enfermero123')"><div class="cr">Enfermero</div><div class="cu">enf_salinas</div><div class="cp">enfermero123</div></button>
+  </div>
+  <p class="hint">Admin entra por <a href="/admin">/admin</a></p>
+  <a href="{{ url_for('publico_index') }}" class="flink">Ver portal público</a>
+</div>
+<script>function go(u,p){document.getElementById('u').value=u;document.getElementById('p').value=p;document.getElementById('lf').submit();}</script>
+</body>
+</html>

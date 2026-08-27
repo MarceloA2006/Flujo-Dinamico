@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hospital General Regional — Portal de Atención</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    /* ── RESET Y VARIABLES ── */
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+
+    :root {
+      --p1: #03045e;
+      --p2: #0077b6;
+      --p3: #00b4d8;
+      --p4: #90e0ef;
+      --p5: #caf0f8;
+      --ink:    #0f172a;
+      --muted:  #64748b;
+      --border: #e2e8f0;
+      --surface:#f8fafc;
+      --white:  #ffffff;
+      --danger: #ef4444;
+      --success:#10b981;
+      --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      color: var(--ink);
+      background: var(--surface);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    /* ── ANIMACIONES GLOBALES ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-in {
+      animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    /* ── NAVBAR ── */
+    .nav {
+      position: fixed; top:0; left:0; right:0; z-index:100;
+      height: 72px;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5%;
+      transition: var(--transition);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .nav.solid {
+      background: rgba(255,255,255,0.95);
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 4px 30px rgba(0,0,0,0.03);
+    }
+    .nav.solid .nav-brand-name { color: var(--p1); }
+    .nav.solid .nav-brand-sub { color: var(--muted); }
+    .nav.solid .nav-links a:not(.nav-cta) { color: var(--muted); }
+    .nav.solid .nav-links a:not(.nav-cta):hover { color: var(--p2); }
+
+    .nav-brand { display:flex; align-items:center; gap:12px; text-decoration:none; }
+    .nav-brand-icon {
+      width:40px; height:40px;
+      background: linear-gradient(135deg,var(--p3),var(--p2));
+      border-radius:10px;
+      display:flex; align-items:center; justify-content:center;
+      box-shadow: 0 4px 12px rgba(0,119,182,0.2);
+    }
+    .nav-brand-icon img { width:22px; height:22px; filter:brightness(0) invert(1); }
+    .nav-brand-name { font-size:18px; font-weight:700; color:white; letter-spacing:-0.5px; transition:color .3s; }
+    .nav-brand-sub  { font-size:10px; color:rgba(255,255,255,0.6); text-transform:uppercase; letter-spacing:1px; display:block; transition:color .3s; font-weight: 600;}
+
+    .nav-links { display:flex; align-items:center; gap:32px; }
+    .nav-links a:not(.nav-cta) { 
+      font-size:14px; font-weight:500; color:rgba(255,255,255,0.8); 
+      text-decoration:none; transition:var(--transition); 
+    }
+    .nav-links a:not(.nav-cta):hover { color:white; transform: translateY(-1px); }
+    
+    .nav-cta {
+      padding:10px 24px; background:var(--p2); color:white !important;
+      border-radius:8px; font-weight:600 !important; font-size:14px !important;
+      text-decoration: none;
+      box-shadow:0 4px 14px rgba(0,119,182,0.4);
+      transition:var(--transition) !important;
+    }
+    .nav-cta:hover { background:var(--p1) !important; transform:translateY(-2px); box-shadow:0 6px 20px rgba(3,4,94,0.4) !important; }
+
+    /* ── HERO ── */
+    .hero {
+      height: 100vh; min-height:720px;
+      position: relative; overflow:hidden;
+      display:flex; align-items:center;
+      justify-content:center;
+    }
+    .hero-bg {
+      position:absolute; inset:0;
+      background:
+        radial-gradient(circle at top right, rgba(0,180,216,0.2) 0%, transparent 50%),
+        linear-gradient(135deg,rgba(3,4,94,0.95) 0%,rgba(0,119,182,0.85) 100%),
+        url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=1920&q=90') center/cover no-repeat;
+    }
+    .hero-grid {
+      position:absolute; inset:0;
+      background-image:
+        linear-gradient(rgba(202,240,248,0.05) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(202,240,248,0.05) 1px,transparent 1px);
+      background-size:64px 64px;
+      opacity: 0.5;
+    }
+    .hero-content { 
+      position:relative; z-index:2; 
+      padding:100px 20px 0; 
+      max-width:800px; 
+      width:100%; 
+      text-align:center; 
+    }
+
+    .hero-tag { 
+      display:inline-flex; align-items:center; gap:8px;
+      background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2);
+      backdrop-filter: blur(10px);
+      color:var(--p5); font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase;
+      padding:8px 18px; border-radius:99px; margin-bottom:24px;
+    }
+    .hero-tag::before { content:''; width:6px; height:6px; border-radius:50%; background:var(--p3); box-shadow: 0 0 10px var(--p3); animation:blink 2s infinite; }
+    @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+
+    .hero-title {
+      font-family:'DM Serif Display',serif;
+      font-size:clamp(48px, 6vw, 72px); color:white; line-height:1.05; letter-spacing:-2px; margin-bottom:24px;
+      text-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+    .hero-title em { font-style:italic; color:var(--p4); position: relative; }
+
+    /* ¡AQUÍ ESTÁ LA SOLUCIÓN DEL PÁRRAFO CENTRADO! */
+    .hero-desc { 
+      font-size:17px; 
+      color:rgba(255,255,255,0.8); /* Mejor contraste */
+      line-height:1.7; 
+      max-width:540px; 
+      margin:0 auto 40px auto; /* El 0 auto centra el bloque */
+      text-align:center; 
+      font-weight: 300;
+    }
+
+    .hero-btns { display:flex; gap:16px; flex-wrap:wrap; justify-content:center; }
+    .btn-hero-1 {
+      padding:14px 32px; background:white; color:var(--p1);
+      border-radius:10px; font-size:15px; font-weight:700; text-decoration:none;
+      box-shadow:0 10px 25px rgba(0,0,0,0.1); transition:var(--transition);
+    }
+    .btn-hero-1:hover { transform:translateY(-3px); box-shadow:0 15px 35px rgba(0,0,0,0.2); }
+    
+    .btn-hero-2 {
+      padding:14px 32px; color:white;
+      background: rgba(255,255,255,0.1); backdrop-filter: blur(10px);
+      border:1px solid rgba(255,255,255,0.2); border-radius:10px;
+      font-size:15px; font-weight:600; text-decoration:none; transition:var(--transition);
+    }
+    .btn-hero-2:hover { background:rgba(255,255,255,0.2); transform:translateY(-3px); }
+
+    /* ── STATS BAR ── */
+    .stats-bar {
+      background:white; 
+      padding:32px 5%;
+      display:flex; justify-content:center;
+      position: relative; z-index: 10;
+      margin-top: -40px;
+      border-radius: 20px 20px 0 0;
+      box-shadow:0 -10px 40px rgba(0,0,0,0.05);
+    }
+    .stats-inner { display:flex; gap:0; max-width:1000px; width:100%; }
+    .stat-item {
+      flex:1; text-align:center; padding:0 20px;
+      border-right:1px solid var(--border);
+    }
+    .stat-item:last-child { border-right:none; }
+    .stat-item .n { font-size:36px; font-weight:700; color:var(--p1); letter-spacing:-1.5px; line-height:1; margin-bottom: 8px;}
+    .stat-item .n b { color:var(--p3); font-size: 24px; }
+    .stat-item .l { font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:1.5px; font-weight: 600;}
+
+    /* ── SECTIONS ── */
+    .section { padding:100px 5%; }
+    .section-white { background:white; }
+    .section-gray  { background:var(--surface); }
+
+    .section-header { margin-bottom:56px; text-align: center; }
+    .section-label {
+      font-size:11px; font-weight:700; color:var(--p2);
+      text-transform:uppercase; letter-spacing:2px;
+      display:block; margin-bottom:12px;
+    }
+    .section-title {
+      font-family:'DM Serif Display',serif;
+      font-size:42px; color:var(--p1); letter-spacing:-1px; line-height:1.1;
+    }
+    .section-title em { font-style:italic; color:var(--p3); }
+    .section-desc { 
+      font-size:16px; color:var(--muted); line-height:1.7; 
+      max-width:580px; margin:16px auto 0 auto; 
+    }
+
+    /* ── CONSULTORIOS ── */
+    .consultorios-grid {
+      display:grid; grid-template-columns:repeat(auto-fill,minmax(340px,1fr)); gap:24px;
+      max-width: 1200px; margin: 0 auto;
+    }
+
+    .consultorio-card {
+      background:white; border-radius:16px;
+      border:1px solid var(--border);
+      box-shadow:0 4px 20px rgba(0,0,0,0.03);
+      overflow:hidden;
+      transition:var(--transition);
+      position: relative;
+    }
+    .consultorio-card:hover { 
+      box-shadow:0 15px 35px rgba(0,0,0,0.08); 
+      transform:translateY(-4px); 
+      border-color: var(--p4);
+    }
+
+    .consultorio-card.abierto::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+      background: linear-gradient(90deg, var(--success), var(--p3));
+    }
+    .consultorio-card.cerrado::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+      background: var(--border);
+    }
+
+    .consultorio-header {
+      padding:24px;
+      display:flex; align-items:center; gap:16px;
+      border-bottom:1px solid var(--surface);
+    }
+
+    .medico-foto {
+      width:60px; height:60px; border-radius:12px; /* Menos IA, más moderno */
+      object-fit:cover;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      flex-shrink:0;
+    }
+
+    .consultorio-info { flex:1; min-width:0; }
+    .consultorio-numero {
+      font-size:11px; font-weight:700; color:var(--muted);
+      text-transform:uppercase; letter-spacing:1px; margin-bottom:4px;
+    }
+    .consultorio-nombre {
+      font-size:15px; font-weight:700; color:var(--p1);
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    }
+    .consultorio-especialidad {
+      font-size:13px; color:var(--p2); font-weight:500; margin-top:2px;
+    }
+
+    .beacon-indicator {
+      display:flex; align-items:center; gap:6px;
+      padding:6px 12px; border-radius:99px;
+      font-size:11px; font-weight:700; flex-shrink:0;
+    }
+    .beacon-indicator.on { background:rgba(16,185,129,0.1); color:var(--success); border:1px solid rgba(16,185,129,0.2); }
+    .beacon-indicator.off { background:var(--surface); color:var(--muted); border:1px solid var(--border); }
+    
+    .beacon-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+    .beacon-dot.on  { background:var(--success); animation:pulse-dot 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+    .beacon-dot.off { background:var(--muted); }
+    @keyframes pulse-dot { 0%,100%{box-shadow:0 0 0 0 rgba(16,185,129,0.4)} 50%{box-shadow:0 0 0 6px rgba(16,185,129,0)} }
+
+    .consultorio-body { padding:20px 24px; background: #fafafa; }
+    .consultorio-medico-nombre { font-size:14px; font-weight:600; color:var(--ink); margin-bottom:8px; }
+    .consultorio-detalle { display:flex; align-items:center; gap:8px; font-size:13px; color:var(--muted); }
+    .consultorio-detalle svg { color: var(--p2); }
+
+    /* ── SALA DE ESPERA ── */
+    .espera-section {
+      background: linear-gradient(135deg, var(--p1) 0%, #02033b 100%);
+      padding:100px 5%;
+      position:relative; overflow:hidden;
+    }
+    .espera-section::before {
+      content:''; position:absolute; inset:0;
+      background-image: radial-gradient(rgba(255,255,255,0.1) 1px, transparent 1px);
+      background-size: 32px 32px;
+      opacity: 0.3;
+    }
+    .espera-inner { position:relative; z-index:1; max-width: 1200px; margin: 0 auto; }
+
+    .espera-header { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:40px; flex-wrap:wrap; gap:24px; }
+    .espera-title { font-family:'DM Serif Display',serif; font-size:42px; color:white; letter-spacing:-1px; }
+    .espera-title em { font-style:italic; color:var(--p4); }
+    .espera-subtitle { font-size:15px; color:rgba(255,255,255,0.6); margin-top:8px; font-weight: 300;}
+
+    .espera-counter {
+      background:rgba(255,255,255,0.05); backdrop-filter: blur(10px);
+      border:1px solid rgba(255,255,255,0.1);
+      border-radius:16px; padding:20px 32px; text-align:center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+    .espera-counter .num { font-size:42px; font-weight:700; color:white; letter-spacing:-2px; line-height: 1;}
+    .espera-counter .lbl { font-size:11px; color:rgba(255,255,255,0.5); text-transform:uppercase; letter-spacing:1.5px; margin-top:8px; font-weight: 600;}
+
+    .privacy-notice {
+      background:rgba(0,180,216,0.1);
+      border:1px solid rgba(0,180,216,0.2);
+      border-radius:12px; padding:16px 24px;
+      display:flex; align-items: flex-start; gap:16px; margin-bottom:32px;
+    }
+    .privacy-notice p { font-size:13px; color:rgba(255,255,255,0.7); line-height:1.6; }
+    .privacy-notice strong { color:white; }
+
+    .espera-table {
+      background:rgba(255,255,255,0.02);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:20px; overflow:hidden;
+      backdrop-filter: blur(10px);
+    }
+    .espera-table-head {
+      display:grid; grid-template-columns:120px 1fr 150px 180px;
+      padding:16px 32px;
+      background:rgba(255,255,255,0.04);
+      border-bottom:1px solid rgba(255,255,255,0.08);
+    }
+    .espera-table-head span { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; color:rgba(255,255,255,0.4); }
+
+    .espera-row {
+      display:grid; grid-template-columns:120px 1fr 150px 180px;
+      padding:20px 32px;
+      border-bottom:1px solid rgba(255,255,255,0.04);
+      align-items:center;
+      transition:var(--transition);
+    }
+    .espera-row:last-child { border-bottom:none; }
+    .espera-row:hover { background:rgba(255,255,255,0.06); transform: scale(1.005); }
+
+    .turno-badge {
+      font-family:'DM Sans',monospace; font-size:18px; font-weight:700;
+      color:white; background: rgba(255,255,255,0.1);
+      padding: 6px 12px; border-radius: 8px; display: inline-block;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+    .espera-paciente { font-size:15px; font-weight:600; color:white; }
+    .espera-tipo {
+      display:inline-flex; padding:6px 14px; border-radius:99px;
+      font-size:11px; font-weight:700; text-transform: uppercase; letter-spacing: 1px;
+    }
+    .tipo-urg  { background:rgba(239,68,68,0.15);  color:#fca5a5; border: 1px solid rgba(239,68,68,0.3);}
+    .tipo-prog { background:rgba(0,180,216,0.15);  color:var(--p4); border: 1px solid rgba(0,180,216,0.3);}
+
+    .espera-tiempo {
+      font-size:14px; color:rgba(255,255,255,0.6);
+      display:flex; align-items:center; gap:8px; font-weight: 500;
+    }
+
+    .espera-empty { padding:64px; text-align:center; color:rgba(255,255,255,0.4); font-size:16px; font-weight: 500;}
+
+    /* ── QUIENES SOMOS ── */
+    .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; max-width: 1200px; margin: 0 auto;}
+    .about-imgs { display:grid; grid-template-columns:1fr 1fr; grid-template-rows:250px 250px; gap:16px; }
+    .about-img { border-radius:16px; overflow:hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+    .about-img img { width:100%; height:100%; object-fit:cover; transition:var(--transition); }
+    .about-img:hover img { transform: scale(1.05); }
+    .about-img:first-child { grid-row:span 2; }
+    
+    .about-text p { font-size:16px; color:var(--muted); line-height:1.8; margin-bottom: 16px;}
+    .about-list { list-style:none; margin-top:32px; }
+    .about-list li {
+      display:flex; align-items:center; gap:12px;
+      font-size:15px; color:var(--ink); margin-bottom:16px; font-weight: 500;
+    }
+    .about-list li::before {
+      content:'✓'; width:24px; height:24px; border-radius:50%;
+      background:var(--p5); color:var(--p2); font-weight: bold; font-size: 12px;
+      display:flex; align-items:center; justify-content:center;
+      flex-shrink:0;
+    }
+
+    /* ── MVV ── */
+    .mvv-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; max-width: 1200px; margin: 0 auto;}
+    .mvv-card { border-radius:20px; padding:40px 32px; transition:var(--transition); }
+    .mvv-card:hover { transform:translateY(-8px); box-shadow:0 20px 40px rgba(0,0,0,0.08); }
+    .mvv-card.mision { background:linear-gradient(135deg,var(--p1),var(--p2)); color:white; }
+    .mvv-card.vision { background:linear-gradient(135deg,var(--p2),var(--p3)); color:white; }
+    .mvv-card.valores { background:white; border:1px solid var(--border); }
+    .mvv-label { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:2px; margin-bottom:16px; opacity:.7; }
+    .mvv-title { font-family:'DM Serif Display',serif; font-size:28px; margin-bottom:16px; line-height:1.2; }
+    .mvv-card.valores .mvv-title { color:var(--p1); }
+    .mvv-body { font-size:15px; line-height:1.8; opacity:.9; }
+    .mvv-card.valores .mvv-body { color:var(--muted); opacity:1; }
+
+    /* ── FOOTER ── */
+    .footer { background:var(--ink); padding:80px 5% 32px; color: white;}
+    .footer-grid { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:64px; padding-bottom:56px; border-bottom:1px solid rgba(255,255,255,0.1); margin-bottom:32px; max-width: 1200px; margin-left: auto; margin-right: auto;}
+    .footer-brand h2 { font-family:'DM Serif Display',serif; font-size:24px; margin-bottom:16px; }
+    .footer-brand p { font-size:14px; color:rgba(255,255,255,0.5); line-height:1.8; max-width:300px; }
+    .footer-col h4 { font-size:11px; font-weight:700; color:white; text-transform:uppercase; letter-spacing:1.5px; margin-bottom:20px; }
+    .footer-col a, .footer-col p { display:block; font-size:14px; color:rgba(255,255,255,0.5); text-decoration:none; margin-bottom:12px; transition:var(--transition); }
+    .footer-col a:hover { color:var(--p3); transform: translateX(4px); }
+    .footer-bottom { display:flex; justify-content:space-between; flex-wrap:wrap; gap:16px; max-width: 1200px; margin: 0 auto;}
+    .footer-bottom p { font-size:13px; color:rgba(255,255,255,0.4); }
+    .footer-bottom b { color:var(--p4); }
+
+    @media(max-width:1024px) {
+      .about-grid { grid-template-columns:1fr; }
+      .mvv-grid { grid-template-columns:1fr; }
+      .footer-grid { grid-template-columns:1fr 1fr; }
+      .espera-table-head, .espera-row { grid-template-columns: 80px 1fr 100px; }
+      .espera-table-head span:last-child, .espera-row div:last-child { display: none; } /* Oculta tiempo en móvil */
+    }
+    @media(max-width:768px) {
+      .nav-links { display:none; }
+      .hero-title { font-size: 40px; }
+      .stats-inner { flex-direction: column; gap: 20px;}
+      .stat-item { border-right: none; border-bottom: 1px solid var(--border); padding-bottom: 20px;}
+      .stat-item:last-child { border-bottom: none; }
+      .footer-grid { grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav" id="navbar">
+  <a href="#" class="nav-brand">
+    <div class="nav-brand-icon">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="22" height="22">
+        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div>
+      <div class="nav-brand-name">FlujoDinamico</div>
+      <span class="nav-brand-sub">HGR · Monterrey</span>
+    </div>
+  </a>
+  <div class="nav-links">
+    <a href="#consultorios">Consultorios</a>
+    <a href="#sala-espera">Sala de Espera</a>
+    <a href="#nosotros">Quiénes Somos</a>
+    <a href="{{ url_for('login') }}" class="nav-cta">Acceso al Sistema</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content animate-in">
+    <div class="hero-tag">Sistema IoT Activo</div>
+    <h1 class="hero-title">
+      Atención médica<br><em>inteligente</em>
+    </h1>
+    <p class="hero-desc">
+      Monitoreo en tiempo real de consultorios y sala de espera mediante tecnología beacon BLE y lectores NFC con ESP32+PN532.
+    </p>
+    <div class="hero-btns">
+      <a href="#sala-espera" class="btn-hero-1">Ver sala de espera</a>
+      <a href="#consultorios" class="btn-hero-2">Consultorios disponibles</a>
+    </div>
+  </div>
+</section>
+
+<div class="stats-bar animate-in" style="animation-delay: 0.2s;">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <div class="n">{{ abiertos }}<b>/{{ total_consultorios }}</b></div>
+      <div class="l">Consultorios Abiertos</div>
+    </div>
+    <div class="stat-item">
+      <div class="n" id="pub-contador-hero">{{ total_espera }}</div>
+      <div class="l">Pacientes en Espera</div>
+    </div>
+    <div class="stat-item">
+      <div class="n">24<b>/7</b></div>
+      <div class="l">Urgencias Activas</div>
+    </div>
+    <div class="stat-item">
+      <div class="n">IoT</div>
+      <div class="l">BLE · NFC · UWB</div>
+    </div>
+  </div>
+</div>
+
+<section class="section section-white" id="consultorios">
+  <div class="section-header">
+    <span class="section-label">Disponibilidad en tiempo real</span>
+    <h2 class="section-title">Consultorios</h2>
+    <p class="section-desc">
+      Estado actualizado por beacon BLE. El indicador verde confirma la presencia activa del médico en su respectiva área.
+    </p>
+  </div>
+
+  <div class="consultorios-grid">
+    {% for c in consultorios %}
+    <div class="consultorio-card {{ 'Desocupado' if c.beacon_activo else 'Ocupado' }}" data-beacon="{{ c.id_beacon or '' }}" id="cons-{{ c.id_consultorio }}">
+      <div class="consultorio-header">
+        <img src="{{ c.foto_medico }}" alt="{{ c.medico }}" class="medico-foto" onerror="this.src='https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=200&q=80'">
+        <div class="consultorio-info">
+          <div class="consultorio-numero">{{ c.numero }}</div>
+          <div class="consultorio-nombre">{{ c.especialidad }}</div>
+          <div class="consultorio-especialidad">{{ c.nombre }}</div>
+        </div>
+        <div class="beacon-indicator {{ 'on' if c.beacon_activo else 'off' }}">
+          <span class="beacon-dot {{ 'on' if c.beacon_activo else 'off' }}"></span>
+          {{ 'Desocupado' if c.beacon_activo else 'Ocupado' }}
+        </div>
+      </div>
+      <div class="consultorio-body">
+        <div class="consultorio-medico-nombre">{{ c.medico }}</div>
+        <div class="consultorio-detalle">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          <span>Horario: {{ c.horario }}</span>
+        </div>
+        {% if not c.beacon_activo %}
+        <div class="sin-beacon" style="margin-top:16px;padding:10px 14px;background:var(--surface);border:1px dashed var(--border); border-radius:8px;font-size:12px;color:var(--muted); display: flex; gap: 8px; align-items: center;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+          Sin actividad beacon detectada
+        </div>
+        {% endif %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="espera-section" id="sala-espera">
+  <div class="espera-inner">
+    <div class="espera-header">
+      <div>
+        <h2 class="espera-title">Sala de <em>espera</em></h2>
+        <p class="espera-subtitle">Monitor de flujo activo. Datos protegidos (LFPDPPP).</p>
+      </div>
+      <div class="espera-counter">
+        <div class="num" id="pub-contador-sala">{{ total_espera }}</div>
+        <div class="lbl">Personas en sala</div>
+      </div>
+    </div>
+
+    <div class="privacy-notice">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="var(--p3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <p>
+        <strong>Aviso de privacidad:</strong> Este módulo muestra únicamente pacientes en sala de espera activa, identificados por iniciales y número de turno. No se expone información clínica sensible.
+      </p>
+    </div>
+
+    <div class="espera-table">
+      <div class="espera-table-head">
+        <span>Turno</span>
+        <span>Destino / Paciente</span>
+        <span>Prioridad</span>
+        <span>Tiempo transcurrido</span>
+      </div>
+
+      {% if sala_espera %}
+        {% for p in sala_espera %}
+        <div class="espera-row">
+          <div><span class="turno-badge">{{ p.turno }}</span></div>
+          <div>
+            <div class="espera-paciente">{{ p.area_destino }}</div>
+            <div style="font-size:13px;color:rgba(255,255,255,0.4);margin-top:4px;">{{ p.iniciales }}</div>
+          </div>
+          <div>
+            <span class="espera-tipo {{ 'tipo-urg' if p.tipo=='URGENCIA' else 'tipo-prog' }}">
+              {{ p.tipo }}
+            </span>
+          </div>
+          <div class="espera-tiempo">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            {{ p.tiempo_espera }} min
+          </div>
+        </div>
+        {% endfor %}
+      {% else %}
+        <div class="espera-empty">Sistema despejado. Sin pacientes en sala de espera actualmente.</div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<section class="section section-white" id="nosotros">
+  <div class="about-grid">
+    <div class="about-imgs">
+      <div class="about-img">
+        <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=800&q=80" alt="Equipo médico">
+      </div>
+      <div class="about-img">
+        <img src="https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?w=600&q=80" alt="Atención">
+      </div>
+      <div class="about-img">
+        <img src="https://images.unsplash.com/photo-1559757175-5700dde675bc?w=600&q=80" alt="Tecnología">
+      </div>
+    </div>
+    <div class="about-text">
+      <span class="section-label">Innovación Clínica</span>
+      <h2 class="section-title" style="margin-bottom:24px;">Un hospital diseñado<br>para el <em>futuro</em></h2>
+      <p>El Hospital General Regional integra atención médica especializada con tecnología de vanguardia. Nuestro ecosistema IoT permite una trazabilidad completa del paciente, desde su llegada hasta su alta.</p>
+      <p>Implementamos infraestructura inteligente con beacons BLE y lectores NFC para garantizar que los tiempos de espera sean transparentes y la atención, impecable.</p>
+      <ul class="about-list">
+        <li>Monitoreo y telemetría de áreas en tiempo real.</li>
+        <li>Infraestructura de datos segura (PostgreSQL 3FN).</li>
+        <li>Estricto apego a protocolos internacionales de privacidad.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section section-gray">
+  <div class="section-header">
+    <span class="section-label">Filosofía Institucional</span>
+    <h2 class="section-title">Misión, Visión y <em>Valores</em></h2>
+  </div>
+  <div class="mvv-grid">
+    <div class="mvv-card mision">
+      <div class="mvv-label">Misión</div>
+      <h3 class="mvv-title">Atención integral</h3>
+      <p class="mvv-body">Proveer servicios médicos de excelencia respaldados por ecosistemas tecnológicos que optimizan la seguridad y el confort del paciente en cada etapa de su recuperación.</p>
+    </div>
+    <div class="mvv-card vision">
+      <div class="mvv-label">Visión</div>
+      <h3 class="mvv-title">Referente digital</h3>
+      <p class="mvv-body">Posicionarnos como el principal hospital inteligente de México, estandarizando el uso de IoT (BLE/NFC) en el sector salud para transformar la gestión hospitalaria.</p>
+    </div>
+    <div class="mvv-card valores">
+      <div class="mvv-label" style="color:var(--p2);">Valores</div>
+      <h3 class="mvv-title">Nuestro ADN</h3>
+      <p class="mvv-body">
+        <strong style="color:var(--ink);">Empatía:</strong> El paciente es primero.<br><br>
+        <strong style="color:var(--ink);">Innovación:</strong> Tecnología con propósito.<br><br>
+        <strong style="color:var(--ink);">Transparencia:</strong> Procesos claros y éticos.
+      </p>
+    </div>
+  </div>
+</section>
+
+<footer class="footer" id="contacto">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <h2>FlujoDinamico</h2>
+      <p>Plataforma de gestión hospitalaria inteligente impulsada por IoT, microcontroladores ESP32 y telemetría BLE.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Servicios Clínicos</h4>
+      <a href="#">Urgencias 24/7</a>
+      <a href="#">Cardiología Especializada</a>
+      <a href="#">Pediatría y Neonatología</a>
+      <a href="#">Terapia Intensiva (UCI)</a>
+    </div>
+    <div class="footer-col">
+      <h4>Accesos</h4>
+      <a href="{{ url_for('login') }}">Portal Médico (Login)</a>
+      <a href="{{ url_for('dashboard') }}">Dashboard Administrativo</a>
+      <a href="#sala-espera">Monitor de Espera</a>
+    </div>
+    <div class="footer-col">
+      <h4>Contacto HGR</h4>
+      <p>Av. Constitución 1200<br>Monterrey, NL 64000</p>
+      <p>Tel: +52 81 1234 5678</p>
+      <p style="margin-top:16px;">Urgencias: 24/7<br>Consultas: 7:00 – 21:00 hrs</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2026 FlujoDinamico · Hospital General Regional</p>
+    <p>Desarrollado con <b>♥</b> por Equipo 5 · Bases de Datos Avanzadas</p>
+  </div>
+</footer>
+
+<script>
+// Efecto de Navbar sólido al hacer scroll
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('solid', window.scrollY > 50);
+});
+</script>
+
+
+<script>
+(function() {
+  function filaPublica(p, idx) {
+    const min   = p.min_espera != null ? Math.round(Number(p.min_espera)) : 0;
+    const turno = String(idx + 1).padStart(3, '0');
+    // Iniciales desde nombre_completo
+    const palabras = (p.nombre_completo || '').split(' ');
+    const iniciales = palabras.slice(0,2).map(w => w[0] || '').join('').toUpperCase();
+    return `
+      <div class="espera-row">
+        <div><span class="turno-badge">${turno}</span></div>
+        <div>
+          <div class="espera-paciente">Consultorio</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.4);margin-top:4px;">${iniciales}</div>
+        </div>
+        <div>
+          <span class="espera-tipo tipo-prog">PROGRAMADO</span>
+        </div>
+        <div class="espera-tiempo">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+            <path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          ${min} min
+        </div>
+      </div>`;
+  }
+
+  function actualizarPublico() {
+    fetch('/iot/estado')
+      .then(r => r.json())
+      .then(data => {
+
+        /* ── Sala de espera ── */
+        const tabla = document.querySelector('.espera-table');
+        if (tabla) {
+          const head = tabla.querySelector('.espera-table-head');
+          const n    = data.sala_espera ? data.sala_espera.length : 0;
+          const sala = data.sala_espera || [];
+
+          const hero  = document.getElementById('pub-contador-hero');
+          const ctr   = document.getElementById('pub-contador-sala');
+          const badge = document.querySelector('.espera-badge');
+          if (hero)  hero.textContent  = n;
+          if (ctr)   ctr.textContent   = n;
+          if (badge) badge.textContent = n + ' paciente' + (n !== 1 ? 's' : '');
+
+          if (n === 0) {
+            tabla.innerHTML = (head ? head.outerHTML : '') +
+              '<div class="espera-empty">Sistema despejado. Sin pacientes en sala de espera actualmente.</div>';
+          } else {
+            tabla.innerHTML = (head ? head.outerHTML : '') +
+              sala.map((p, i) => filaPublica(p, i)).join('');
+          }
+        }
+
+        /* ── Consultorios / beacon ── */
+        const det      = data.beacon ? data.beacon.detectado : false;
+        const idBeacon = data.beacon ? data.beacon.id_beacon : '';
+
+        document.querySelectorAll('.consultorio-card').forEach(card => {
+          const activo = det && card.dataset.beacon === idBeacon;
+
+          // Clase de la tarjeta
+          card.classList.toggle('abierto', activo);
+          card.classList.toggle('cerrado', !activo);
+
+          // Badge beacon
+          const indicator = card.querySelector('.beacon-indicator');
+          const dot       = card.querySelector('.beacon-dot');
+          if (indicator) {
+            indicator.className = 'beacon-indicator ' + (activo ? 'on' : 'off');
+            indicator.childNodes.forEach(n => { if (n.nodeType === 3) n.textContent = activo ? ' Ocupado' : ' Desocupado'; });
+          }
+          if (dot) dot.className = 'beacon-dot ' + (activo ? 'on' : 'off');
+
+          // Aviso sin beacon
+          const aviso = card.querySelector('.sin-beacon');
+          if (aviso) aviso.style.display = activo ? 'none' : 'flex';
+        });
+      })
+      .catch(err => console.warn('[IoT público] error:', err));
+  }
+
+  actualizarPublico();
+  setInterval(actualizarPublico, 3000);
+})();
+</script>
+</body>
+</html>

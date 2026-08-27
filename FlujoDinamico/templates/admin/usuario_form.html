@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% block title %}{{ accion }} Usuario{% endblock %}
+{% block page_title %}{{ accion }} Usuario{% endblock %}
+{% block page_subtitle %}Formulario de acceso al sistema{% endblock %}
+{% block topbar_actions %}<a href="{{ url_for('usuarios') }}" class="btn btn-outline">← Volver</a>{% endblock %}
+
+{% block content %}
+<div class="card" style="max-width:560px;">
+  <div class="card-header"><h3>{{ '✏️ Editar' if accion == 'Editar' else '➕ Nuevo' }} Usuario</h3></div>
+  <div class="card-body">
+    <form method="POST">
+
+      {% if accion != 'Editar' %}
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Username * <small>(único, sin espacios)</small></label>
+          <input type="text" name="username" class="form-control"
+                 placeholder="dr_nuevo" pattern="[a-z0-9_]+"
+                 title="Solo letras minúsculas, números y guión bajo"
+                 value="{{ usuario.username if usuario else '' }}" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Nombre completo</label>
+          <input type="text" name="nombre_completo" class="form-control"
+                 placeholder="Dr. Juan Pérez"
+                 value="{{ usuario.nombre_completo if usuario else '' }}">
+        </div>
+      </div>
+      {% else %}
+      <div class="form-group">
+        <label class="form-label">Username</label>
+        <input type="text" class="form-control" value="{{ usuario.username }}" disabled
+               style="background:var(--slate-100);color:var(--text-secondary);">
+      </div>
+      {% endif %}
+
+      <div class="form-group">
+        <label class="form-label">
+          Contraseña {{ '(dejar vacío para no cambiar)' if accion == 'Editar' else '*' }}
+        </label>
+        <input type="password" name="password" class="form-control"
+               placeholder="••••••••"
+               {{ 'required' if accion != 'Editar' }}>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Rol *</label>
+        <select name="rol" class="form-control" required id="rolSelect" onchange="toggleCampos()">
+          <option value="">— Seleccionar rol —</option>
+          {% for r in roles %}
+          <option value="{{ r }}"
+            {{ 'selected' if usuario and usuario.get('rol') == r }}>
+            {{ r }}
+          </option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <!-- Campos condicionales según rol -->
+      <div id="campo-cedula" style="display:none;">
+        <div class="form-group">
+          <label class="form-label">Cédula Médica <small>(para rol MEDICO)</small></label>
+          <select name="cedula_medico" class="form-control">
+            <option value="">— Sin asignar —</option>
+            {% for m in medicos %}
+            <option value="{{ m.cedula_medico }}"
+              {{ 'selected' if usuario and usuario.get('cedula_medico') == m.cedula_medico }}>
+              {{ m.cedula_medico }} — {{ m.nombre }} {{ m.apellidop }}
+            </option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+
+      <div id="campo-enfermero" style="display:none;">
+        <div class="form-group">
+          <label class="form-label">ID Enfermero <small>(para rol ENFERMERO)</small></label>
+          <input type="number" name="id_enfermero" class="form-control"
+                 placeholder="1" min="1"
+                 value="{{ usuario.id_enfermero if usuario and usuario.get('id_enfermero') else '' }}">
+        </div>
+      </div>
+
+      {% if accion == 'Editar' %}
+      <div class="form-group">
+        <label style="display:flex;align-items:center;gap:8px;cursor:pointer;">
+          <input type="checkbox" name="activo" {{ 'checked' if usuario and usuario.get('activo', True) }}>
+          <span class="form-label" style="margin:0;">Usuario activo</span>
+        </label>
+      </div>
+      {% endif %}
+
+      <div style="display:flex;gap:12px;margin-top:20px;padding-top:16px;border-top:1px solid var(--border);">
+        <button type="submit" class="btn btn-primary">
+          💾 {{ 'Actualizar' if accion == 'Editar' else 'Crear' }} Usuario
+        </button>
+        <a href="{{ url_for('usuarios') }}" class="btn btn-outline">Cancelar</a>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+function toggleCampos() {
+  const rol = document.getElementById('rolSelect').value;
+  document.getElementById('campo-cedula').style.display    = rol === 'MEDICO'    ? 'block' : 'none';
+  document.getElementById('campo-enfermero').style.display = rol === 'ENFERMERO' ? 'block' : 'none';
+}
+toggleCampos(); // ejecutar al cargar
+</script>
+{% endblock %}

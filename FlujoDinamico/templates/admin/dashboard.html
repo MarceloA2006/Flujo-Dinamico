@@ -1,0 +1,308 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard{% endblock %}
+{% block page_title %}Dashboard{% endblock %}
+{% block page_subtitle %}Panel de control operativo — FlujoDinamico{% endblock %}
+
+{% block content %}
+
+<!-- ── KPIs ─────────────────────────────────────── -->
+<div class="stats-grid" style="grid-template-columns:repeat(4,1fr);">
+  <div class="stat-card">
+    <div class="stat-icon">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke="#0077b6" stroke-width="2" stroke-linecap="round"/><circle cx="9" cy="7" r="4" stroke="#0077b6" stroke-width="2"/></svg>
+    </div>
+    <div class="stat-info"><p>{{ stats.pacientes_activos }}</p><span>Pacientes activos</span></div>
+  </div>
+  <div class="stat-card azul">
+    <div class="stat-icon azul">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="7" height="7" rx="1" stroke="#1d4ed8" stroke-width="2"/><rect x="14" y="3" width="7" height="7" rx="1" stroke="#1d4ed8" stroke-width="2"/><rect x="3" y="14" width="7" height="7" rx="1" stroke="#1d4ed8" stroke-width="2"/><rect x="14" y="14" width="7" height="7" rx="1" stroke="#1d4ed8" stroke-width="2"/></svg>
+    </div>
+    <div class="stat-info"><p>{{ stats.areas_ocupadas }}</p><span>Áreas activas</span></div>
+  </div>
+  <div class="stat-card rojo">
+    <div class="stat-icon rojo">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0zM12 9v4M12 17h.01" stroke="#b91c1c" stroke-width="2" stroke-linecap="round"/></svg>
+    </div>
+    <div class="stat-info"><p style="color:var(--red);">{{ stats.alertas }}</p><span>Alertas activas</span></div>
+  </div>
+  <div class="stat-card verde">
+    <div class="stat-icon verde">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="#065f46" stroke-width="2"/><path d="M16 2v4M8 2v4M3 10h18" stroke="#065f46" stroke-width="2" stroke-linecap="round"/></svg>
+    </div>
+    <div class="stat-info"><p>{{ stats.ingresos_hoy }}</p><span>Ingresos hoy</span></div>
+  </div>
+</div>
+
+<!-- ── Beacon + Sala de espera ──────────────────── -->
+<div class="grid-2" style="margin-bottom:22px;">
+
+  <!-- Beacon -->
+  <div class="card">
+    <div class="card-header">
+      <h3>Estado del Beacon</h3>
+      <span id="badge-beacon" class="badge {{ 'badge-iot' if beacon_estado.detectado else 'badge-mantenimiento' }}">
+        {{ 'BLE · Detectado' if beacon_estado.detectado else 'BLE · Sin señal' }}
+      </span>
+    </div>
+    <div style="padding:20px 24px;display:flex;align-items:center;gap:20px;">
+      <div id="beacon-dot" style="
+        width:56px;height:56px;border-radius:50%;flex-shrink:0;
+        background:{{ '#22c55e' if beacon_estado.detectado else '#d1d5db' }};
+        display:flex;align-items:center;justify-content:center;
+        transition:background .4s,box-shadow .4s;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M5 12.55a11 11 0 0 1 14.08 0" stroke="white" stroke-width="2" stroke-linecap="round"/>
+          <path d="M1.42 9a16 16 0 0 1 21.16 0" stroke="white" stroke-width="2" stroke-linecap="round"/>
+          <path d="M8.53 16.11a6 6 0 0 1 6.95 0" stroke="white" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="12" cy="20" r="1.5" fill="white"/>
+        </svg>
+      </div>
+      <div style="flex:1;">
+        <p id="beacon-estado-txt" style="font-size:17px;font-weight:700;color:{{ 'var(--green)' if beacon_estado.detectado else 'var(--muted)' }};margin-bottom:4px;">
+          {{ 'Consultorio OCUPADO' if beacon_estado.detectado else 'Consultorio LIBRE' }}
+        </p>
+        <p style="font-size:12px;color:var(--muted);">
+          Beacon: <code style="font-size:11px;background:var(--bg);padding:1px 5px;border-radius:3px;">{{ beacon_estado.id_beacon }}</code>
+          <span id="beacon-rssi">{% if beacon_estado.rssi %} · RSSI {{ beacon_estado.rssi }} dBm{% endif %}</span>
+        </p>
+        <p id="beacon-ts" style="font-size:11px;color:var(--muted);margin-top:3px;">
+          Última actualización: {{ beacon_estado.timestamp or '—' }}
+        </p>
+      </div>
+    </div>
+    {% if beacon_estado.id_consultorio %}
+    <div style="margin:0 20px 16px;padding:10px 14px;background:var(--bg);border-radius:8px;border:1px solid var(--border);">
+      <p style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px;">Consultorio asociado</p>
+      <p id="beacon-consultorio" style="font-size:14px;font-weight:600;color:var(--ink2);">
+        {{ beacon_estado.id_consultorio.nombre }} — {{ beacon_estado.id_consultorio.numero }}
+      </p>
+    </div>
+    {% endif %}
+  </div>
+
+  <!-- Sala de Espera -->
+  <div class="card">
+    <div class="card-header">
+      <h3>Sala de Espera</h3>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span style="font-size:10px;color:var(--muted);">NFC · auto-actualiza</span>
+        <span class="badge badge-medico">
+          <span id="contador-espera">{{ sala_espera|length }}</span> paciente{{ 's' if sala_espera|length != 1 else '' }}
+        </span>
+      </div>
+    </div>
+
+    <div id="lista-espera" style="max-height:260px;overflow-y:auto;">
+      <!-- Renderizado inicial por Jinja; el JS lo actualiza en polling -->
+      {% if sala_espera %}
+        {% for p in sala_espera %}
+        <div class="fila-espera" data-id="{{ p.id_paciente }}"
+             style="display:flex;align-items:center;gap:12px;padding:11px 20px;border-bottom:1px solid var(--border);">
+          <img src="{{ p.foto }}"
+               style="width:38px;height:38px;border-radius:50%;object-fit:cover;border:1.5px solid var(--border);flex-shrink:0;"
+               onerror="this.src='https://ui-avatars.com/api/?name=P&background=6366f1&color=fff&size=64'">
+          <div style="flex:1;min-width:0;">
+            <p style="font-weight:600;font-size:13px;color:var(--ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ p.nombre_completo }}</p>
+            <p style="font-size:11px;color:var(--muted);">Exp: {{ p.num_expediente or '—' }}</p>
+          </div>
+          <div style="text-align:right;flex-shrink:0;">
+            <span style="font-size:10px;background:var(--amb-bg);color:var(--amber);padding:2px 8px;border-radius:4px;font-weight:600;display:block;margin-bottom:3px;">EN ESPERA</span>
+            <span style="font-size:11px;font-weight:700;color:var(--ink2);">
+              {{ p.min_espera or 0 }} min
+            </span>
+          </div>
+        </div>
+        {% endfor %}
+      {% else %}
+        <div id="espera-vacia" style="padding:36px;text-align:center;color:var(--muted);">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" style="margin:0 auto 10px;display:block;opacity:.25;">
+            <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="2"/>
+          </svg>
+          <p style="font-size:13px;font-weight:500;">Sin pacientes en espera</p>
+          <p style="font-size:11px;margin-top:4px;">Los pacientes aparecerán aquí al pasar su tarjeta NFC</p>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<!-- ── Alertas + Ocupación ──────────────────────── -->
+<div class="grid-2">
+  <div class="card">
+    <div class="card-header">
+      <h3>Alertas de permanencia</h3>
+      <span class="badge badge-mantenimiento">{{ alertas|length }}</span>
+    </div>
+    {% for a in alertas %}
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 20px;border-bottom:1px solid var(--border);">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div style="width:36px;height:36px;border-radius:8px;background:var(--red-bg);display:flex;align-items:center;justify-content:center;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#b91c1c" stroke-width="2"/><path d="M12 6v6l4 2" stroke="#b91c1c" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <div>
+          <p style="font-weight:600;font-size:13px;color:var(--ink2);">{{ a.paciente }}</p>
+          <p style="font-size:11.5px;color:var(--muted);">{{ a.area }}</p>
+        </div>
+      </div>
+      <div style="text-align:right;">
+        <p style="font-size:20px;font-weight:700;color:var(--red);letter-spacing:-1px;">{{ a.tiempo|int }}<span style="font-size:11px;font-weight:400;color:var(--muted);"> min</span></p>
+        <p style="font-size:10.5px;color:var(--muted);">Umbral: {{ a.umbral|int }} min</p>
+      </div>
+    </div>
+    {% else %}
+    <div style="padding:32px;text-align:center;color:var(--muted);">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" style="margin:0 auto 8px;display:block;opacity:.3;"><path d="M22 11.08V12a10 10 0 11-5.93-9.14" stroke="currentColor" stroke-width="2"/><polyline points="22 4 12 14.01 9 11.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <p style="font-size:13px;">Sin alertas activas</p>
+    </div>
+    {% endfor %}
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <h3>Ocupación por área</h3>
+      <span class="badge badge-iot">BLE · Tiempo real</span>
+    </div>
+    <div class="card-body">
+      <div class="barra-container">
+        {% for o in ocupacion %}
+        {% set cap = o.capacidad|int %}
+        {% set ocu = o.ocupacion_actual|int %}
+        {% set pct = ((ocu / cap * 100)|int) if cap > 0 else 0 %}
+        <div>
+          <div class="barra-label">
+            <span style="font-size:13px;color:var(--ink3);font-weight:500;">{{ o.nombre_area }}</span>
+            <span style="font-size:12px;color:var(--muted);">{{ ocu }}/{{ cap }}</span>
+          </div>
+          <div class="barra-track">
+            <div class="barra-fill {% if pct>80 %}alta{% elif pct>55 %}media{% endif %}" style="width:{{ pct }}%;"></div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── IoT panel ─────────────────────────────────── -->
+<div class="iot-panel" style="margin-top:22px;">
+  <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;">
+    <div>
+      <p style="font-size:9px;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:2px;margin-bottom:6px;">Sistema IoT activo · polling cada 3 seg</p>
+      <p style="font-size:16px;font-weight:600;color:white;margin-bottom:4px;">ESP32 + PN532 NFC · Beacon BLE · PostgreSQL</p>
+      <p style="font-size:12px;color:rgba(255,255,255,.35);line-height:1.7;">Beacon detecta presencia · NFC toggle entrada/salida · historial en BD</p>
+    </div>
+    <div style="display:flex;gap:28px;flex-shrink:0;">
+      <div style="text-align:center;">
+        <p id="iot-beacon-val" style="font-size:28px;font-weight:700;color:#90e0ef;letter-spacing:-1px;">{{ '1' if beacon_estado.detectado else '0' }}</p>
+        <p style="font-size:9px;color:rgba(255,255,255,.25);text-transform:uppercase;letter-spacing:1.2px;margin-top:2px;">Beacon activo</p>
+      </div>
+      <div style="text-align:center;">
+        <p id="iot-espera-val" style="font-size:28px;font-weight:700;color:#caf0f8;letter-spacing:-1px;">{{ sala_espera|length }}</p>
+        <p style="font-size:9px;color:rgba(255,255,255,.25);text-transform:uppercase;letter-spacing:1.2px;margin-top:2px;">En sala espera</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── Estilos + JS de polling ───────────────────── -->
+<style>
+@keyframes pulse-beacon {
+  0%,100% { box-shadow: 0 0 0 0   rgba(34,197,94,.5); }
+  50%      { box-shadow: 0 0 0 14px rgba(34,197,94,.0); }
+}
+.beacon-on  { background:#22c55e !important; animation:pulse-beacon 2s infinite; }
+.beacon-off { background:#d1d5db !important; animation:none; }
+</style>
+
+<script>
+(function () {
+  /* ─ helpers ─────────────────────────────────────────── */
+  function filaHTML(p) {
+    const min = p.min_espera != null ? Math.round(Number(p.min_espera)) : 0;
+    const color = min > 30 ? 'var(--red)' : 'var(--ink2)';
+    return `
+      <div class="fila-espera" data-id="${p.id_paciente}"
+           style="display:flex;align-items:center;gap:12px;padding:11px 20px;border-bottom:1px solid var(--border);">
+        <img src="${p.foto}"
+             style="width:38px;height:38px;border-radius:50%;object-fit:cover;border:1.5px solid var(--border);flex-shrink:0;"
+             onerror="this.src='https://ui-avatars.com/api/?name=P&background=6366f1&color=fff&size=64'">
+        <div style="flex:1;min-width:0;">
+          <p style="font-weight:600;font-size:13px;color:var(--ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${p.nombre_completo}</p>
+          <p style="font-size:11px;color:var(--muted);">Exp: ${p.num_expediente || '—'}</p>
+        </div>
+        <div style="text-align:right;flex-shrink:0;">
+          <span style="font-size:10px;background:var(--amb-bg);color:var(--amber);padding:2px 8px;border-radius:4px;font-weight:600;display:block;margin-bottom:3px;">EN ESPERA</span>
+          <span style="font-size:12px;font-weight:700;color:${color};">${min} min</span>
+        </div>
+      </div>`;
+  }
+
+  /* ─ polling ─────────────────────────────────────────── */
+  function actualizar() {
+    fetch('/iot/estado')
+      .then(r => r.json())
+      .then(data => {
+
+        /* Beacon */
+        const det  = data.beacon.detectado;
+        const dot  = document.getElementById('beacon-dot');
+        const txt  = document.getElementById('beacon-estado-txt');
+        const badg = document.getElementById('badge-beacon');
+        const ts   = document.getElementById('beacon-ts');
+        const rssi = document.getElementById('beacon-rssi');
+
+        if (dot) {
+          dot.classList.toggle('beacon-on',  det);
+          dot.classList.toggle('beacon-off', !det);
+        }
+        if (txt) {
+          txt.textContent  = det ? 'Consultorio OCUPADO' : 'Consultorio LIBRE';
+          txt.style.color  = det ? 'var(--green)' : 'var(--muted)';
+        }
+        if (badg) {
+          badg.textContent = det ? 'BLE · Detectado' : 'BLE · Sin señal';
+          badg.className   = 'badge ' + (det ? 'badge-iot' : 'badge-mantenimiento');
+        }
+        if (ts && data.beacon.timestamp)
+          ts.textContent = 'Última actualización: ' + data.beacon.timestamp;
+        if (rssi)
+          rssi.textContent = data.beacon.rssi ? ' · RSSI ' + data.beacon.rssi + ' dBm' : '';
+
+        document.getElementById('iot-beacon-val').textContent = det ? '1' : '0';
+
+        /* Sala de espera */
+        const n       = data.contador_espera;
+        const ctr     = document.getElementById('contador-espera');
+        const iotE    = document.getElementById('iot-espera-val');
+        const lista   = document.getElementById('lista-espera');
+
+        if (ctr)  ctr.textContent  = n;
+        if (iotE) iotE.textContent = n;
+
+        /* Reconstruir lista siempre */
+        if (lista) {
+          if (n === 0) {
+            lista.innerHTML = `
+              <div id="espera-vacia" style="padding:36px;text-align:center;color:var(--muted);">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" style="margin:0 auto 10px;display:block;opacity:.25;">
+                  <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  <circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="2"/>
+                </svg>
+                <p style="font-size:13px;font-weight:500;">Sin pacientes en espera</p>
+                <p style="font-size:11px;margin-top:4px;">Los pacientes aparecerán aquí al pasar su tarjeta NFC</p>
+              </div>`;
+          } else {
+            lista.innerHTML = data.sala_espera.map(filaHTML).join('');
+          }
+        }
+      })
+      .catch(err => console.warn('[IoT] polling error:', err));
+  }
+
+  actualizar();
+  setInterval(actualizar, 3000);
+})();
+</script>
+
+{% endblock %}

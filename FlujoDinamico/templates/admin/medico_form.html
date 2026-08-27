@@ -1,0 +1,142 @@
+{% extends 'base.html' %}
+{% block title %}{{ accion }} Médico{% endblock %}
+{% block page_title %}{{ accion }} Médico{% endblock %}
+{% block page_subtitle %}Formulario de registro de personal médico{% endblock %}
+{% block topbar_actions %}
+  <a href="{{ url_for('medicos') }}" class="btn btn-outline">← Volver</a>
+{% endblock %}
+
+{% block content %}
+<div style="display:grid;grid-template-columns:1fr 340px;gap:24px;max-width:900px;">
+
+  <div class="card">
+    <div class="card-header"><h3>{{ '✏️ Editar' if accion == 'Editar' else '➕ Nuevo' }} Médico</h3></div>
+    <div class="card-body">
+      <form method="POST">
+
+        {% if accion != 'Editar' %}
+        <div class="form-group">
+          <label class="form-label">Cédula Profesional *</label>
+          <input type="text" name="cedula_medico" class="form-control"
+                 placeholder="CED-007"
+                 value="{{ medico.cedula_medico if medico else '' }}" required>
+        </div>
+        {% endif %}
+
+        <div class="form-grid-3">
+          <div class="form-group">
+            <label class="form-label">Nombre(s) *</label>
+            <input type="text" name="nombre" class="form-control"
+                   value="{{ medico.nombre if medico else '' }}" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Apellido Paterno *</label>
+            <input type="text" name="apellidop" class="form-control"
+                   value="{{ medico.apellidop if medico else '' }}" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Apellido Materno</label>
+            <input type="text" name="apellidom" class="form-control"
+                   value="{{ medico.apellidom if medico else '' }}">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Especialidad *</label>
+          <select name="especialidad" class="form-control" required>
+            {% for esp in especialidades %}
+            <option value="{{ esp }}" {{ 'selected' if medico and medico.especialidad == esp }}>{{ esp }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">Teléfono</label>
+            <input type="tel" name="telefono" class="form-control"
+                   placeholder="81-0001-0001"
+                   value="{{ medico.telefono if medico else '' }}">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <input type="email" name="email" class="form-control"
+                   placeholder="doctor@hospital.mx"
+                   value="{{ medico.email if medico else '' }}">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">URL de Foto <span style="font-weight:400;color:var(--muted);">(opcional)</span></label>
+          <input type="url" name="foto" class="form-control" id="fotoInput"
+                 placeholder="https://... o dejar vacío para foto automática"
+                 value="{{ medico.foto if medico and medico.get('foto') else '' }}"
+                 oninput="actualizarFotoMedico(this.value)">
+          <small style="color:var(--muted);font-size:11px;">Pega un URL de imagen. Si lo dejas vacío se genera una foto automática con las iniciales.</small>
+          <div style="margin-top:8px;">
+            <button type="button" onclick="limpiarFotoMedico()"
+              style="font-size:11px;padding:4px 10px;border-radius:5px;border:1px solid var(--border);background:var(--bg);color:var(--sub);cursor:pointer;">
+              ✕ Quitar foto
+            </button>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:12px;margin-top:20px;">
+          <button type="submit" class="btn btn-primary">
+            💾 {{ 'Actualizar' if accion == 'Editar' else 'Registrar' }} Médico
+          </button>
+          <a href="{{ url_for('medicos') }}" class="btn btn-outline">Cancelar</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Preview foto -->
+  <div class="card" style="height:fit-content;">
+    <div class="card-header"><h3>Vista previa</h3></div>
+    <div class="card-body" style="text-align:center;">
+      <img id="fotoPreview"
+           src="{{ medico.get('foto','') if medico else '' }}"
+           alt="Foto del médico"
+           style="width:120px;height:120px;border-radius:50%;object-fit:cover;border:3px solid var(--border);margin-bottom:12px;"
+           onerror="this.src='https://ui-avatars.com/api/?name=Medico&background=4f46e5&color=fff&size=128'">
+      <p style="font-size:13px;font-weight:600;color:var(--slate-800);">
+        {{ medico.nombre+' '+medico.apellidop if medico else 'Nombre del Médico' }}
+      </p>
+      <span class="badge badge-medico" style="margin-top:4px;">
+        {{ medico.especialidad if medico else 'Especialidad' }}
+      </span>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const nombreMedico   = document.querySelector('[name="nombre"]');
+const apellidoMedico = document.querySelector('[name="apellidop"]');
+const previewMedico  = document.getElementById('fotoPreview');
+
+function getDefaultAvatarMedico() {
+  const n = nombreMedico ? nombreMedico.value.trim() : 'Doctor';
+  const a = apellidoMedico ? apellidoMedico.value.trim() : '';
+  return `https://ui-avatars.com/api/?name=${encodeURIComponent(n+'+'+a)}&background=4f46e5&color=fff&size=128`;
+}
+
+function actualizarFotoMedico(url) {
+  previewMedico.src = url || getDefaultAvatarMedico();
+}
+
+function limpiarFotoMedico() {
+  document.getElementById('fotoInput').value = '';
+  previewMedico.src = getDefaultAvatarMedico();
+}
+
+window.addEventListener('load', () => {
+  if (!document.getElementById('fotoInput').value) {
+    previewMedico.src = getDefaultAvatarMedico();
+  }
+});
+
+if (nombreMedico)   nombreMedico.addEventListener('input',   () => { if (!document.getElementById('fotoInput').value) previewMedico.src = getDefaultAvatarMedico(); });
+if (apellidoMedico) apellidoMedico.addEventListener('input', () => { if (!document.getElementById('fotoInput').value) previewMedico.src = getDefaultAvatarMedico(); });
+</script>
+{% endblock %}
