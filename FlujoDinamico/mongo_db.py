@@ -16,6 +16,7 @@ Relación con PostgreSQL:
 from pymongo import MongoClient, DESCENDING
 from datetime import datetime, timezone
 import os
+import time
 
 # ════════════════════════════════════════════════════
 #  Conexión
@@ -26,14 +27,23 @@ MONGO_DB  = 'hospital_beaconflow'
 _client = None
 _db     = None
 
+_mongo_caido_hasta = 0
 
 def get_mongo():
-    """Devuelve la instancia de la base de datos MongoDB (singleton)."""
-    global _client, _db
+    """Devuelve la BD de Mongo; si no hay servidor, falla rápido y no reintenta por 30 s."""
+    global _client, _db, _mongo_caido_hasta
+    if time.time() < _mongo_caido_hasta:
+        raise ConnectionError('MongoDB no disponible')
     if _db is None:
-        _client = MongoClient(MONGO_URI, serverSelectionTimeoutMS=3000)
-        _db     = _client[MONGO_DB]
-        _crear_indices()
+        try:
+            _client = MongoClient(MONGO_URI, serverSelectionTimeoutMS=500)
+            _client.admin.command('ping')
+            _db = _client[MONGO_DB]
+            _crear_indices()
+        except Exception:
+            _client, _db = None, None
+            _mongo_caido_hasta = time.time() + 30
+            raise
     return _db
 
 
